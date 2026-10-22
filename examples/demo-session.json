@@ -1,0 +1,4340 @@
+{
+  "schema_version": 2,
+  "provenance": {
+    "kind": "synthetic",
+    "label": "Illustrative 8-minute scenario"
+  },
+  "samples": [
+    {
+      "timestamp": 1790845200000,
+      "heart_rate_bpm": 62,
+      "rmssd_ms": 58.6,
+      "resp_rate_brpm": 12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845201000,
+      "heart_rate_bpm": 62.88,
+      "rmssd_ms": 58.88,
+      "resp_rate_brpm": 12.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845202000,
+      "heart_rate_bpm": 62.49,
+      "rmssd_ms": 59.2,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845203000,
+      "heart_rate_bpm": 62.53,
+      "rmssd_ms": 60,
+      "resp_rate_brpm": 12.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845204000,
+      "heart_rate_bpm": 62.22,
+      "rmssd_ms": 58.76,
+      "resp_rate_brpm": 12.06,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845205000,
+      "heart_rate_bpm": 61.06,
+      "rmssd_ms": 56.89,
+      "resp_rate_brpm": 11.9,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845206000,
+      "heart_rate_bpm": 61.22,
+      "rmssd_ms": 56.84,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845207000,
+      "heart_rate_bpm": 61.84,
+      "rmssd_ms": 56.73,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845208000,
+      "heart_rate_bpm": 61.85,
+      "rmssd_ms": 56.28,
+      "resp_rate_brpm": 11.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845209000,
+      "heart_rate_bpm": 62.69,
+      "rmssd_ms": 57.82,
+      "resp_rate_brpm": 12.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845210000,
+      "heart_rate_bpm": 63.07,
+      "rmssd_ms": 59.56,
+      "resp_rate_brpm": 12.17,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845211000,
+      "heart_rate_bpm": 62.08,
+      "rmssd_ms": 59.31,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845212000,
+      "heart_rate_bpm": 61.79,
+      "rmssd_ms": 59.19,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845213000,
+      "heart_rate_bpm": 61.57,
+      "rmssd_ms": 59.32,
+      "resp_rate_brpm": 12.01,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845214000,
+      "heart_rate_bpm": 60.93,
+      "rmssd_ms": 57.58,
+      "resp_rate_brpm": 11.87,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845215000,
+      "heart_rate_bpm": 61.71,
+      "rmssd_ms": 56.08,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845216000,
+      "heart_rate_bpm": 62.59,
+      "rmssd_ms": 56.69,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845217000,
+      "heart_rate_bpm": 62.43,
+      "rmssd_ms": 57.03,
+      "resp_rate_brpm": 11.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845218000,
+      "heart_rate_bpm": 62.76,
+      "rmssd_ms": 57.16,
+      "resp_rate_brpm": 12.08,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845219000,
+      "heart_rate_bpm": 62.53,
+      "rmssd_ms": 58.98,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845220000,
+      "heart_rate_bpm": 61.3,
+      "rmssd_ms": 60.13,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845221000,
+      "heart_rate_bpm": 61.27,
+      "rmssd_ms": 59.15,
+      "resp_rate_brpm": 12.12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845222000,
+      "heart_rate_bpm": 61.59,
+      "rmssd_ms": 58.63,
+      "resp_rate_brpm": 11.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845223000,
+      "heart_rate_bpm": 61.5,
+      "rmssd_ms": 58.32,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845224000,
+      "heart_rate_bpm": 62.49,
+      "rmssd_ms": 56.55,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845225000,
+      "heart_rate_bpm": 63.06,
+      "rmssd_ms": 55.81,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845226000,
+      "heart_rate_bpm": 62.32,
+      "rmssd_ms": 57.15,
+      "resp_rate_brpm": 11.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845227000,
+      "heart_rate_bpm": 62.15,
+      "rmssd_ms": 57.79,
+      "resp_rate_brpm": 12.12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845228000,
+      "heart_rate_bpm": 61.76,
+      "rmssd_ms": 58.17,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845229000,
+      "heart_rate_bpm": 60.87,
+      "rmssd_ms": 59.8,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845230000,
+      "heart_rate_bpm": 61.47,
+      "rmssd_ms": 60.07,
+      "resp_rate_brpm": 12.08,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845231000,
+      "heart_rate_bpm": 62.25,
+      "rmssd_ms": 58.43,
+      "resp_rate_brpm": 11.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845232000,
+      "heart_rate_bpm": 62.24,
+      "rmssd_ms": 57.76,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845233000,
+      "heart_rate_bpm": 62.86,
+      "rmssd_ms": 57.39,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845234000,
+      "heart_rate_bpm": 62.8,
+      "rmssd_ms": 56,
+      "resp_rate_brpm": 11.87,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845235000,
+      "heart_rate_bpm": 61.61,
+      "rmssd_ms": 56.2,
+      "resp_rate_brpm": 12.01,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845236000,
+      "heart_rate_bpm": 61.45,
+      "rmssd_ms": 58.07,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845237000,
+      "heart_rate_bpm": 61.47,
+      "rmssd_ms": 58.67,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845238000,
+      "heart_rate_bpm": 61.19,
+      "rmssd_ms": 58.94,
+      "resp_rate_brpm": 12.17,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845239000,
+      "heart_rate_bpm": 62.21,
+      "rmssd_ms": 60.03,
+      "resp_rate_brpm": 12.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845240000,
+      "heart_rate_bpm": 62.92,
+      "rmssd_ms": 59.38,
+      "resp_rate_brpm": 11.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845241000,
+      "heart_rate_bpm": 62.45,
+      "rmssd_ms": 57.39,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845242000,
+      "heart_rate_bpm": 62.49,
+      "rmssd_ms": 56.96,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845243000,
+      "heart_rate_bpm": 62.04,
+      "rmssd_ms": 56.87,
+      "resp_rate_brpm": 11.9,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845244000,
+      "heart_rate_bpm": 60.96,
+      "rmssd_ms": 56.1,
+      "resp_rate_brpm": 12.06,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845245000,
+      "heart_rate_bpm": 61.33,
+      "rmssd_ms": 57.13,
+      "resp_rate_brpm": 12.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845246000,
+      "heart_rate_bpm": 61.91,
+      "rmssd_ms": 59.14,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845247000,
+      "heart_rate_bpm": 61.95,
+      "rmssd_ms": 59.3,
+      "resp_rate_brpm": 12.14,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845248000,
+      "heart_rate_bpm": 62.83,
+      "rmssd_ms": 59.18,
+      "resp_rate_brpm": 12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845249000,
+      "heart_rate_bpm": 62.97,
+      "rmssd_ms": 59.63,
+      "resp_rate_brpm": 11.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845250000,
+      "heart_rate_bpm": 61.93,
+      "rmssd_ms": 58.29,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845251000,
+      "heart_rate_bpm": 61.74,
+      "rmssd_ms": 56.4,
+      "resp_rate_brpm": 11.82,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845252000,
+      "heart_rate_bpm": 61.47,
+      "rmssd_ms": 56.56,
+      "resp_rate_brpm": 11.94,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845253000,
+      "heart_rate_bpm": 60.96,
+      "rmssd_ms": 56.92,
+      "resp_rate_brpm": 12.1,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845254000,
+      "heart_rate_bpm": 61.91,
+      "rmssd_ms": 56.76,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845255000,
+      "heart_rate_bpm": 62.67,
+      "rmssd_ms": 58.31,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845256000,
+      "heart_rate_bpm": 62.44,
+      "rmssd_ms": 59.97,
+      "resp_rate_brpm": 12.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845257000,
+      "heart_rate_bpm": 62.76,
+      "rmssd_ms": 59.42,
+      "resp_rate_brpm": 11.96,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845258000,
+      "heart_rate_bpm": 62.35,
+      "rmssd_ms": 58.84,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845259000,
+      "heart_rate_bpm": 61.16,
+      "rmssd_ms": 58.77,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845260000,
+      "heart_rate_bpm": 61.32,
+      "rmssd_ms": 57.14,
+      "resp_rate_brpm": 11.84,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845261000,
+      "heart_rate_bpm": 61.62,
+      "rmssd_ms": 55.81,
+      "resp_rate_brpm": 11.99,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845262000,
+      "heart_rate_bpm": 61.62,
+      "rmssd_ms": 56.76,
+      "resp_rate_brpm": 12.13,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845263000,
+      "heart_rate_bpm": 62.67,
+      "rmssd_ms": 57.52,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845264000,
+      "heart_rate_bpm": 63.02,
+      "rmssd_ms": 57.72,
+      "resp_rate_brpm": 12.19,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845265000,
+      "heart_rate_bpm": 62.2,
+      "rmssd_ms": 59.33,
+      "resp_rate_brpm": 12.07,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845266000,
+      "heart_rate_bpm": 62.08,
+      "rmssd_ms": 60.25,
+      "resp_rate_brpm": 11.92,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845267000,
+      "heart_rate_bpm": 61.61,
+      "rmssd_ms": 58.92,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845268000,
+      "heart_rate_bpm": 60.86,
+      "rmssd_ms": 58.06,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845269000,
+      "heart_rate_bpm": 61.64,
+      "rmssd_ms": 57.8,
+      "resp_rate_brpm": 11.88,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845270000,
+      "heart_rate_bpm": 62.33,
+      "rmssd_ms": 56.32,
+      "resp_rate_brpm": 12.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845271000,
+      "heart_rate_bpm": 62.31,
+      "rmssd_ms": 55.85,
+      "resp_rate_brpm": 12.17,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845272000,
+      "heart_rate_bpm": 62.92,
+      "rmssd_ms": 57.52,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845273000,
+      "heart_rate_bpm": 62.63,
+      "rmssd_ms": 58.39,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845274000,
+      "heart_rate_bpm": 61.45,
+      "rmssd_ms": 58.61,
+      "resp_rate_brpm": 12.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845275000,
+      "heart_rate_bpm": 61.45,
+      "rmssd_ms": 59.88,
+      "resp_rate_brpm": 11.88,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845276000,
+      "heart_rate_bpm": 61.44,
+      "rmssd_ms": 59.88,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845277000,
+      "heart_rate_bpm": 61.29,
+      "rmssd_ms": 57.96,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845278000,
+      "heart_rate_bpm": 62.42,
+      "rmssd_ms": 57.17,
+      "resp_rate_brpm": 11.92,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845279000,
+      "heart_rate_bpm": 62.93,
+      "rmssd_ms": 57.08,
+      "resp_rate_brpm": 12.07,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845280000,
+      "heart_rate_bpm": 62.39,
+      "rmssd_ms": 56.09,
+      "resp_rate_brpm": 12.19,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845281000,
+      "heart_rate_bpm": 62.44,
+      "rmssd_ms": 56.53,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845282000,
+      "heart_rate_bpm": 61.85,
+      "rmssd_ms": 58.59,
+      "resp_rate_brpm": 12.13,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845283000,
+      "heart_rate_bpm": 60.89,
+      "rmssd_ms": 59.19,
+      "resp_rate_brpm": 11.98,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845284000,
+      "heart_rate_bpm": 61.46,
+      "rmssd_ms": 59.09,
+      "resp_rate_brpm": 11.84,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845285000,
+      "heart_rate_bpm": 61.98,
+      "rmssd_ms": 59.78,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845286000,
+      "heart_rate_bpm": 62.07,
+      "rmssd_ms": 58.96,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845287000,
+      "heart_rate_bpm": 62.95,
+      "rmssd_ms": 56.87,
+      "resp_rate_brpm": 11.96,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845288000,
+      "heart_rate_bpm": 62.85,
+      "rmssd_ms": 56.55,
+      "resp_rate_brpm": 12.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845289000,
+      "heart_rate_bpm": 61.78,
+      "rmssd_ms": 56.88,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845290000,
+      "heart_rate_bpm": 61.69,
+      "rmssd_ms": 56.49,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845291000,
+      "heart_rate_bpm": 61.38,
+      "rmssd_ms": 57.62,
+      "resp_rate_brpm": 12.1,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845292000,
+      "heart_rate_bpm": 61.03,
+      "rmssd_ms": 59.61,
+      "resp_rate_brpm": 11.94,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845293000,
+      "heart_rate_bpm": 62.12,
+      "rmssd_ms": 59.58,
+      "resp_rate_brpm": 11.82,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845294000,
+      "heart_rate_bpm": 62.71,
+      "rmssd_ms": 58.99,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845295000,
+      "heart_rate_bpm": 62.45,
+      "rmssd_ms": 59.13,
+      "resp_rate_brpm": 11.86,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845296000,
+      "heart_rate_bpm": 62.74,
+      "rmssd_ms": 57.8,
+      "resp_rate_brpm": 12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845297000,
+      "heart_rate_bpm": 62.14,
+      "rmssd_ms": 56.01,
+      "resp_rate_brpm": 12.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845298000,
+      "heart_rate_bpm": 61.05,
+      "rmssd_ms": 56.46,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845299000,
+      "heart_rate_bpm": 61.39,
+      "rmssd_ms": 57.27,
+      "resp_rate_brpm": 12.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845300000,
+      "heart_rate_bpm": 61.66,
+      "rmssd_ms": 57.32,
+      "resp_rate_brpm": 12.06,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845301000,
+      "heart_rate_bpm": 61.75,
+      "rmssd_ms": 58.75,
+      "resp_rate_brpm": 11.9,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845302000,
+      "heart_rate_bpm": 62.83,
+      "rmssd_ms": 60.22,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845303000,
+      "heart_rate_bpm": 62.95,
+      "rmssd_ms": 59.35,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845304000,
+      "heart_rate_bpm": 62.09,
+      "rmssd_ms": 58.36,
+      "resp_rate_brpm": 11.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845305000,
+      "heart_rate_bpm": 62.01,
+      "rmssd_ms": 58.2,
+      "resp_rate_brpm": 12.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845306000,
+      "heart_rate_bpm": 61.46,
+      "rmssd_ms": 56.79,
+      "resp_rate_brpm": 12.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845307000,
+      "heart_rate_bpm": 60.88,
+      "rmssd_ms": 55.71,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845308000,
+      "heart_rate_bpm": 61.83,
+      "rmssd_ms": 56.98,
+      "resp_rate_brpm": 12.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845309000,
+      "heart_rate_bpm": 62.4,
+      "rmssd_ms": 58.08,
+      "resp_rate_brpm": 12.01,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845310000,
+      "heart_rate_bpm": 62.38,
+      "rmssd_ms": 58.26,
+      "resp_rate_brpm": 11.87,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845311000,
+      "heart_rate_bpm": 62.95,
+      "rmssd_ms": 59.55,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845312000,
+      "heart_rate_bpm": 62.44,
+      "rmssd_ms": 60.19,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845313000,
+      "heart_rate_bpm": 61.32,
+      "rmssd_ms": 58.56,
+      "resp_rate_brpm": 11.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845314000,
+      "heart_rate_bpm": 61.45,
+      "rmssd_ms": 57.46,
+      "resp_rate_brpm": 12.09,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845315000,
+      "heart_rate_bpm": 61.42,
+      "rmssd_ms": 57.35,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845316000,
+      "heart_rate_bpm": 61.43,
+      "rmssd_ms": 56.26,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845317000,
+      "heart_rate_bpm": 62.61,
+      "rmssd_ms": 56.07,
+      "resp_rate_brpm": 12.12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845318000,
+      "heart_rate_bpm": 62.91,
+      "rmssd_ms": 57.97,
+      "resp_rate_brpm": 11.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845319000,
+      "heart_rate_bpm": 62.33,
+      "rmssd_ms": 58.98,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845320000,
+      "heart_rate_bpm": 62.37,
+      "rmssd_ms": 58.93,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845321000,
+      "heart_rate_bpm": 61.66,
+      "rmssd_ms": 59.77,
+      "resp_rate_brpm": 11.84,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845322000,
+      "heart_rate_bpm": 60.86,
+      "rmssd_ms": 59.53,
+      "resp_rate_brpm": 11.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845323000,
+      "heart_rate_bpm": 61.6,
+      "rmssd_ms": 57.46,
+      "resp_rate_brpm": 12.12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845324000,
+      "heart_rate_bpm": 62.05,
+      "rmssd_ms": 56.65,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845325000,
+      "heart_rate_bpm": 62.18,
+      "rmssd_ms": 56.92,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845326000,
+      "heart_rate_bpm": 63.03,
+      "rmssd_ms": 56.35,
+      "resp_rate_brpm": 12.08,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845327000,
+      "heart_rate_bpm": 62.69,
+      "rmssd_ms": 56.97,
+      "resp_rate_brpm": 11.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845328000,
+      "heart_rate_bpm": 61.65,
+      "rmssd_ms": 59.1,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845329000,
+      "heart_rate_bpm": 61.65,
+      "rmssd_ms": 59.6,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845330000,
+      "heart_rate_bpm": 61.31,
+      "rmssd_ms": 59.08,
+      "resp_rate_brpm": 11.87,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845331000,
+      "heart_rate_bpm": 61.14,
+      "rmssd_ms": 59.38,
+      "resp_rate_brpm": 12.02,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845332000,
+      "heart_rate_bpm": 62.32,
+      "rmssd_ms": 58.47,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845333000,
+      "heart_rate_bpm": 62.74,
+      "rmssd_ms": 56.41,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845334000,
+      "heart_rate_bpm": 62.45,
+      "rmssd_ms": 56.28,
+      "resp_rate_brpm": 12.17,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845335000,
+      "heart_rate_bpm": 62.7,
+      "rmssd_ms": 57.07,
+      "resp_rate_brpm": 12.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845336000,
+      "heart_rate_bpm": 61.94,
+      "rmssd_ms": 57,
+      "resp_rate_brpm": 11.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845337000,
+      "heart_rate_bpm": 60.98,
+      "rmssd_ms": 58.11,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845338000,
+      "heart_rate_bpm": 61.47,
+      "rmssd_ms": 59.98,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845339000,
+      "heart_rate_bpm": 61.7,
+      "rmssd_ms": 59.68,
+      "resp_rate_brpm": 11.9,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845340000,
+      "heart_rate_bpm": 61.9,
+      "rmssd_ms": 58.65,
+      "resp_rate_brpm": 12.06,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845341000,
+      "heart_rate_bpm": 63.09,
+      "rmssd_ms": 58.43,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845342000,
+      "heart_rate_bpm": 63.08,
+      "rmssd_ms": 57.1,
+      "resp_rate_brpm": 12.27,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845343000,
+      "heart_rate_bpm": 62.35,
+      "rmssd_ms": 55.39,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845344000,
+      "heart_rate_bpm": 62.43,
+      "rmssd_ms": 56.01,
+      "resp_rate_brpm": 12.1,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845345000,
+      "heart_rate_bpm": 61.94,
+      "rmssd_ms": 57.09,
+      "resp_rate_brpm": 11.98,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845346000,
+      "heart_rate_bpm": 61.68,
+      "rmssd_ms": 57.13,
+      "resp_rate_brpm": 11.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845347000,
+      "heart_rate_bpm": 62.87,
+      "rmssd_ms": 58.19,
+      "resp_rate_brpm": 11.99,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845348000,
+      "heart_rate_bpm": 63.44,
+      "rmssd_ms": 59.26,
+      "resp_rate_brpm": 12.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845349000,
+      "heart_rate_bpm": 63.54,
+      "rmssd_ms": 57.96,
+      "resp_rate_brpm": 12.33,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845350000,
+      "heart_rate_bpm": 64.17,
+      "rmssd_ms": 56.51,
+      "resp_rate_brpm": 12.46,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845351000,
+      "heart_rate_bpm": 63.58,
+      "rmssd_ms": 56.22,
+      "resp_rate_brpm": 12.48,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845352000,
+      "heart_rate_bpm": 62.69,
+      "rmssd_ms": 55.02,
+      "resp_rate_brpm": 12.41,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845353000,
+      "heart_rate_bpm": 63.07,
+      "rmssd_ms": 54.11,
+      "resp_rate_brpm": 12.28,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845354000,
+      "heart_rate_bpm": 63.14,
+      "rmssd_ms": 55.53,
+      "resp_rate_brpm": 12.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845355000,
+      "heart_rate_bpm": 63.42,
+      "rmssd_ms": 56.73,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845356000,
+      "heart_rate_bpm": 64.74,
+      "rmssd_ms": 56.65,
+      "resp_rate_brpm": 12.25,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845357000,
+      "heart_rate_bpm": 64.94,
+      "rmssd_ms": 57.4,
+      "resp_rate_brpm": 12.42,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845358000,
+      "heart_rate_bpm": 64.46,
+      "rmssd_ms": 57.63,
+      "resp_rate_brpm": 12.59,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845359000,
+      "heart_rate_bpm": 64.61,
+      "rmssd_ms": 55.65,
+      "resp_rate_brpm": 12.69,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845360000,
+      "heart_rate_bpm": 63.93,
+      "rmssd_ms": 54.29,
+      "resp_rate_brpm": 12.69,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845361000,
+      "heart_rate_bpm": 63.45,
+      "rmssd_ms": 54.3,
+      "resp_rate_brpm": 12.6,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845362000,
+      "heart_rate_bpm": 64.44,
+      "rmssd_ms": 53.52,
+      "resp_rate_brpm": 12.47,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845363000,
+      "heart_rate_bpm": 64.93,
+      "rmssd_ms": 53.45,
+      "resp_rate_brpm": 12.38,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845364000,
+      "heart_rate_bpm": 65.24,
+      "rmssd_ms": 55.36,
+      "resp_rate_brpm": 12.39,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845365000,
+      "heart_rate_bpm": 66.13,
+      "rmssd_ms": 56.25,
+      "resp_rate_brpm": 12.51,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845366000,
+      "heart_rate_bpm": 65.69,
+      "rmssd_ms": 55.73,
+      "resp_rate_brpm": 12.69,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845367000,
+      "heart_rate_bpm": 64.84,
+      "rmssd_ms": 56,
+      "resp_rate_brpm": 12.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845368000,
+      "heart_rate_bpm": 65.04,
+      "rmssd_ms": 55.45,
+      "resp_rate_brpm": 12.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845369000,
+      "heart_rate_bpm": 64.81,
+      "rmssd_ms": 53.2,
+      "resp_rate_brpm": 12.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845370000,
+      "heart_rate_bpm": 64.95,
+      "rmssd_ms": 52.36,
+      "resp_rate_brpm": 12.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845371000,
+      "heart_rate_bpm": 66.3,
+      "rmssd_ms": 52.91,
+      "resp_rate_brpm": 12.66,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845372000,
+      "heart_rate_bpm": 66.66,
+      "rmssd_ms": 52.62,
+      "resp_rate_brpm": 12.59,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845373000,
+      "heart_rate_bpm": 66.48,
+      "rmssd_ms": 53.2,
+      "resp_rate_brpm": 12.64,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845374000,
+      "heart_rate_bpm": 66.79,
+      "rmssd_ms": 55.13,
+      "resp_rate_brpm": 12.77,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845375000,
+      "heart_rate_bpm": 66.01,
+      "rmssd_ms": 55.32,
+      "resp_rate_brpm": 12.95,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845376000,
+      "heart_rate_bpm": 65.35,
+      "rmssd_ms": 54.24,
+      "resp_rate_brpm": 13.1,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845377000,
+      "heart_rate_bpm": 66.09,
+      "rmssd_ms": 54.06,
+      "resp_rate_brpm": 13.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845378000,
+      "heart_rate_bpm": 66.41,
+      "rmssd_ms": 53.04,
+      "resp_rate_brpm": 13.09,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845379000,
+      "heart_rate_bpm": 66.83,
+      "rmssd_ms": 51.01,
+      "resp_rate_brpm": 12.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845380000,
+      "heart_rate_bpm": 67.96,
+      "rmssd_ms": 51,
+      "resp_rate_brpm": 12.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845381000,
+      "heart_rate_bpm": 67.72,
+      "rmssd_ms": 52.09,
+      "resp_rate_brpm": 12.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845382000,
+      "heart_rate_bpm": 67.02,
+      "rmssd_ms": 52.14,
+      "resp_rate_brpm": 12.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845383000,
+      "heart_rate_bpm": 67.13,
+      "rmssd_ms": 52.98,
+      "resp_rate_brpm": 13.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845384000,
+      "heart_rate_bpm": 66.6,
+      "rmssd_ms": 54.48,
+      "resp_rate_brpm": 13.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845385000,
+      "heart_rate_bpm": 66.55,
+      "rmssd_ms": 53.77,
+      "resp_rate_brpm": 13.34,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845386000,
+      "heart_rate_bpm": 67.82,
+      "rmssd_ms": 52.22,
+      "resp_rate_brpm": 13.36,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845387000,
+      "heart_rate_bpm": 68.25,
+      "rmssd_ms": 51.87,
+      "resp_rate_brpm": 13.28,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845388000,
+      "heart_rate_bpm": 68.37,
+      "rmssd_ms": 50.79,
+      "resp_rate_brpm": 13.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845389000,
+      "heart_rate_bpm": 68.9,
+      "rmssd_ms": 49.38,
+      "resp_rate_brpm": 13.05,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845390000,
+      "heart_rate_bpm": 87.52,
+      "rmssd_ms": 29.75,
+      "resp_rate_brpm": 17.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845391000,
+      "heart_rate_bpm": 86.64,
+      "rmssd_ms": 31.29,
+      "resp_rate_brpm": 17.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845392000,
+      "heart_rate_bpm": 87.01,
+      "rmssd_ms": 31.47,
+      "resp_rate_brpm": 17.25,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845393000,
+      "heart_rate_bpm": 86.94,
+      "rmssd_ms": 32.31,
+      "resp_rate_brpm": 17.4,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845394000,
+      "heart_rate_bpm": 87.25,
+      "rmssd_ms": 33.19,
+      "resp_rate_brpm": 17.47,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845395000,
+      "heart_rate_bpm": 88.42,
+      "rmssd_ms": 31.77,
+      "resp_rate_brpm": 17.43,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845396000,
+      "heart_rate_bpm": 88.28,
+      "rmssd_ms": 30.22,
+      "resp_rate_brpm": 17.3,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845397000,
+      "heart_rate_bpm": 87.69,
+      "rmssd_ms": 30.18,
+      "resp_rate_brpm": 17.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845398000,
+      "heart_rate_bpm": 87.69,
+      "rmssd_ms": 29.52,
+      "resp_rate_brpm": 17.05,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845399000,
+      "heart_rate_bpm": 86.82,
+      "rmssd_ms": 29.05,
+      "resp_rate_brpm": 17.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845400000,
+      "heart_rate_bpm": 86.43,
+      "rmssd_ms": 30.79,
+      "resp_rate_brpm": 17.14,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845401000,
+      "heart_rate_bpm": 87.4,
+      "rmssd_ms": 32.24,
+      "resp_rate_brpm": 17.3,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845402000,
+      "heart_rate_bpm": 87.67,
+      "rmssd_ms": 32.06,
+      "resp_rate_brpm": 17.43,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845403000,
+      "heart_rate_bpm": 87.91,
+      "rmssd_ms": 32.49,
+      "resp_rate_brpm": 17.47,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845404000,
+      "heart_rate_bpm": 88.58,
+      "rmssd_ms": 32.57,
+      "resp_rate_brpm": 17.4,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845405000,
+      "heart_rate_bpm": 87.82,
+      "rmssd_ms": 30.62,
+      "resp_rate_brpm": 17.26,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845406000,
+      "heart_rate_bpm": 86.94,
+      "rmssd_ms": 29.38,
+      "resp_rate_brpm": 17.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845407000,
+      "heart_rate_bpm": 87.09,
+      "rmssd_ms": 29.85,
+      "resp_rate_brpm": 17.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845408000,
+      "heart_rate_bpm": 86.72,
+      "rmssd_ms": 29.65,
+      "resp_rate_brpm": 17.06,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845409000,
+      "heart_rate_bpm": 86.94,
+      "rmssd_ms": 29.91,
+      "resp_rate_brpm": 17.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845410000,
+      "heart_rate_bpm": 88.17,
+      "rmssd_ms": 31.95,
+      "resp_rate_brpm": 17.34,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845411000,
+      "heart_rate_bpm": 88.22,
+      "rmssd_ms": 32.88,
+      "resp_rate_brpm": 17.45,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845412000,
+      "heart_rate_bpm": 87.93,
+      "rmssd_ms": 32.1,
+      "resp_rate_brpm": 17.46,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845413000,
+      "heart_rate_bpm": 88.03,
+      "rmssd_ms": 32.07,
+      "resp_rate_brpm": 17.37,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845414000,
+      "heart_rate_bpm": 87.03,
+      "rmssd_ms": 31.56,
+      "resp_rate_brpm": 17.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845415000,
+      "heart_rate_bpm": 86.45,
+      "rmssd_ms": 29.54,
+      "resp_rate_brpm": 17.08,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845416000,
+      "heart_rate_bpm": 87.17,
+      "rmssd_ms": 29.01,
+      "resp_rate_brpm": 17.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845417000,
+      "heart_rate_bpm": 87.31,
+      "rmssd_ms": 30.1,
+      "resp_rate_brpm": 17.09,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845418000,
+      "heart_rate_bpm": 87.72,
+      "rmssd_ms": 30.3,
+      "resp_rate_brpm": 17.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845419000,
+      "heart_rate_bpm": 88.62,
+      "rmssd_ms": 30.99,
+      "resp_rate_brpm": 17.37,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845420000,
+      "heart_rate_bpm": 88.05,
+      "rmssd_ms": 32.86,
+      "resp_rate_brpm": 17.46,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845421000,
+      "heart_rate_bpm": 87.28,
+      "rmssd_ms": 32.94,
+      "resp_rate_brpm": 17.45,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845422000,
+      "heart_rate_bpm": 87.29,
+      "rmssd_ms": 31.57,
+      "resp_rate_brpm": 17.33,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845423000,
+      "heart_rate_bpm": 86.63,
+      "rmssd_ms": 31.26,
+      "resp_rate_brpm": 17.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845424000,
+      "heart_rate_bpm": 86.68,
+      "rmssd_ms": 30.51,
+      "resp_rate_brpm": 17.06,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845425000,
+      "heart_rate_bpm": 87.86,
+      "rmssd_ms": 28.88,
+      "resp_rate_brpm": 17.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845426000,
+      "heart_rate_bpm": 88.02,
+      "rmssd_ms": 29.27,
+      "resp_rate_brpm": 17.12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845427000,
+      "heart_rate_bpm": 88.04,
+      "rmssd_ms": 30.86,
+      "resp_rate_brpm": 17.27,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845428000,
+      "heart_rate_bpm": 88.33,
+      "rmssd_ms": 31.19,
+      "resp_rate_brpm": 17.41,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845429000,
+      "heart_rate_bpm": 87.31,
+      "rmssd_ms": 31.91,
+      "resp_rate_brpm": 17.47,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845430000,
+      "heart_rate_bpm": 86.6,
+      "rmssd_ms": 33.22,
+      "resp_rate_brpm": 17.42,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845431000,
+      "heart_rate_bpm": 87.05,
+      "rmssd_ms": 32.37,
+      "resp_rate_brpm": 17.29,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845432000,
+      "heart_rate_bpm": 86.98,
+      "rmssd_ms": 30.65,
+      "resp_rate_brpm": 17.14,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845433000,
+      "heart_rate_bpm": 87.44,
+      "rmssd_ms": 30.4,
+      "resp_rate_brpm": 17.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845434000,
+      "heart_rate_bpm": 88.53,
+      "rmssd_ms": 29.8,
+      "resp_rate_brpm": 17.05,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845435000,
+      "heart_rate_bpm": 88.17,
+      "rmssd_ms": 28.85,
+      "resp_rate_brpm": 17.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845436000,
+      "heart_rate_bpm": 87.23,
+      "rmssd_ms": 30.53,
+      "resp_rate_brpm": 17.23,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845437000,
+      "heart_rate_bpm": 86.79,
+      "rmssd_ms": 32.69,
+      "resp_rate_brpm": 17.27,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845438000,
+      "heart_rate_bpm": 85.5,
+      "rmssd_ms": 33.18,
+      "resp_rate_brpm": 17.23,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845439000,
+      "heart_rate_bpm": 84.95,
+      "rmssd_ms": 34.02,
+      "resp_rate_brpm": 17.07,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845440000,
+      "heart_rate_bpm": 85.58,
+      "rmssd_ms": 34.99,
+      "resp_rate_brpm": 16.84,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845441000,
+      "heart_rate_bpm": 85.38,
+      "rmssd_ms": 33.81,
+      "resp_rate_brpm": 16.62,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845442000,
+      "heart_rate_bpm": 85.28,
+      "rmssd_ms": 32.58,
+      "resp_rate_brpm": 16.47,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845443000,
+      "heart_rate_bpm": 85.41,
+      "rmssd_ms": 33.17,
+      "resp_rate_brpm": 16.42,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845444000,
+      "heart_rate_bpm": 84.08,
+      "rmssd_ms": 33.39,
+      "resp_rate_brpm": 16.47,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845445000,
+      "heart_rate_bpm": 82.94,
+      "rmssd_ms": 33.61,
+      "resp_rate_brpm": 16.54,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845446000,
+      "heart_rate_bpm": 82.75,
+      "rmssd_ms": 35.84,
+      "resp_rate_brpm": 16.57,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845447000,
+      "heart_rate_bpm": 82.01,
+      "rmssd_ms": 37.7,
+      "resp_rate_brpm": 16.49,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845448000,
+      "heart_rate_bpm": 82.03,
+      "rmssd_ms": 37.63,
+      "resp_rate_brpm": 16.31,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845449000,
+      "heart_rate_bpm": 82.82,
+      "rmssd_ms": 38.01,
+      "resp_rate_brpm": 16.07,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845450000,
+      "heart_rate_bpm": 82.29,
+      "rmssd_ms": 38.31,
+      "resp_rate_brpm": 15.86,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845451000,
+      "heart_rate_bpm": 81.62,
+      "rmssd_ms": 36.79,
+      "resp_rate_brpm": 15.74,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845452000,
+      "heart_rate_bpm": 81.24,
+      "rmssd_ms": 36.08,
+      "resp_rate_brpm": 15.72,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845453000,
+      "heart_rate_bpm": 79.78,
+      "rmssd_ms": 37.32,
+      "resp_rate_brpm": 15.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845454000,
+      "heart_rate_bpm": 79.03,
+      "rmssd_ms": 37.98,
+      "resp_rate_brpm": 15.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845455000,
+      "heart_rate_bpm": 79.43,
+      "rmssd_ms": 38.75,
+      "resp_rate_brpm": 15.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845456000,
+      "heart_rate_bpm": 79.14,
+      "rmssd_ms": 41.09,
+      "resp_rate_brpm": 15.74,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845457000,
+      "heart_rate_bpm": 79.24,
+      "rmssd_ms": 42.24,
+      "resp_rate_brpm": 15.54,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845458000,
+      "heart_rate_bpm": 79.62,
+      "rmssd_ms": 41.49,
+      "resp_rate_brpm": 15.31,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845459000,
+      "heart_rate_bpm": 78.46,
+      "rmssd_ms": 41.5,
+      "resp_rate_brpm": 15.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845460000,
+      "heart_rate_bpm": 77.39,
+      "rmssd_ms": 41.42,
+      "resp_rate_brpm": 15.02,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845461000,
+      "heart_rate_bpm": 77.01,
+      "rmssd_ms": 40.03,
+      "resp_rate_brpm": 15.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845462000,
+      "heart_rate_bpm": 75.98,
+      "rmssd_ms": 40.16,
+      "resp_rate_brpm": 15.1,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845463000,
+      "heart_rate_bpm": 75.86,
+      "rmssd_ms": 42.05,
+      "resp_rate_brpm": 15.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845464000,
+      "heart_rate_bpm": 76.64,
+      "rmssd_ms": 42.95,
+      "resp_rate_brpm": 15.13,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845465000,
+      "heart_rate_bpm": 76.26,
+      "rmssd_ms": 43.91,
+      "resp_rate_brpm": 14.99,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845466000,
+      "heart_rate_bpm": 75.91,
+      "rmssd_ms": 45.91,
+      "resp_rate_brpm": 14.77,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845467000,
+      "heart_rate_bpm": 75.68,
+      "rmssd_ms": 46.13,
+      "resp_rate_brpm": 14.54,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845468000,
+      "heart_rate_bpm": 74.16,
+      "rmssd_ms": 44.83,
+      "resp_rate_brpm": 14.37,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845469000,
+      "heart_rate_bpm": 73.25,
+      "rmssd_ms": 44.78,
+      "resp_rate_brpm": 14.31,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845470000,
+      "heart_rate_bpm": 73.37,
+      "rmssd_ms": 44.69,
+      "resp_rate_brpm": 14.34,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845471000,
+      "heart_rate_bpm": 72.91,
+      "rmssd_ms": 43.82,
+      "resp_rate_brpm": 14.42,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845472000,
+      "heart_rate_bpm": 73.11,
+      "rmssd_ms": 44.89,
+      "resp_rate_brpm": 14.45,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845473000,
+      "heart_rate_bpm": 73.69,
+      "rmssd_ms": 47.17,
+      "resp_rate_brpm": 14.4,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845474000,
+      "heart_rate_bpm": 72.75,
+      "rmssd_ms": 47.95,
+      "resp_rate_brpm": 14.23,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845475000,
+      "heart_rate_bpm": 71.86,
+      "rmssd_ms": 48.74,
+      "resp_rate_brpm": 14,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845476000,
+      "heart_rate_bpm": 71.38,
+      "rmssd_ms": 50.1,
+      "resp_rate_brpm": 13.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845477000,
+      "heart_rate_bpm": 70.08,
+      "rmssd_ms": 49.44,
+      "resp_rate_brpm": 13.64,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845478000,
+      "heart_rate_bpm": 69.77,
+      "rmssd_ms": 47.95,
+      "resp_rate_brpm": 13.6,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845479000,
+      "heart_rate_bpm": 70.43,
+      "rmssd_ms": 48.2,
+      "resp_rate_brpm": 13.66,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845480000,
+      "heart_rate_bpm": 70.13,
+      "rmssd_ms": 48.44,
+      "resp_rate_brpm": 13.73,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845481000,
+      "heart_rate_bpm": 70.07,
+      "rmssd_ms": 48.26,
+      "resp_rate_brpm": 13.74,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845482000,
+      "heart_rate_bpm": 70.05,
+      "rmssd_ms": 50.09,
+      "resp_rate_brpm": 13.66,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845483000,
+      "heart_rate_bpm": 68.57,
+      "rmssd_ms": 52.33,
+      "resp_rate_brpm": 13.47,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845484000,
+      "heart_rate_bpm": 67.59,
+      "rmssd_ms": 52.63,
+      "resp_rate_brpm": 13.23,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845485000,
+      "heart_rate_bpm": 67.44,
+      "rmssd_ms": 53,
+      "resp_rate_brpm": 13.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845486000,
+      "heart_rate_bpm": 66.72,
+      "rmssd_ms": 53.67,
+      "resp_rate_brpm": 12.91,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845487000,
+      "heart_rate_bpm": 66.93,
+      "rmssd_ms": 52.44,
+      "resp_rate_brpm": 12.91,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845488000,
+      "heart_rate_bpm": 67.63,
+      "rmssd_ms": 51.22,
+      "resp_rate_brpm": 12.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845489000,
+      "heart_rate_bpm": 66.93,
+      "rmssd_ms": 52.09,
+      "resp_rate_brpm": 13.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845490000,
+      "heart_rate_bpm": 66.29,
+      "rmssd_ms": 52.79,
+      "resp_rate_brpm": 13.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845491000,
+      "heart_rate_bpm": 65.81,
+      "rmssd_ms": 53.22,
+      "resp_rate_brpm": 12.91,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845492000,
+      "heart_rate_bpm": 64.32,
+      "rmssd_ms": 55.42,
+      "resp_rate_brpm": 12.7,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845493000,
+      "heart_rate_bpm": 63.8,
+      "rmssd_ms": 57.16,
+      "resp_rate_brpm": 12.47,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845494000,
+      "heart_rate_bpm": 64.24,
+      "rmssd_ms": 56.75,
+      "resp_rate_brpm": 12.28,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845495000,
+      "heart_rate_bpm": 63.91,
+      "rmssd_ms": 56.69,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845496000,
+      "heart_rate_bpm": 64.09,
+      "rmssd_ms": 56.87,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845497000,
+      "heart_rate_bpm": 64.3,
+      "rmssd_ms": 55.5,
+      "resp_rate_brpm": 12.29,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845498000,
+      "heart_rate_bpm": 62.98,
+      "rmssd_ms": 54.98,
+      "resp_rate_brpm": 12.34,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845499000,
+      "heart_rate_bpm": 62.02,
+      "rmssd_ms": 56.59,
+      "resp_rate_brpm": 12.3,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845500000,
+      "heart_rate_bpm": 61.64,
+      "rmssd_ms": 57.63,
+      "resp_rate_brpm": 12.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845501000,
+      "heart_rate_bpm": 61.04,
+      "rmssd_ms": 57.97,
+      "resp_rate_brpm": 12.01,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845502000,
+      "heart_rate_bpm": 61.53,
+      "rmssd_ms": 59.66,
+      "resp_rate_brpm": 11.86,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845503000,
+      "heart_rate_bpm": 62.65,
+      "rmssd_ms": 60.15,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845504000,
+      "heart_rate_bpm": 62.53,
+      "rmssd_ms": 58.62,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845505000,
+      "heart_rate_bpm": 62.59,
+      "rmssd_ms": 57.93,
+      "resp_rate_brpm": 11.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845506000,
+      "heart_rate_bpm": 62.6,
+      "rmssd_ms": 57.56,
+      "resp_rate_brpm": 12.09,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845507000,
+      "heart_rate_bpm": 61.41,
+      "rmssd_ms": 56.08,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845508000,
+      "heart_rate_bpm": 61.1,
+      "rmssd_ms": 56.06,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845509000,
+      "heart_rate_bpm": 61.66,
+      "rmssd_ms": 57.85,
+      "resp_rate_brpm": 12.12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845510000,
+      "heart_rate_bpm": 61.6,
+      "rmssd_ms": 58.51,
+      "resp_rate_brpm": 11.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845511000,
+      "heart_rate_bpm": 62.32,
+      "rmssd_ms": 58.81,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845512000,
+      "heart_rate_bpm": 63.13,
+      "rmssd_ms": 60.03,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845513000,
+      "heart_rate_bpm": 62.42,
+      "rmssd_ms": 59.58,
+      "resp_rate_brpm": 11.84,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845514000,
+      "heart_rate_bpm": 61.99,
+      "rmssd_ms": 57.61,
+      "resp_rate_brpm": 11.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845515000,
+      "heart_rate_bpm": 61.84,
+      "rmssd_ms": 57.09,
+      "resp_rate_brpm": 12.13,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845516000,
+      "heart_rate_bpm": 60.97,
+      "rmssd_ms": 56.93,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845517000,
+      "heart_rate_bpm": 61.29,
+      "rmssd_ms": 56.03,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845518000,
+      "heart_rate_bpm": 62.32,
+      "rmssd_ms": 56.9,
+      "resp_rate_brpm": 12.08,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845519000,
+      "heart_rate_bpm": 62.33,
+      "rmssd_ms": 58.93,
+      "resp_rate_brpm": 11.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845520000,
+      "heart_rate_bpm": 62.7,
+      "rmssd_ms": 59.22,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845521000,
+      "heart_rate_bpm": 62.88,
+      "rmssd_ms": 59.17,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845522000,
+      "heart_rate_bpm": 61.71,
+      "rmssd_ms": 59.75,
+      "resp_rate_brpm": 11.87,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.6,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845523000,
+      "heart_rate_bpm": 61.29,
+      "rmssd_ms": 58.54,
+      "resp_rate_brpm": 12.02,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845524000,
+      "heart_rate_bpm": 61.55,
+      "rmssd_ms": 56.58,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845525000,
+      "heart_rate_bpm": 61.28,
+      "rmssd_ms": 56.59,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845526000,
+      "heart_rate_bpm": 62.04,
+      "rmssd_ms": 56.87,
+      "resp_rate_brpm": 12.17,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845527000,
+      "heart_rate_bpm": 63,
+      "rmssd_ms": 56.6,
+      "resp_rate_brpm": 12.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845528000,
+      "heart_rate_bpm": 62.53,
+      "rmssd_ms": 58.05,
+      "resp_rate_brpm": 11.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845529000,
+      "heart_rate_bpm": 62.33,
+      "rmssd_ms": 59.84,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845530000,
+      "heart_rate_bpm": 62.13,
+      "rmssd_ms": 59.46,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845531000,
+      "heart_rate_bpm": 61.04,
+      "rmssd_ms": 58.94,
+      "resp_rate_brpm": 11.91,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845532000,
+      "heart_rate_bpm": 61.16,
+      "rmssd_ms": 58.96,
+      "resp_rate_brpm": 12.06,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845533000,
+      "heart_rate_bpm": 61.99,
+      "rmssd_ms": 57.37,
+      "resp_rate_brpm": 12.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845534000,
+      "heart_rate_bpm": 62.03,
+      "rmssd_ms": 55.88,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845535000,
+      "heart_rate_bpm": 62.66,
+      "rmssd_ms": 56.66,
+      "resp_rate_brpm": 12.14,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845536000,
+      "heart_rate_bpm": 63.07,
+      "rmssd_ms": 57.37,
+      "resp_rate_brpm": 12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845537000,
+      "heart_rate_bpm": 62.01,
+      "rmssd_ms": 57.53,
+      "resp_rate_brpm": 11.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845538000,
+      "heart_rate_bpm": 61.57,
+      "rmssd_ms": 59.14,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845539000,
+      "heart_rate_bpm": 61.57,
+      "rmssd_ms": 60.25,
+      "resp_rate_brpm": 11.82,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845540000,
+      "heart_rate_bpm": 61.04,
+      "rmssd_ms": 59.08,
+      "resp_rate_brpm": 11.95,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845541000,
+      "heart_rate_bpm": 61.74,
+      "rmssd_ms": 58.23,
+      "resp_rate_brpm": 12.1,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845542000,
+      "heart_rate_bpm": 62.75,
+      "rmssd_ms": 57.98,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845543000,
+      "heart_rate_bpm": 62.52,
+      "rmssd_ms": 56.46,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845544000,
+      "heart_rate_bpm": 62.6,
+      "rmssd_ms": 55.78,
+      "resp_rate_brpm": 12.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845545000,
+      "heart_rate_bpm": 62.45,
+      "rmssd_ms": 57.32,
+      "resp_rate_brpm": 11.95,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845546000,
+      "heart_rate_bpm": 61.24,
+      "rmssd_ms": 58.22,
+      "resp_rate_brpm": 11.82,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845547000,
+      "heart_rate_bpm": 61.15,
+      "rmssd_ms": 58.46,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845548000,
+      "heart_rate_bpm": 61.72,
+      "rmssd_ms": 59.8,
+      "resp_rate_brpm": 11.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845549000,
+      "heart_rate_bpm": 61.68,
+      "rmssd_ms": 60.01,
+      "resp_rate_brpm": 11.99,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845550000,
+      "heart_rate_bpm": 62.5,
+      "rmssd_ms": 58.19,
+      "resp_rate_brpm": 12.14,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845551000,
+      "heart_rate_bpm": 63.12,
+      "rmssd_ms": 57.33,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845552000,
+      "heart_rate_bpm": 62.27,
+      "rmssd_ms": 57.19,
+      "resp_rate_brpm": 12.19,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845553000,
+      "heart_rate_bpm": 61.92,
+      "rmssd_ms": 56.1,
+      "resp_rate_brpm": 12.07,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845554000,
+      "heart_rate_bpm": 61.72,
+      "rmssd_ms": 56.34,
+      "resp_rate_brpm": 11.91,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845555000,
+      "heart_rate_bpm": 60.92,
+      "rmssd_ms": 58.36,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845556000,
+      "heart_rate_bpm": 61.47,
+      "rmssd_ms": 59.07,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845557000,
+      "heart_rate_bpm": 62.43,
+      "rmssd_ms": 59.04,
+      "resp_rate_brpm": 11.88,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845558000,
+      "heart_rate_bpm": 62.37,
+      "rmssd_ms": 59.84,
+      "resp_rate_brpm": 12.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845559000,
+      "heart_rate_bpm": 62.76,
+      "rmssd_ms": 59.19,
+      "resp_rate_brpm": 12.17,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845560000,
+      "heart_rate_bpm": 62.75,
+      "rmssd_ms": 57.09,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845561000,
+      "heart_rate_bpm": 61.52,
+      "rmssd_ms": 56.62,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845562000,
+      "heart_rate_bpm": 61.28,
+      "rmssd_ms": 56.88,
+      "resp_rate_brpm": 12.02,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845563000,
+      "heart_rate_bpm": 61.55,
+      "rmssd_ms": 56.37,
+      "resp_rate_brpm": 11.87,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845564000,
+      "heart_rate_bpm": 61.34,
+      "rmssd_ms": 57.37,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845565000,
+      "heart_rate_bpm": 62.25,
+      "rmssd_ms": 59.42,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845566000,
+      "heart_rate_bpm": 63.04,
+      "rmssd_ms": 59.56,
+      "resp_rate_brpm": 11.92,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845567000,
+      "heart_rate_bpm": 62.44,
+      "rmssd_ms": 59.05,
+      "resp_rate_brpm": 12.07,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845568000,
+      "heart_rate_bpm": 62.28,
+      "rmssd_ms": 59.29,
+      "resp_rate_brpm": 12.19,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845569000,
+      "heart_rate_bpm": 61.97,
+      "rmssd_ms": 58.05,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845570000,
+      "heart_rate_bpm": 60.94,
+      "rmssd_ms": 56.15,
+      "resp_rate_brpm": 12.13,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845571000,
+      "heart_rate_bpm": 61.29,
+      "rmssd_ms": 56.41,
+      "resp_rate_brpm": 11.98,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845572000,
+      "heart_rate_bpm": 62.09,
+      "rmssd_ms": 57.16,
+      "resp_rate_brpm": 11.84,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845573000,
+      "heart_rate_bpm": 62.11,
+      "rmssd_ms": 57.14,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845574000,
+      "heart_rate_bpm": 62.78,
+      "rmssd_ms": 58.52,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845575000,
+      "heart_rate_bpm": 62.97,
+      "rmssd_ms": 60.14,
+      "resp_rate_brpm": 11.96,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845576000,
+      "heart_rate_bpm": 61.83,
+      "rmssd_ms": 59.46,
+      "resp_rate_brpm": 12.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845577000,
+      "heart_rate_bpm": 61.53,
+      "rmssd_ms": 58.51,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845578000,
+      "heart_rate_bpm": 61.51,
+      "rmssd_ms": 58.38,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845579000,
+      "heart_rate_bpm": 61.07,
+      "rmssd_ms": 56.98,
+      "resp_rate_brpm": 12.09,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845580000,
+      "heart_rate_bpm": 61.95,
+      "rmssd_ms": 55.72,
+      "resp_rate_brpm": 11.94,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845581000,
+      "heart_rate_bpm": 62.83,
+      "rmssd_ms": 56.82,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845582000,
+      "heart_rate_bpm": 62.49,
+      "rmssd_ms": 57.91,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845583000,
+      "heart_rate_bpm": 62.59,
+      "rmssd_ms": 58.09,
+      "resp_rate_brpm": 11.86,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845584000,
+      "heart_rate_bpm": 62.27,
+      "rmssd_ms": 59.42,
+      "resp_rate_brpm": 12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845585000,
+      "heart_rate_bpm": 61.09,
+      "rmssd_ms": 60.26,
+      "resp_rate_brpm": 12.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845586000,
+      "heart_rate_bpm": 61.23,
+      "rmssd_ms": 58.77,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845587000,
+      "heart_rate_bpm": 61.78,
+      "rmssd_ms": 57.63,
+      "resp_rate_brpm": 12.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845588000,
+      "heart_rate_bpm": 61.78,
+      "rmssd_ms": 57.49,
+      "resp_rate_brpm": 12.05,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845589000,
+      "heart_rate_bpm": 62.67,
+      "rmssd_ms": 56.33,
+      "resp_rate_brpm": 11.9,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845590000,
+      "heart_rate_bpm": 63.07,
+      "rmssd_ms": 55.94,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845591000,
+      "heart_rate_bpm": 62.13,
+      "rmssd_ms": 57.74,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845592000,
+      "heart_rate_bpm": 61.86,
+      "rmssd_ms": 58.82,
+      "resp_rate_brpm": 11.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845593000,
+      "heart_rate_bpm": 61.6,
+      "rmssd_ms": 58.84,
+      "resp_rate_brpm": 12.05,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845594000,
+      "heart_rate_bpm": 60.91,
+      "rmssd_ms": 59.77,
+      "resp_rate_brpm": 12.18,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845595000,
+      "heart_rate_bpm": 61.66,
+      "rmssd_ms": 59.72,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845596000,
+      "heart_rate_bpm": 62.53,
+      "rmssd_ms": 57.7,
+      "resp_rate_brpm": 12.15,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845597000,
+      "heart_rate_bpm": 62.4,
+      "rmssd_ms": 56.78,
+      "resp_rate_brpm": 12.01,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845598000,
+      "heart_rate_bpm": 62.79,
+      "rmssd_ms": 56.96,
+      "resp_rate_brpm": 11.86,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845599000,
+      "heart_rate_bpm": 62.58,
+      "rmssd_ms": 56.3,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845600000,
+      "heart_rate_bpm": 61.35,
+      "rmssd_ms": 56.75,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845601000,
+      "heart_rate_bpm": 61.3,
+      "rmssd_ms": 58.87,
+      "resp_rate_brpm": 11.93,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845602000,
+      "heart_rate_bpm": 61.56,
+      "rmssd_ms": 59.53,
+      "resp_rate_brpm": 12.09,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845603000,
+      "heart_rate_bpm": 61.44,
+      "rmssd_ms": 59.1,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845604000,
+      "heart_rate_bpm": 62.45,
+      "rmssd_ms": 59.49,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845605000,
+      "heart_rate_bpm": 63.04,
+      "rmssd_ms": 58.71,
+      "resp_rate_brpm": 12.12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845606000,
+      "heart_rate_bpm": 62.35,
+      "rmssd_ms": 56.61,
+      "resp_rate_brpm": 11.97,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845607000,
+      "heart_rate_bpm": 62.22,
+      "rmssd_ms": 56.29,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845608000,
+      "heart_rate_bpm": 61.8,
+      "rmssd_ms": 56.99,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845609000,
+      "heart_rate_bpm": 60.88,
+      "rmssd_ms": 56.85,
+      "resp_rate_brpm": 11.84,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845610000,
+      "heart_rate_bpm": 61.44,
+      "rmssd_ms": 57.87,
+      "resp_rate_brpm": 11.98,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845611000,
+      "heart_rate_bpm": 62.18,
+      "rmssd_ms": 59.83,
+      "resp_rate_brpm": 12.13,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845612000,
+      "heart_rate_bpm": 62.19,
+      "rmssd_ms": 59.73,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845613000,
+      "heart_rate_bpm": 62.88,
+      "rmssd_ms": 58.77,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845614000,
+      "heart_rate_bpm": 62.84,
+      "rmssd_ms": 58.73,
+      "resp_rate_brpm": 12.08,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845615000,
+      "heart_rate_bpm": 61.67,
+      "rmssd_ms": 57.58,
+      "resp_rate_brpm": 11.92,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845616000,
+      "heart_rate_bpm": 61.5,
+      "rmssd_ms": 55.87,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845617000,
+      "heart_rate_bpm": 61.45,
+      "rmssd_ms": 56.41,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845618000,
+      "heart_rate_bpm": 61.14,
+      "rmssd_ms": 57.58,
+      "resp_rate_brpm": 11.87,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845619000,
+      "heart_rate_bpm": 62.17,
+      "rmssd_ms": 57.73,
+      "resp_rate_brpm": 12.02,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845620000,
+      "heart_rate_bpm": 62.88,
+      "rmssd_ms": 58.91,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845621000,
+      "heart_rate_bpm": 62.45,
+      "rmssd_ms": 60.28,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845622000,
+      "heart_rate_bpm": 62.55,
+      "rmssd_ms": 59.3,
+      "resp_rate_brpm": 12.17,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845623000,
+      "heart_rate_bpm": 62.09,
+      "rmssd_ms": 57.98,
+      "resp_rate_brpm": 12.04,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845624000,
+      "heart_rate_bpm": 60.98,
+      "rmssd_ms": 57.81,
+      "resp_rate_brpm": 11.89,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845625000,
+      "heart_rate_bpm": 61.32,
+      "rmssd_ms": 56.71,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845626000,
+      "heart_rate_bpm": 61.85,
+      "rmssd_ms": 55.73,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845627000,
+      "heart_rate_bpm": 61.89,
+      "rmssd_ms": 57.12,
+      "resp_rate_brpm": 11.91,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845628000,
+      "heart_rate_bpm": 62.82,
+      "rmssd_ms": 58.49,
+      "resp_rate_brpm": 12.06,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845629000,
+      "heart_rate_bpm": 62.99,
+      "rmssd_ms": 58.59,
+      "resp_rate_brpm": 12.19,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845630000,
+      "heart_rate_bpm": 61.98,
+      "rmssd_ms": 59.54,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845631000,
+      "heart_rate_bpm": 61.8,
+      "rmssd_ms": 60.08,
+      "resp_rate_brpm": 12.14,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845632000,
+      "heart_rate_bpm": 61.48,
+      "rmssd_ms": 58.35,
+      "resp_rate_brpm": 12,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845633000,
+      "heart_rate_bpm": 60.93,
+      "rmssd_ms": 57.05,
+      "resp_rate_brpm": 11.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845634000,
+      "heart_rate_bpm": 61.87,
+      "rmssd_ms": 57.1,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845635000,
+      "heart_rate_bpm": 62.6,
+      "rmssd_ms": 56.37,
+      "resp_rate_brpm": 11.82,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845636000,
+      "heart_rate_bpm": 62.43,
+      "rmssd_ms": 56.25,
+      "resp_rate_brpm": 11.95,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845637000,
+      "heart_rate_bpm": 62.81,
+      "rmssd_ms": 58.22,
+      "resp_rate_brpm": 12.1,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845638000,
+      "heart_rate_bpm": 62.4,
+      "rmssd_ms": 59.36,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845639000,
+      "heart_rate_bpm": 61.21,
+      "rmssd_ms": 59.08,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845640000,
+      "heart_rate_bpm": 61.34,
+      "rmssd_ms": 59.56,
+      "resp_rate_brpm": 12.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845641000,
+      "heart_rate_bpm": 61.58,
+      "rmssd_ms": 59.29,
+      "resp_rate_brpm": 11.95,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845642000,
+      "heart_rate_bpm": 61.56,
+      "rmssd_ms": 57.2,
+      "resp_rate_brpm": 11.82,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845643000,
+      "heart_rate_bpm": 62.64,
+      "rmssd_ms": 56.33,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845644000,
+      "heart_rate_bpm": 63.01,
+      "rmssd_ms": 56.89,
+      "resp_rate_brpm": 11.85,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845645000,
+      "heart_rate_bpm": 62.24,
+      "rmssd_ms": 56.66,
+      "resp_rate_brpm": 11.99,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845646000,
+      "heart_rate_bpm": 62.16,
+      "rmssd_ms": 57.24,
+      "resp_rate_brpm": 12.14,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845647000,
+      "heart_rate_bpm": 61.64,
+      "rmssd_ms": 59.34,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845648000,
+      "heart_rate_bpm": 60.85,
+      "rmssd_ms": 59.85,
+      "resp_rate_brpm": 12.19,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845649000,
+      "heart_rate_bpm": 61.61,
+      "rmssd_ms": 58.99,
+      "resp_rate_brpm": 12.07,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845650000,
+      "heart_rate_bpm": 62.26,
+      "rmssd_ms": 59,
+      "resp_rate_brpm": 11.91,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845651000,
+      "heart_rate_bpm": 62.27,
+      "rmssd_ms": 58.2,
+      "resp_rate_brpm": 11.8,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845652000,
+      "heart_rate_bpm": 62.94,
+      "rmssd_ms": 56.22,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845653000,
+      "heart_rate_bpm": 62.67,
+      "rmssd_ms": 56.14,
+      "resp_rate_brpm": 11.88,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845654000,
+      "heart_rate_bpm": 61.51,
+      "rmssd_ms": 57.27,
+      "resp_rate_brpm": 12.03,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845655000,
+      "heart_rate_bpm": 61.49,
+      "rmssd_ms": 57.41,
+      "resp_rate_brpm": 12.17,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845656000,
+      "heart_rate_bpm": 61.41,
+      "rmssd_ms": 58.34,
+      "resp_rate_brpm": 12.22,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845657000,
+      "heart_rate_bpm": 61.24,
+      "rmssd_ms": 60.09,
+      "resp_rate_brpm": 12.16,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845658000,
+      "heart_rate_bpm": 62.37,
+      "rmssd_ms": 59.72,
+      "resp_rate_brpm": 12.02,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845659000,
+      "heart_rate_bpm": 62.89,
+      "rmssd_ms": 58.36,
+      "resp_rate_brpm": 11.87,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845660000,
+      "heart_rate_bpm": 62.41,
+      "rmssd_ms": 58.13,
+      "resp_rate_brpm": 11.79,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845661000,
+      "heart_rate_bpm": 62.5,
+      "rmssd_ms": 57.18,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845662000,
+      "heart_rate_bpm": 61.89,
+      "rmssd_ms": 55.75,
+      "resp_rate_brpm": 11.92,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845663000,
+      "heart_rate_bpm": 60.91,
+      "rmssd_ms": 56.58,
+      "resp_rate_brpm": 12.08,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845664000,
+      "heart_rate_bpm": 61.44,
+      "rmssd_ms": 58.1,
+      "resp_rate_brpm": 12.19,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845665000,
+      "heart_rate_bpm": 61.91,
+      "rmssd_ms": 58.31,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845666000,
+      "heart_rate_bpm": 62.01,
+      "rmssd_ms": 59.18,
+      "resp_rate_brpm": 12.13,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845667000,
+      "heart_rate_bpm": 62.94,
+      "rmssd_ms": 60.24,
+      "resp_rate_brpm": 11.98,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845668000,
+      "heart_rate_bpm": 62.87,
+      "rmssd_ms": 58.99,
+      "resp_rate_brpm": 11.84,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845669000,
+      "heart_rate_bpm": 61.84,
+      "rmssd_ms": 57.41,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845670000,
+      "heart_rate_bpm": 61.75,
+      "rmssd_ms": 57.3,
+      "resp_rate_brpm": 11.83,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845671000,
+      "heart_rate_bpm": 61.38,
+      "rmssd_ms": 56.59,
+      "resp_rate_brpm": 11.96,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845672000,
+      "heart_rate_bpm": 61,
+      "rmssd_ms": 55.93,
+      "resp_rate_brpm": 12.11,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845673000,
+      "heart_rate_bpm": 62.07,
+      "rmssd_ms": 57.54,
+      "resp_rate_brpm": 12.21,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845674000,
+      "heart_rate_bpm": 62.66,
+      "rmssd_ms": 59.07,
+      "resp_rate_brpm": 12.2,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845675000,
+      "heart_rate_bpm": 62.45,
+      "rmssd_ms": 58.98,
+      "resp_rate_brpm": 12.09,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845676000,
+      "heart_rate_bpm": 62.79,
+      "rmssd_ms": 59.49,
+      "resp_rate_brpm": 11.94,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845677000,
+      "heart_rate_bpm": 62.19,
+      "rmssd_ms": 59.74,
+      "resp_rate_brpm": 11.81,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845678000,
+      "heart_rate_bpm": 61.1,
+      "rmssd_ms": 57.88,
+      "resp_rate_brpm": 11.78,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    },
+    {
+      "timestamp": 1790845679000,
+      "heart_rate_bpm": 61.39,
+      "rmssd_ms": 56.52,
+      "resp_rate_brpm": 11.86,
+      "eeg_beta_alpha": null,
+      "motion_g": 0.025,
+      "quality": "good"
+    }
+  ],
+  "markers": [
+    {
+      "timestamp": 1790845390000,
+      "label": "Synthetic change begins"
+    },
+    {
+      "timestamp": 1790845510000,
+      "label": "Synthetic motion"
+    }
+  ],
+  "context": null
+}

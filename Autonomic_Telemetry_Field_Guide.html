@@ -1,0 +1,1202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="An honest field guide to the experimental Autonomic Telemetry console: synthetic sessions, fixed references, data quality, Hume and Apple Health context, and privacy."
+    />
+    <title>Field Guide · Autonomic Telemetry</title>
+    <style>
+      :root {
+        --bg: #09171c;
+        --surface: #10242b;
+        --surface2: #12282f;
+        --line: #284048;
+        --text: #e1eceb;
+        --muted: #a2b9bb;
+        --quiet: #7f9c9f;
+        --teal: #8bd5c5;
+        --amber: #ddc393;
+        --ink: #071b20;
+        --radius: 18px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 24px;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          16px/1.7 -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: var(--teal);
+        text-underline-offset: 4px;
+      }
+      a:hover {
+        color: #b9fff6;
+      }
+      a:focus-visible {
+        outline: 3px solid var(--teal);
+        outline-offset: 5px;
+        border-radius: 3px;
+      }
+      .skip {
+        position: absolute;
+        left: 16px;
+        top: -80px;
+        background: var(--teal);
+        color: var(--ink);
+        padding: 10px 16px;
+        z-index: 10;
+      }
+      .skip:focus {
+        top: 12px;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        max-width: 1320px;
+        margin: auto;
+        padding: 23px 40px;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        color: var(--text);
+        text-decoration: none;
+      }
+      .brand::before {
+        content: "";
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        margin-right: 10px;
+        border-radius: 50%;
+        background: var(--teal);
+        box-shadow: 0 0 0 5px #72d9cf12;
+      }
+      .back {
+        font-size: 13px;
+        white-space: nowrap;
+        text-decoration: none;
+      }
+      .hero {
+        position: relative;
+        overflow: hidden;
+        max-width: 1240px;
+        margin: auto;
+        padding: 64px 0 48px;
+      }
+      .eyebrow {
+        color: var(--teal);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 750;
+      }
+      .hero h1 {
+        font-size: clamp(36px, 5vw, 58px);
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+        margin: 17px 0 24px;
+        max-width: 760px;
+        font-weight: 650;
+      }
+      .hero p {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.6;
+        max-width: 660px;
+        margin: 0;
+      }
+      .hero-art {
+        position: absolute;
+        right: 0;
+        top: 38px;
+        width: 370px;
+        height: 220px;
+        opacity: 0.46;
+        pointer-events: none;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 26px;
+      }
+      .tag {
+        display: inline-block;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        border: 1px solid var(--line);
+        padding: 5px 10px;
+        border-radius: 30px;
+      }
+      .tag.accent {
+        color: var(--teal);
+        border-color: #386b69;
+        background: #72d9cf09;
+      }
+      .shell {
+        max-width: 1240px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 44px;
+        padding-bottom: 72px;
+      }
+      .toc {
+        position: sticky;
+        top: 24px;
+        align-self: start;
+        max-height: calc(100vh - 48px);
+        overflow: auto;
+        padding-top: 4px;
+      }
+      .toc-label {
+        font-size: 10px;
+        color: var(--quiet);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+      .toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .toc li {
+        margin: 0 0 5px;
+      }
+      .toc a {
+        display: flex;
+        gap: 13px;
+        padding: 8px 0;
+        text-decoration: none;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .toc a:hover {
+        color: var(--teal);
+      }
+      .toc .num {
+        font:
+          11px/1.9 ui-monospace,
+          SFMono-Regular,
+          monospace;
+        color: var(--quiet);
+      }
+      .toc-note {
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--quiet);
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        margin-top: 22px;
+        max-width: 185px;
+      }
+      main {
+        min-width: 0;
+      }
+      .notice {
+        border: 1px solid #7b6542;
+        border-radius: var(--radius);
+        padding: 22px 26px;
+        background: #efc88f07;
+        margin-bottom: 20px;
+      }
+      .notice strong {
+        color: var(--amber);
+        font-size: 14px;
+      }
+      .notice p {
+        color: var(--muted);
+        font-size: 14px;
+        margin: 7px 0 0;
+      }
+      .card {
+        background: linear-gradient(145deg, #122632, #10212c 64%);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 30px 34px;
+        margin-bottom: 18px;
+        scroll-margin-top: 24px;
+      }
+      .section-head {
+        display: flex;
+        gap: 15px;
+        align-items: baseline;
+        margin-bottom: 18px;
+      }
+      .section-head .num {
+        font:
+          12px ui-monospace,
+          SFMono-Regular,
+          monospace;
+        color: var(--teal);
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+        font-weight: 650;
+        margin: 0;
+      }
+      h3 {
+        font-size: 16px;
+        line-height: 1.4;
+        color: var(--text);
+        margin: 25px 0 8px;
+      }
+      p {
+        margin: 12px 0;
+        color: var(--muted);
+      }
+      strong {
+        color: var(--text);
+        font-weight: 650;
+      }
+      ul,
+      ol {
+        padding-left: 23px;
+        color: var(--muted);
+        margin: 13px 0;
+      }
+      li {
+        padding-left: 3px;
+        margin: 8px 0;
+      }
+      li::marker {
+        color: var(--teal);
+      }
+      .lead {
+        font-size: 17px;
+        color: var(--text);
+        line-height: 1.65;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 20px 0;
+      }
+      .mini {
+        background: #0a1b25;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 17px 19px;
+      }
+      .mini .label {
+        font-size: 10px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--teal);
+        font-weight: 700;
+      }
+      .mini p {
+        font-size: 13px;
+        line-height: 1.7;
+        margin: 7px 0 0;
+      }
+      .rule {
+        padding: 15px 18px;
+        border-left: 2px solid var(--teal);
+        background: #72d9cf06;
+        border-radius: 0 10px 10px 0;
+        margin: 20px 0;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .rule.warm {
+        border-color: var(--amber);
+        background: #efc88f06;
+      }
+      .table-wrap {
+        overflow-x: auto;
+        margin: 18px 0;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+      }
+      th {
+        color: var(--quiet);
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: #0a1b25;
+        font-weight: 700;
+      }
+      td {
+        color: var(--muted);
+      }
+      td:first-child {
+        color: var(--text);
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      code {
+        font:
+          12px/1.6 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: #c0e9e3;
+        overflow-wrap: anywhere;
+      }
+      p code,
+      li code,
+      td code {
+        background: #081822;
+        border: 1px solid var(--line);
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+      pre {
+        background: #081822;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 18px 20px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        line-height: 1.65;
+      }
+      .small {
+        font-size: 12px;
+        color: var(--quiet);
+      }
+      .sources {
+        list-style: none;
+        padding: 0;
+      }
+      .sources li {
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+        margin: 0;
+      }
+      .sources li:last-child {
+        border-bottom: 0;
+      }
+      .sources a {
+        font-size: 14px;
+      }
+      .sources p {
+        font-size: 12px;
+        margin: 5px 0 0;
+        color: var(--quiet);
+      }
+      .footer {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 23px 0 35px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        color: var(--quiet);
+        font-size: 12px;
+      }
+      .footer a {
+        text-decoration: none;
+      }
+      @media (max-width: 1320px) {
+        .hero,
+        .shell,
+        .footer {
+          margin-left: 40px;
+          margin-right: 40px;
+        }
+        .hero-art {
+          right: -60px;
+        }
+        .hero h1,
+        .hero p {
+          position: relative;
+          z-index: 1;
+        }
+      }
+      @media (max-width: 1050px) {
+        .hero-art {
+          opacity: 0.16;
+        }
+        .shell {
+          grid-template-columns: 180px minmax(0, 1fr);
+          gap: 26px;
+        }
+        .card {
+          padding: 26px;
+        }
+        .hero {
+          padding-top: 46px;
+        }
+        .hero h1 {
+          max-width: 640px;
+        }
+      }
+      @media (max-width: 760px) {
+        body {
+          font-size: 15px;
+        }
+        .topbar {
+          padding: 18px 20px;
+        }
+        .brand {
+          font-size: 12px;
+        }
+        .back {
+          font-size: 12px;
+        }
+        .hero,
+        .shell,
+        .footer {
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+        .hero {
+          padding: 36px 0 27px;
+        }
+        .hero p {
+          font-size: 16px;
+        }
+        .hero-art {
+          display: none;
+        }
+        .shell {
+          display: block;
+          padding-bottom: 35px;
+        }
+        .toc {
+          position: static;
+          max-height: none;
+          overflow: visible;
+          border-bottom: 1px solid var(--line);
+          padding: 0 0 20px;
+          margin-bottom: 24px;
+        }
+        .toc ol {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0 16px;
+        }
+        .toc a {
+          font-size: 12px;
+          padding: 5px 0;
+          gap: 8px;
+        }
+        .toc-note {
+          display: none;
+        }
+        .toc-label {
+          margin-bottom: 10px;
+        }
+        .card {
+          padding: 24px 20px;
+          border-radius: 14px;
+        }
+        .notice {
+          padding: 20px;
+        }
+        .section-head {
+          gap: 10px;
+        }
+        h2 {
+          font-size: 21px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .lead {
+          font-size: 16px;
+        }
+        th,
+        td {
+          padding: 10px;
+        }
+        .footer {
+          display: block;
+          padding-top: 20px;
+        }
+        .footer span {
+          display: block;
+          margin-bottom: 7px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      @media print {
+        html {
+          color-scheme: light;
+        }
+        body {
+          background: white;
+          color: #14252c;
+          font:
+            10pt/1.5 Georgia,
+            serif;
+        }
+        .topbar,
+        .toc,
+        .hero-art,
+        .tags,
+        .back {
+          display: none;
+        }
+        .hero,
+        .shell,
+        .footer {
+          margin: 0;
+          display: block;
+        }
+        .hero {
+          padding: 0 0 20px;
+        }
+        .hero h1 {
+          font-size: 28pt;
+          color: #14252c;
+        }
+        .hero p,
+        p,
+        li,
+        td,
+        .notice p,
+        .rule {
+          color: #344b55;
+        }
+        .card,
+        .notice,
+        .mini,
+        pre {
+          background: white;
+          box-shadow: none;
+          border-color: #cbd5db;
+          border-radius: 0;
+        }
+        .card {
+          padding: 20px 0;
+          break-inside: avoid;
+        }
+        .notice {
+          padding: 14px;
+        }
+        .section-head .num,
+        .eyebrow,
+        h3,
+        strong,
+        td:first-child {
+          color: #14252c;
+        }
+        a {
+          color: #155b62;
+        }
+        th {
+          background: #eef3f5;
+          color: #344b55;
+        }
+        .shell {
+          padding: 0;
+        }
+        .footer {
+          padding: 15px 0;
+        }
+        .rule {
+          background: #f2f8f7;
+        }
+        code {
+          color: #155b62;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to the guide</a>
+    <header class="topbar">
+      <a class="brand" href="Autonomic_Telemetry_Console.html"
+        >AUTONOMIC TELEMETRY</a
+      >
+      <a class="back" href="Autonomic_Telemetry_Console.html"
+        >Open console <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <div class="hero">
+      <svg
+        class="hero-art"
+        viewBox="0 0 370 220"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M0 180H370M0 125H370M0 70H370M50 20V220M130 20V220M210 20V220M290 20V220"
+          stroke="#34505b"
+        />
+        <path
+          d="M0 144L23 143L42 137L62 140L82 134L104 139L126 130L146 133L165 128L186 70L205 45L226 54L246 56L266 83L286 99L307 115L328 120L350 131L370 128"
+          stroke="#72d9cf"
+          stroke-width="2"
+        />
+        <path
+          d="M0 80L23 78L42 84L62 79L82 89L104 83L126 87L146 82L165 90L186 130L205 152L226 145L246 147L266 126L286 116L307 104L328 99L350 95L370 86"
+          stroke="#efc88f"
+          stroke-width="1.5"
+        />
+        <circle cx="205" cy="45" r="5" fill="#72d9cf" />
+        <circle cx="205" cy="152" r="4" fill="#efc88f" />
+      </svg>
+      <div class="eyebrow">A companion for curious observation</div>
+      <h1>Read the signals.<br />Keep the limits in view.</h1>
+      <p>
+        A field guide to the console's reference, patterns, and provenance—with
+        a practical path for Hume Band 2.0 and Apple Watch users.
+      </p>
+      <div class="tags">
+        <span class="tag accent">EXPERIMENTAL</span
+        ><span class="tag">OFFLINE BY DESIGN</span
+        ><span class="tag">SYNTHETIC DEMO INCLUDED</span>
+      </div>
+    </div>
+    <div class="shell">
+      <nav class="toc" aria-label="Field guide contents">
+        <div class="toc-label">In this guide</div>
+        <ol>
+          <li>
+            <a href="#start"><span class="num">01</span>Start with the demo</a>
+          </li>
+          <li>
+            <a href="#devices"
+              ><span class="num">02</span>Your wearable context</a
+            >
+          </li>
+          <li>
+            <a href="#reference"
+              ><span class="num">03</span>Quality and reference</a
+            >
+          </li>
+          <li>
+            <a href="#index"><span class="num">04</span>Read the shift index</a>
+          </li>
+          <li>
+            <a href="#events"><span class="num">05</span>Novelty and events</a>
+          </li>
+          <li>
+            <a href="#lenses"><span class="num">06</span>The other lenses</a>
+          </li>
+          <li>
+            <a href="#files"><span class="num">07</span>Files and privacy</a>
+          </li>
+          <li>
+            <a href="#sources"
+              ><span class="num">08</span>Evidence and limits</a
+            >
+          </li>
+        </ol>
+        <p class="toc-note">
+          A descriptive workbench for comparing a recording with its own
+          reference. Every number needs its source and context.
+        </p>
+      </nav>
+      <main id="main">
+        <aside class="notice" aria-label="Experimental scope">
+          <strong>An experimental display, with no clinical validation.</strong>
+          <p>
+            The custom scores do not measure stress, sympathetic activity,
+            illness, or recovery. They describe selected changes in supplied
+            summaries. They carry no clinical thresholds or confidence
+            intervals.
+          </p>
+        </aside>
+
+        <section class="card" id="start">
+          <div class="section-head">
+            <span class="num">01</span>
+            <h2>Start with the demo</h2>
+          </div>
+          <p class="lead">
+            Use a known story to understand what each display can show.
+          </p>
+          <ol>
+            <li>
+              Open the console and keep the <strong>synthetic</strong> label in
+              view. The scenarios are generated examples, not a person's
+              recording.
+            </li>
+            <li>
+              Use the Reference, Change, Easing, and Motion presets to jump to
+              key moments, then explore with play/pause, playback speed,
+              restart, and the timeline scrubber.
+            </li>
+            <li>
+              Compare the index's contribution bars with the actual HR, RMSSD,
+              and respiratory-rate traces. Notice how excluded data creates a
+              gap instead of a confident score.
+            </li>
+          </ol>
+          <p>
+            The demo supplies a deterministic eight-minute, 1 Hz series and a
+            preloaded two-minute reference. Faster playback changes how quickly
+            you watch it; it does not change the recorded time scale. Restart
+            returns to the beginning of the same data.
+          </p>
+          <div class="grid">
+            <div class="mini">
+              <div class="label">Reference shift</div>
+              <p>
+                How far the current summaries have moved in selected directions
+                from a fixed comparison segment.
+              </p>
+            </div>
+            <div class="mini">
+              <div class="label">Novelty</div>
+              <p>
+                How unusual the latest step is. A sustained shift can remain
+                high on the index after novelty falls.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="devices">
+          <div class="section-head">
+            <span class="num">02</span>
+            <h2>Your wearable context</h2>
+          </div>
+          <h3>Hume Band 2.0</h3>
+          <p>
+            Choose <strong>Add Hume reading</strong> to copy the date, resting
+            heart rate, HRV, and respiratory rate available in your Hume app.
+            For HRV, choose
+            <strong>Unspecified / not confirmed, RMSSD, or SDNN</strong>. Keep
+            it unspecified if the source does not identify the method. The dated
+            reading stays in memory and travels with your export. A new reading
+            or Health XML replaces the current context snapshot.
+          </p>
+          <p>
+            Hume's
+            <a href="https://humehealth.com/en-gb/pages/faq">FAQ</a> describes
+            partial Apple Health/Google Fit sharing and lists native export as
+            “Coming Soon” (checked 22 October 2026). This console assumes no
+            direct Hume API, CSV export, or Bluetooth feed.
+          </p>
+          <p>
+            If your Hume metrics appear in Apple Health, load its unzipped
+            <code>export.xml</code> and select the Hume source name. Check which
+            metrics actually arrived. Google Fit import is not supported here.
+          </p>
+          <h3>Apple Watch</h3>
+          <p>
+            Load Apple Health XML and choose the Watch source.
+            <a
+              href="https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/heartratevariabilitysdnn"
+              >HealthKit HRV is SDNN</a
+            >; it is kept separate from RMSSD. The latest record is selected by
+            measurement timestamp for each supported metric within the selected
+            source. Each value shows its date; older than 30 days is labeled
+            stale.
+          </p>
+          <div class="rule warm">
+            <strong>Daily context stays context.</strong> Neither manual notes
+            nor sparse Health records enter the 1 Hz session score or seed its
+            reference. No sleep-stage or recovery estimate is derived. Shared
+            physiology views are device neutral.
+          </div>
+          <p class="small">
+            Earlier Muse Web Bluetooth and OSC sketches have been retired. A
+            supported live feed would require verified acquisition, timing,
+            artifact handling, and signal-processing validation.
+          </p>
+        </section>
+
+        <section class="card" id="reference">
+          <div class="section-head">
+            <span class="num">03</span>
+            <h2>Quality before interpretation</h2>
+          </div>
+          <p>
+            Only samples labeled <code>quality: "good"</code> enter the model.
+            <code>poor</code> and <code>unknown</code> are excluded. When motion
+            is supplied, it must be <strong>0.25 g or less</strong>. Motion
+            means magnitude after gravity removal, not the raw accelerometer's
+            roughly 1 g at rest.
+          </p>
+          <p>
+            A missing motion value cannot establish stillness, and “good”
+            quality is the file provider's assertion. The console does not
+            independently validate sensors or reconstruct quality from a raw
+            recording.
+          </p>
+          <h3>A fixed comparison segment</h3>
+          <p>
+            A reference needs at least
+            <strong>60 eligible samples spanning 119 seconds</strong>, with at
+            least two of HR, RMSSD, and respiratory rate present. A candidate
+            restarts after an excluded sample, insufficient channels, a gap
+            longer than 10 seconds, or a change in those available channels.
+            Once formed, the reference stays fixed for the session; scoring
+            starts on the next eligible sample.
+          </p>
+          <div class="rule">
+            <strong>Same channels, same comparison.</strong> A scored row must
+            have the reference's channel set. A missing channel withholds the
+            index rather than silently increasing the weights of the remaining
+            channels.
+          </div>
+          <p>
+            The reference is not a health norm or proof of rest. Recording
+            conditions, timing, and preprocessing affect the comparison. There
+            is no saved baseline; a new recording or page reload starts fresh.
+          </p>
+        </section>
+
+        <section class="card" id="index">
+          <div class="section-head">
+            <span class="num">04</span>
+            <h2>Read the pattern-shift index</h2>
+          </div>
+          <p class="lead">
+            A transparent directional composite on a 0–100 display scale.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Input</th>
+                  <th>Direction scored</th>
+                  <th>Weight</th>
+                  <th>SD floor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Heart rate</td>
+                  <td>Increase</td>
+                  <td>40%</td>
+                  <td>2 bpm</td>
+                </tr>
+                <tr>
+                  <td>RMSSD</td>
+                  <td>Decrease</td>
+                  <td>40%</td>
+                  <td>5 ms</td>
+                </tr>
+                <tr>
+                  <td>Respiratory rate</td>
+                  <td>Increase</td>
+                  <td>20%</td>
+                  <td>1 breath/min</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            For each reference channel, the console divides the directional
+            difference from its reference mean by its reference SD, using the
+            floor above when needed. Positive standardized shifts are clipped to
+            0–4, divided by four, then combined with the weights. Weights are
+            normalized once for the reference's available channels.
+          </p>
+          <p>
+            For example, if only HR and RMSSD form the reference, each has 50%
+            weight. Later rows keep that exact pair. EEG and novelty contribute
+            no weight.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Score</th>
+                  <th>Display language</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Below 25</td>
+                  <td>Low directional shift</td>
+                </tr>
+                <tr>
+                  <td>25 to below 46</td>
+                  <td>Small shift</td>
+                </tr>
+                <tr>
+                  <td>46 to below 68</td>
+                  <td>Moderate shift</td>
+                </tr>
+                <tr>
+                  <td>68–100</td>
+                  <td>Large shift</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="rule warm">
+            Only HR increases, RMSSD decreases, and respiratory-rate increases
+            contribute. A low score means little shift in those directions;
+            large opposite-direction changes can also score zero. Low does not
+            mean close to the reference, calm, or healthy. The weights, floors,
+            clipping, and tiers are design choices, and a large shift does not
+            identify a cause.
+          </div>
+        </section>
+
+        <section class="card" id="events">
+          <div class="section-head">
+            <span class="num">05</span>
+            <h2>Novelty and coincident change</h2>
+          </div>
+          <p>
+            Novelty is the root mean square of standardized feature
+            <strong>first differences per second</strong>, centered and scaled
+            against the reference's rates of change. Actual timestamp intervals
+            are used. It is dimensionless. It is not a likelihood, information
+            in nats, a forecast, or a direct physiological measurement.
+          </p>
+          <p>
+            An event requires eligible data, novelty of at least
+            <strong>3</strong>, and at least two directional steps of one
+            reference SD or more relative to the preceding five-second mean: HR
+            up, RMSSD down, or respiration up. There must be at least three
+            prior clean samples in that interval. A
+            <strong>20-second</strong> refractory interval separates logged
+            events.
+          </p>
+          <div class="grid">
+            <div class="mini">
+              <div class="label">What it describes</div>
+              <p>
+                A coincident, unusually large change in the supplied channels
+                under a specific heuristic rule.
+              </p>
+            </div>
+            <div class="mini">
+              <div class="label">What remains unknown</div>
+              <p>
+                Cause, physiological meaning, sensor validity, and whether a
+                condition is present. An event is not labeled a sympathetic
+                surge or stress episode.
+              </p>
+            </div>
+          </div>
+          <p>
+            Use markers to note your own context. A marker records what you
+            typed; it does not establish causation or change the calculations.
+            The detector's threshold has no validated false-positive rate.
+          </p>
+        </section>
+
+        <section class="card" id="lenses">
+          <div class="section-head">
+            <span class="num">06</span>
+            <h2>The other lenses</h2>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Display</th>
+                  <th>How to read it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Trend association</td>
+                  <td>
+                    Pearson correlation of aligned, clean, contiguous HR and
+                    respiratory-rate summaries. It does not establish RSA,
+                    causal direction, or a physiological coupling strength.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Temporal texture · HR persistence</td>
+                  <td>
+                    Lag-one association of consecutive clean HR values. This is
+                    a sample lag; sampling and smoothing matter. It is not a
+                    critical-transition warning.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Temporal texture · RMSSD dispersion</td>
+                  <td>
+                    Sample standard deviation of the supplied RMSSD summaries.
+                    It is not beat-to-beat SDNN or autonomic complexity.
+                  </td>
+                </tr>
+                <tr>
+                  <td>State portrait</td>
+                  <td>
+                    Standardized HR against standardized RMSSD relative to the
+                    fixed reference. These are the actual two axes, not PCA or a
+                    learned phenotype. Points are clipped at the frame.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Supplied EEG beta/alpha</td>
+                  <td>
+                    Optional value in Temporal texture. It carries no index
+                    weight or physiological interpretation.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Association and texture use the latest contiguous clean window of up
+            to 60 seconds and need at least 20 relevant samples.
+          </p>
+          <h3>The breathing pacer</h3>
+          <p>
+            The pacer is an independent visual timing guide. It does not measure
+            breathing, adherence, RSA, or a treatment response. Changing the
+            pacer's speed does not modify the recording or its scores.
+          </p>
+          <p class="small">
+            This release does not calculate LF/HF, spectral power, RSA
+            amplitude, entropy, a causal network, or a critical-transition
+            predictor.
+          </p>
+        </section>
+
+        <section class="card" id="files">
+          <div class="section-head">
+            <span class="num">07</span>
+            <h2>Bring data. Keep its provenance.</h2>
+          </div>
+          <p>
+            Import already-computed summaries as normalized JSON or CSV. Start
+            with the repository's
+            <a href="examples/session-template.csv">CSV template</a> or
+            <a href="examples/demo-session.json">synthetic JSON example</a>. The
+            console does not derive RMSSD from raw ECG, PPG, or RR intervals.
+          </p>
+          <pre><code>timestamp,heart_rate_bpm,rmssd_ms,resp_rate_brpm,eeg_beta_alpha,motion_g,quality
+2026-10-22T10:00:00-04:00,62,48,12,,0.03,good</code></pre>
+          <p>
+            The example row demonstrates the columns; it is not enough to form a
+            reference. Use ISO timestamps with seconds and an explicit timezone,
+            numeric Unix epoch milliseconds in JSON, or 13-digit epoch
+            milliseconds in CSV. Rows must be at least one second apart; the
+            limit is 20,000 samples and 20 MB. Blank numeric cells remain
+            missing. The JSON format is versioned with
+            <code>schema_version: 2</code>; see
+            <a href="docs/METHODS.md">Methods</a> for the full contract.
+          </p>
+          <p>
+            CSV is labeled <strong>user-supplied</strong>; JSON must explicitly
+            declare provenance. Neither becomes a “verified measurement.”
+            Exports preserve provenance, missing values, timestamps, quality,
+            markers, and context notes for the complete loaded recording.
+            Synthetic JSON sessions remain labeled synthetic. The repository's
+            <a href="examples/README.md">example notes</a> identify its six-row
+            CSV template as synthetic format data with intentionally unknown
+            quality.
+          </p>
+          <div class="rule">
+            <strong>Local processing, explicit files.</strong> The console makes
+            no network requests and writes no browser storage. Imports stay in
+            the current page's memory; a reload clears them. Exported JSON is a
+            file under your control and may contain sensitive health information
+            or marker text.
+          </div>
+          <p>
+            Before posting a repository, inspect its files and Git staging area.
+            Keep personal recordings and Health exports outside it. A filename
+            exclusion list cannot recognize every sensitive file.
+          </p>
+        </section>
+
+        <section class="card" id="sources">
+          <div class="section-head">
+            <span class="num">08</span>
+            <h2>Evidence and limits</h2>
+          </div>
+          <p>
+            The references below inform measurement and interpretation cautions.
+            <strong
+              >They do not validate this console's composite, tiers, novelty
+              statistic, or event detector.</strong
+            >
+            A software test can verify arithmetic or file behavior; it cannot
+            establish clinical accuracy.
+          </p>
+          <ul class="sources">
+            <li>
+              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3576706/"
+                >Billman · 2013</a
+              >
+              <p>
+                Why LF/HF should not be read as cardiac sympathovagal balance.
+                This release omits that ratio.
+              </p>
+            </li>
+            <li>
+              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5316555/"
+                >Laborde, Mosley &amp; Thayer · 2017</a
+              >
+              <p>
+                Practical guidance on HRV study design, analysis, and reporting.
+                HRV needs careful measurement and context.
+              </p>
+            </li>
+            <li>
+              <a
+                href="https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/heartratevariabilitysdnn"
+                >Apple · HealthKit HRV SDNN</a
+              >
+              <p>
+                Apple's definition of its SDNN quantity. SDNN and RMSSD remain
+                different measures here.
+              </p>
+            </li>
+          </ul>
+          <p>
+            Use the console for exploration and reproducible examples. Its
+            outputs should not guide diagnosis, treatment, or decisions about a
+            health condition.
+          </p>
+          <p class="small">
+            Full technical definitions: <a href="docs/METHODS.md">Methods</a> ·
+            Changes from the prototype:
+            <a href="docs/REVIEW.md">Review notes</a> · Setup and publication:
+            <a href="README.md">README</a>
+          </p>
+        </section>
+      </main>
+    </div>
+    <footer class="footer">
+      <span>Autonomic Telemetry · Field Guide · October 2026</span
+      ><a href="Autonomic_Telemetry_Console.html"
+        >Return to the console <span aria-hidden="true">↗</span></a
+      >
+    </footer>
+  </body>
+</html>
