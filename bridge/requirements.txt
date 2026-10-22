@@ -1,0 +1,5 @@
+# Current release checked against the official PyPI project on 2026-10-22.
+# Bleak 3.x requires Python 3.10 or newer.
+bleak==3.0.2
+# SVG pairing codes; no Pillow image dependency is requested.
+qrcode==8.2

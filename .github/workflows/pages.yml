@@ -26,7 +26,8 @@ jobs:
       - name: Stage public static files only
         run: |
           mkdir _site
-          cp ./*.html _site/
+          cp index.html Autonomic_Telemetry_Console.html Autonomic_Telemetry_Field_Guide.html Autonomic_Telemetry_Signal_Lab.html _site/
+          cp research-math.js _site/
           cp -R examples _site/examples
           cp README.md _site/
           mkdir _site/docs

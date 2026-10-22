@@ -1,13 +1,30 @@
 # Release verification — October 22, 2026
 
-The v2.2.0 release passes **56 automated Chromium browser checks** with no page errors or external network requests. Run `npm ci`, `npx playwright install --only-shell chromium`, and `npm test` to repeat the suite.
+Version 2.3.0 passes **167 automated checks**: 47 Chromium browser checks, 33 pure research-math checks, 19 personal-arousal engine checks, and 68 Python bridge checks. Repeat with:
 
-The original 26 checks cover synthetic provenance; elapsed-time reference formation; exclusion of poor, unknown, and high-motion samples; missing and changing channels; directional score interpretation; novelty events; timestamps and CSV; canceled or malformed imports; text injection; export/reimport; Apple Health units, dates, sources, and XML declarations; Hume entry; playback timing; reduced-motion pacer controls; gap and exclusion counts; offline operation; and guide links.
+```sh
+npm ci
+npx playwright install --only-shell chromium
+npm test
+python3 -m unittest discover -s bridge -p 'test_*.py' -v
+```
 
-The 16 additional checks cover independent Rest and Work timers; mode and keyboard navigation; self-reported ease/focus ratings; intentions and reflections; validated workspace export/reimport and paused timer restoration; duration controls; pacer cleanup; 360- and 390-pixel layouts; 44-pixel touch controls; the fixed mobile timer bar; device-guide handoffs; unsupported Bluetooth; and a mocked Muse service with command framing, raw packet decoding, first-packet gating, stale data, and disconnection. Mode switching preserves the recording and signal model.
+The browser checks cover the immersive Work and Rest spaces, explicit ambient/demo/live labeling, source expiry, malformed and stale packet rejection, optional wall-clock timers, breathing controls, quiet/still/color settings, keyboard dialogs, 360-pixel and short-landscape layouts, and the actual HTTP/SSE relay with synthetic device fixtures. The standalone app makes no external runtime requests.
 
-The 14 workbench checks cover untimed Work defaults; one current task and a queue; small steps and restart notes; explicit completion, reopening, and breaks; distraction parking and long-text promotion; validated export/reimport without storage consent; UI input escaping; optional local task persistence and blocked-storage behavior; completed-task guards; the mobile task bar, current-task return shortcut, and optional timer; and all four bio-reactive visuals with source, stream, freshness, quiet-view, and reduced-motion behavior. Sensor tests use mock data. Task progress responds only to the user's checkoffs; it is independent of raw device animations.
+The preserved Signal Lab checks cover reference formation and quality gates, missing channels and timestamps, score and novelty definitions, import/export, injection resistance, Apple Health source/units/date handling, Hume context, playback, the independent pacer, offline operation, and guide links. Research-panel checks cover cursor-bounded analysis, reference files, supplied RR intervals, Mind Monitor and Health Auto Export adapters, stale-result invalidation after a recording change, and mobile layout.
 
-Both HTML files were opened directly from disk. Desktop and mobile screenshots were visually inspected. Interface copy and documents use American English. Separate evergreen/sage and midnight-blue/periwinkle palettes were checked on the main panels and all three device-guide panels; sampled text contrast exceeds 4.5:1, with no page or dialog overflow at 360 pixels. This is sampled testing, not an accessibility certification. The app and field guide use inline assets and system fonts. The manual Pages workflow stages only public static files and documentation.
+The pure-math checks use analytic fixtures for covariance, eigenvalues, PCA, regularized Mahalanobis distance, AR prediction without target leakage, sample entropy, signed cross-lags, exact finite-pair RR statistics, quality/missingness, timestamp validity, and strict CSV parsing. An independent eigensolver review also checked 180 symmetric matrices. The research lenses remain experimental descriptors; software verification does not validate physiological interpretations.
 
-No physical Muse S, Hume Band, or Apple Watch was tested. The Muse adapter is an experimental raw preview, verified with mocks rather than hardware; its packets never enter the signal model. Hume and Watch use guided entry/import workflows. Software checks establish the tested behavior, not physiological validity or clinical accuracy. No personal health recording was used.
+The personal-arousal checks cover elapsed-time reference requirements, signed directional shifts, fixed references, explicit HR-only coverage, source isolation, motion rejection without smoothing leakage, invalid motion values, signal gaps, per-component freshness, and sustained-cue continuity. These verify implementation rules, not physiological validity.
+
+Fifteen analytic/lifecycle feature checks cover known EEG power ratios, actual synthetic pulse intervals and their PRV statistics, noise/clipping, motion over the full window, timing/counter/source resets, stale support timestamps, and optical/Hume source selection. The new live derived-feature path and arousal estimate have not been validated against ECG or an independent arousal reference.
+
+The Python checks cover Muse Classic and Athena parsing, command framing, discovery-independent transport, bounded queues, first-packet gating, staleness, cancellation, and teardown; Hume checks include checksum/type/zero handling and safe measurement renewal; server checks cover private paths, origin validation, static-file isolation, synthetic provenance, queue bounds, SSE, and serialized device control. No physical-device access is required by these automated suites.
+
+## Physical device checks
+
+The owner's Hume Band V2 supplied valid current heart-rate responses over Bluetooth. A 90-second run after the first valid reading received 84 valid responses, with a longest gap of approximately three seconds and no stale phase after warm-up. Renewing the same measurement-start request every 20 seconds prevented the observed approximately 30-second cutoff. Stop, unsubscribe, and disconnect completed. The band firmware version was not read; the upstream project's version is not assumed to match it.
+
+The owner's Muse S exposes the Athena multiplexed `0013` characteristic. Its corrected adapter streamed for 40.3 seconds across all eight EEG channels, four raw optical channels, and acceleration, with no malformed packets, stale periods, or errors. Teardown completed. The older Classic protocol retains mock/fixture coverage; the standalone browser's Classic-only fallback has not been physically validated on a Classic headband.
+
+These are bounded checks on one pair of devices, not compatibility guarantees for all units or firmware. No real sensor values were printed, saved as fixtures, or committed. Source identity, protocol acceptance, and freshness are verified separately from physiological accuracy. The local Wi-Fi bridge uses HTTP and requires a trusted private network.

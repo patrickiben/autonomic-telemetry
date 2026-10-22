@@ -92,7 +92,7 @@ const samples = makeSamples();
 
 try {
   const page = await context.newPage();
-  await page.goto(`${base}/Autonomic_Telemetry_Console.html`);
+  await page.goto(`${base}/Autonomic_Telemetry_Signal_Lab.html`);
   await page.waitForFunction(() => Boolean(window.Telemetry));
 
   await check(
@@ -785,7 +785,7 @@ try {
     async () => {
       const clockPage = await context.newPage();
       await clockPage.clock.install({ time: new Date("2026-10-22T12:00:00Z") });
-      await clockPage.goto(`${base}/Autonomic_Telemetry_Console.html`);
+      await clockPage.goto(`${base}/Autonomic_Telemetry_Signal_Lab.html`);
       await clockPage.clock.pauseAt(new Date("2026-10-22T12:00:01Z"));
       await clockPage.evaluate(() => {
         window.Telemetry.restart();
@@ -855,7 +855,7 @@ try {
   await check("console and guide fit a 390px viewport", async () => {
     await page.setViewportSize({ width: 390, height: 844 });
     for (const filename of [
-      "Autonomic_Telemetry_Console.html",
+      "Autonomic_Telemetry_Signal_Lab.html",
       "Autonomic_Telemetry_Field_Guide.html",
     ]) {
       await page.goto(`${base}/${filename}`);
@@ -873,7 +873,7 @@ try {
   await check(
     "recording import and interaction work with browser networking offline",
     async () => {
-      await page.goto(`${base}/Autonomic_Telemetry_Console.html`);
+      await page.goto(`${base}/Autonomic_Telemetry_Signal_Lab.html`);
       await page.waitForFunction(() => Boolean(window.Telemetry));
       await context.setOffline(true);
       const result = await page.evaluate((fixture) => {

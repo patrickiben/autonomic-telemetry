@@ -1,0 +1,486 @@
+<style>
+  #research-lenses {
+    margin: 24px 0;
+    padding: 24px;
+    overflow: hidden;
+  }
+  #research-lenses summary {
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--text);
+  }
+  #research-lenses .research-copy {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 12px 0;
+    line-height: 1.7;
+  }
+  #research-lenses .research-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  #research-lenses .research-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  #research-lenses .research-cell {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px;
+    min-width: 0;
+  }
+  #research-lenses .research-cell strong {
+    display: block;
+    font: 25px/1.5 var(--mono);
+    color: var(--teal);
+  }
+  #research-lenses .research-cell small {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  #research-lenses table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin: 14px 0;
+  }
+  #research-lenses td,
+  #research-lenses th {
+    border-bottom: 1px solid var(--line);
+    padding: 8px;
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+  #research-lenses .research-scroll {
+    overflow: auto;
+  }
+  #research-lenses canvas {
+    width: 100%;
+    height: 230px;
+    display: block;
+    margin: 16px 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  #research-lenses label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 12px 0;
+  }
+  #research-lenses input,
+  #research-lenses select {
+    max-width: 100%;
+    font-size: 16px;
+  }
+  #research-lenses .research-import {
+    border-top: 1px solid var(--line);
+    margin-top: 22px;
+    padding-top: 12px;
+  }
+  #research-lenses pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 11px;
+    line-height: 1.8;
+    max-height: 330px;
+    overflow: auto;
+  }
+  @media (max-width: 640px) {
+    #research-lenses {
+      padding: 18px;
+    }
+    #research-lenses .research-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+<details class="panel" id="research-lenses">
+  <summary>Research lenses · original mathematical tools</summary>
+  <p class="research-copy">
+    AR prediction errors, covariance distance, eigenvalue coupling, sample
+    entropy, signed cross-lags, and a PCA trajectory. These experimental
+    descriptors inspect the recording; they do not change the main index or the
+    immersive visual.
+  </p>
+  <p class="research-copy">
+    <a href="docs/RESEARCH_ENGINE.md">Definitions and corrections ↗</a>
+  </p>
+  <div class="research-actions">
+    <button id="research-run" type="button" class="primary">
+      Analyze up to the cursor</button
+    ><button id="research-save-reference" type="button" disabled>
+      Export reference</button
+    ><button id="research-load-reference" type="button">Open reference</button
+    ><button id="research-clear-reference" type="button" hidden>
+      Use recording reference
+    </button>
+  </div>
+  <p class="research-copy" id="research-status" role="status">
+    Analysis runs when you choose it. No personal reference is saved
+    automatically.
+  </p>
+  <div class="research-grid" id="research-summary" hidden></div>
+  <canvas
+    id="research-pca"
+    hidden
+    role="img"
+    aria-label="PCA trajectory of complete eligible recording samples"
+  ></canvas>
+  <div class="research-scroll" id="research-crosslags"></div>
+  <pre id="research-details"></pre>
+  <div class="research-import">
+    <h3>Explicit RR intervals</h3>
+    <p class="research-copy">
+      Open a JSON array, or an object with <code>rr_intervals_ms</code>,
+      containing a consecutive sequence of independently supplied RR intervals
+      in milliseconds. An artifact-corrected sequence is required for
+      interpretation. The app does not create beat intervals from Hume heart
+      rate or raw Muse PPG.
+    </p>
+    <button id="research-rr-open" type="button">
+      Analyze RR interval file
+    </button>
+    <pre id="research-rr-result"></pre>
+  </div>
+  <div class="research-import">
+    <h3>Recording adapters</h3>
+    <p class="research-copy">
+      Mind Monitor bands require their declared power scale and timezone. Health
+      Auto Export JSON remains dated context. Neither adapter fills missing HR,
+      breathing, or variability channels.
+    </p>
+    <label
+      >Mind Monitor power scale
+      <select id="research-band-scale">
+        <option value="bel">Bel · log10 power</option>
+        <option value="linear">Linear power</option>
+      </select></label
+    >
+    <label
+      >Timezone for timestamps without one
+      <input
+        id="research-timezone"
+        type="text"
+        placeholder="e.g. -04:00"
+        maxlength="6"
+        size="8"
+    /></label>
+    <div class="research-actions">
+      <button id="research-mind-open" type="button">
+        Open Mind Monitor CSV</button
+      ><button id="research-health-open" type="button">
+        Open Health Auto Export JSON</button
+      ><button id="research-adapter-export" type="button" disabled>
+        Export adapter result
+      </button>
+    </div>
+    <pre id="research-adapter-result"></pre>
+  </div>
+  <input id="research-file" type="file" hidden />
+</details>
+<script>
+  (() => {
+    "use strict";
+    const q = (id) => document.getElementById(id),
+      T = window.Telemetry,
+      R = window.TelemetryResearch;
+    const panel = q("research-lenses");
+    document.getElementById("advanced")?.before(panel);
+    let result = null,
+      reference = null,
+      fileKind = null,
+      adapterResult = null;
+    const names = {
+      heart_rate_bpm: "HR",
+      rmssd_ms: "RMSSD",
+      resp_rate_brpm: "Breathing",
+      eeg_beta_alpha: "Supplied EEG ratio",
+      motion_g: "Motion",
+    };
+    const esc = (x) =>
+      String(x).replace(
+        /[&<>"']/g,
+        (c) =>
+          ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;",
+          })[c],
+      );
+    const num = (v, n = 3) =>
+      typeof v === "number" && Number.isFinite(v)
+        ? v.toFixed(n)
+        : "Unavailable";
+    function drawPCA(data) {
+      const c = q("research-pca");
+      c.hidden = !data?.available;
+      if (!data?.available) return;
+      c.width = 1000;
+      c.height = 300;
+      const ctx = c.getContext("2d"),
+        points = data.coordinates;
+      const xs = points.map((p) => p[0]),
+        ys = points.map((p) => p[1] ?? 0),
+        loX = Math.min(...xs),
+        hiX = Math.max(...xs),
+        loY = Math.min(...ys),
+        hiY = Math.max(...ys);
+      ctx.clearRect(0, 0, 1000, 300);
+      ctx.strokeStyle = "#93b8d6";
+      ctx.lineWidth = 1.7;
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        const x = 30 + (940 * (p[0] - loX)) / Math.max(hiX - loX, 1e-8),
+          y = 270 - (240 * ((p[1] ?? 0) - loY)) / Math.max(hiY - loY, 1e-8);
+        i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      });
+      ctx.stroke();
+      ctx.fillStyle = "#a2b9bb";
+      ctx.font = "13px system-ui";
+      ctx.fillText("Standardized PCA · recording order · PC1 / PC2", 25, 25);
+    }
+    function clearAnalysis() {
+      result = null;
+      q("research-summary").hidden = true;
+      q("research-summary").textContent = "";
+      q("research-pca").hidden = true;
+      q("research-crosslags").textContent = "";
+      q("research-details").textContent = "";
+      q("research-save-reference").disabled = true;
+      q("research-status").textContent =
+        "Recording changed. Analyze up to the cursor to inspect this recording.";
+    }
+    window.addEventListener("telemetry:recording-changed", clearAnalysis);
+    function analyze() {
+      const recording = T.getExport(),
+        cursor = T.getState().cursor;
+      const samples = recording.samples.slice(0, cursor + 1);
+      result = R.evaluate(samples, reference ? { reference } : {});
+      if (!result.available) throw Error(result.reason);
+      const cells = [
+        [
+          "AR prediction error",
+          result.surprise.latest?.value,
+          "Mean half squared standardized residual; forecast uses prior data.",
+        ],
+        [
+          "Covariance distance",
+          result.turbulence.distance,
+          "Regularized Mahalanobis distance from the selected reference.",
+        ],
+        [
+          "Eigenvalue share",
+          result.coupling.absorptionRatio,
+          "Leading eigenvalue / total standardized variation.",
+        ],
+        [
+          "Sample entropy",
+          result.entropy.value,
+          "Descriptive regularity; missing estimates stay unavailable.",
+        ],
+      ];
+      q("research-summary").hidden = false;
+      q("research-summary").innerHTML = cells
+        .map(
+          ([label, value, explain]) =>
+            `<div class="research-cell"><span>${esc(label)}</span><strong>${num(value)}</strong><small>${esc(explain)}</small></div>`,
+        )
+        .join("");
+      q("research-status").textContent =
+        `${recording.provenance.kind.toUpperCase()} · ${samples.length} samples through the cursor · ${result.eligibleSamples} eligible. This is a snapshot; run again after moving the cursor.`;
+      q("research-save-reference").disabled = !result.reference?.available;
+      drawPCA(result.manifold);
+      q("research-crosslags").innerHTML =
+        "<table><caption>Signed cross-lags · positive lag means the first channel precedes the second; association only.</caption><thead><tr><th>Pair</th><th>Lag</th><th>Correlation</th><th>Pairs</th></tr></thead><tbody>" +
+        result.crosslags
+          .map(
+            (x) =>
+              `<tr><td>${esc(names[x.from] || x.from)} → ${esc(names[x.to] || x.to)}</td><td>${x.available ? num(x.lagSeconds, 1) + " s" : "Unavailable"}</td><td>${num(x.correlation)}</td><td>${x.n ?? "—"}</td></tr>`,
+          )
+          .join("") +
+        "</tbody></table>";
+      const details = {
+        reference: result.reference
+          ? { samples: result.reference.n, channels: result.reference.keys }
+          : null,
+        principalComponents: result.manifold.available
+          ? {
+              channels: result.manifold.keys,
+              explainedVariance: result.manifold.explainedVariance,
+            }
+          : result.manifold.reason,
+        events: result.events,
+        unavailable: result.unavailable,
+      };
+      q("research-details").textContent = JSON.stringify(details, null, 2);
+      return result;
+    }
+    function attempt(fn) {
+      try {
+        return fn();
+      } catch (error) {
+        q("research-status").textContent = error.message;
+        return null;
+      }
+    }
+    q("research-run").onclick = () => attempt(analyze);
+    q("research-save-reference").onclick = () =>
+      attempt(() => {
+        if (!result?.reference)
+          throw Error("Analyze a recording reference first.");
+        const exported = R.exportReference(result.reference);
+        if (!exported.available) throw Error(exported.reason);
+        const blob = new Blob([exported.json], { type: "application/json" }),
+          url = URL.createObjectURL(blob),
+          a = document.createElement("a");
+        a.href = url;
+        a.download = "autonomic-research-reference.json";
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+    function choose(kind, accept) {
+      fileKind = kind;
+      q("research-file").accept = accept;
+      q("research-file").value = "";
+      q("research-file").click();
+    }
+    q("research-load-reference").onclick = () => choose("reference", ".json");
+    q("research-clear-reference").onclick = () => {
+      reference = null;
+      q("research-clear-reference").hidden = true;
+      attempt(analyze);
+    };
+    q("research-rr-open").onclick = () => choose("rr", ".json");
+    q("research-mind-open").onclick = () => choose("mind", ".csv");
+    q("research-health-open").onclick = () => choose("health", ".json");
+    q("research-adapter-export").onclick = () => {
+      if (!adapterResult) return;
+      const url = URL.createObjectURL(
+          new Blob([JSON.stringify(adapterResult, null, 2)], {
+            type: "application/json",
+          }),
+        ),
+        a = document.createElement("a");
+      a.href = url;
+      a.download = "autonomic-adapter-result.json";
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+    function csvRows(text) {
+      const rows = [];
+      let row = [],
+        cell = "",
+        quoted = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (c === '"') {
+          if (quoted && text[i + 1] === '"') {
+            cell += '"';
+            i++;
+          } else quoted = !quoted;
+        } else if (c === "," && !quoted) {
+          row.push(cell);
+          cell = "";
+        } else if ((c === "\n" || c === "\r") && !quoted) {
+          if (c === "\r" && text[i + 1] === "\n") i++;
+          row.push(cell);
+          if (row.some((v) => v.trim())) rows.push(row);
+          row = [];
+          cell = "";
+        } else cell += c;
+      }
+      if (quoted) throw Error("The CSV has an unclosed quoted field.");
+      row.push(cell);
+      if (row.some((v) => v.trim())) rows.push(row);
+      const header = rows.shift()?.map((x) => x.replace(/^\uFEFF/, "").trim());
+      if (!header?.length) throw Error("The CSV needs a header.");
+      return rows.map((values) => {
+        if (values.length !== header.length)
+          throw Error("CSV row length does not match the header.");
+        return Object.fromEntries(header.map((k, i) => [k, values[i]]));
+      });
+    }
+    q("research-file").onchange = async () => {
+      const file = q("research-file").files[0];
+      if (!file) return;
+      try {
+        if (file.size > 20000000)
+          throw Error("Choose a file smaller than 20 MB.");
+        const text = await file.text();
+        if (fileKind === "reference") {
+          const imported = R.importReference(text);
+          if (!imported.available) throw Error(imported.reason);
+          reference = imported;
+          q("research-clear-reference").hidden = false;
+          analyze();
+        } else if (fileKind === "rr") {
+          const parsed = JSON.parse(text),
+            rr = R.rrMetrics(
+              Array.isArray(parsed) ? parsed : parsed.rr_intervals_ms,
+            );
+          q("research-rr-result").textContent = JSON.stringify(rr, null, 2);
+        } else if (fileKind === "health") {
+          const context = R.healthAutoExport(JSON.parse(text));
+          adapterResult = context;
+          q("research-adapter-export").disabled = !context.available;
+          q("research-adapter-result").textContent = JSON.stringify(
+            context,
+            null,
+            2,
+          );
+        } else if (fileKind === "mind") {
+          const converted = R.mindMonitorCSV(text, {
+            bandScale: q("research-band-scale").value,
+            timezoneOffset: q("research-timezone").value.trim(),
+          });
+          if (!converted.available)
+            throw Error(converted.reason || converted.rejected.join("; "));
+          adapterResult = converted;
+          q("research-adapter-export").disabled = false;
+          q("research-adapter-result").textContent = JSON.stringify(
+            {
+              provenance: converted.provenance,
+              samples: converted.samples.length,
+              rejected: converted.rejected,
+              definition: converted.definition,
+              latestSuppliedBands: converted.samples.at(-1)?.suppliedBands,
+              frontalAlphaLogRatio:
+                converted.samples.at(-1)?.frontalAlphaLogRatio,
+            },
+            null,
+            2,
+          );
+          const session = {
+            schema_version: 2,
+            provenance: converted.provenance,
+            samples: converted.samples,
+            markers: [],
+          };
+          T.openSession(
+            T.parseSession(JSON.stringify(session), "json", file.name),
+          );
+          q("research-status").textContent =
+            "Mind Monitor supplied ratios opened in the Lab. Missing heart, variability, and breathing data remain missing.";
+        }
+      } catch (error) {
+        q("research-status").textContent = error.message;
+      }
+    };
+    window.TelemetryResearchPanel = Object.freeze({
+      analyze,
+      getState: () => result,
+      parseCSV: csvRows,
+    });
+  })();
+</script>
