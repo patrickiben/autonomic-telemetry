@@ -1,5 +1,7 @@
 # Autonomic Telemetry
 
+**[Open the live app](https://patrickiben.github.io/autonomic-telemetry/)** · [Field guide](https://patrickiben.github.io/autonomic-telemetry/Autonomic_Telemetry_Field_Guide.html)
+
 A private-by-default browser workspace for rest and meditation, focused work and learning, and optional exploration of wearable summaries. Open one HTML file, choose a mode, and give the next few minutes an intention. A companion field guide explains the practice tools, signal displays, and their limits.
 
 **This is an experimental visualization, not a validated measure of stress, sympathetic activity, illness, or recovery.** The custom index and event thresholds are design choices. They have no clinical validation or confidence intervals.
@@ -115,14 +117,13 @@ npm test
 
 Run the tests after editing the model, importer, export, or controls. Test dependencies are for development only. [Review notes](docs/REVIEW.md) describe the main corrections made to the original prototype and the remaining scope limits.
 
-## Publish on GitHub Pages
+## GitHub Pages
 
-1. Create a repository and add this directory's contents, after reviewing them for personal data.
-2. In the repository's **Settings → Pages**, choose **GitHub Actions** as the source.
-3. Open **Actions**, select the included Pages deployment workflow, and run it manually against the branch you want to publish.
-4. Use the deployment's page URL. The site entry point opens the console; the field guide is linked from it.
+The public app is hosted at [patrickiben.github.io/autonomic-telemetry](https://patrickiben.github.io/autonomic-telemetry/). Open this HTTPS link on your phone or computer; choose Rest & meditation or Work & learning at the top. No account is required to use the app.
 
-The workflow is manual so a code push does not automatically publish the app. This directory has been prepared locally; creating a GitHub repository or publishing a site is a separate action.
+To publish an update after pushing reviewed changes, open **Actions → Deploy GitHub Pages (manual) → Run workflow**, choose `main`, and run it. The workflow stages the public HTML, synthetic examples, README, and documentation. Code pushes run browser checks but do not automatically deploy a new site.
+
+For a fork, first enable **Settings → Pages → GitHub Actions**, then run the same deployment workflow. The site's entry point opens the console, with the field guide linked from it.
 
 ## Scientific context
 

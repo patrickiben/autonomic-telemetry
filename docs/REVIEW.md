@@ -37,6 +37,6 @@ The repository excludes live physiological scoring, raw-signal HRV analysis, LF/
 - Inspect the actual repository contents and Git staging area for personal recordings, Health exports, identifiers, or sensitive marker text. Filename exclusions cannot guarantee privacy.
 - Run the documented automated checks and review the console and field guide on desktop and mobile.
 - Choose a license before describing the code as open source or permitting reuse.
-- Treat GitHub repository creation and Pages deployment as explicit publishing actions. The prepared local directory does not imply either has occurred.
+- Publish reviewed updates through the repository's manual GitHub Pages workflow. Code pushes run checks without automatically deploying the site.
 
 See [Methods](METHODS.md) for exact definitions, input requirements, and source boundaries. See the [README](../README.md) for local use and publishing steps.
