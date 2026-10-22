@@ -39,6 +39,16 @@ async function check(name, run) {
   console.log(`✓ ${name}`);
 }
 
+// Legacy timer flows remain available through an explicit opt-in in Work.
+async function openOptionalWorkTimer(page) {
+  const toggle = page.locator("#work-timer-toggle");
+  if (
+    (await toggle.count()) &&
+    (await page.evaluate(() => window.Telemetry.getModeState().mode)) === "work" &&
+    !(await page.locator("#work-timer-panel").isVisible())
+  ) await toggle.click();
+}
+
 function installMuseMock() {
   const suffix = "-4c4d-454d-96be-f03bac821358";
   const mock = { commands: [], services: [], disconnects: 0, options: null };
@@ -336,7 +346,13 @@ try {
         restTitle,
       );
       assert.equal(await ui.locator(".pacer").isVisible(), false);
+      if (await ui.locator("#work-timer-panel").count()) {
+        assert.equal(await ui.locator("#work-timer-panel").isVisible(), false);
+      }
+      await openOptionalWorkTimer(ui);
       assert.equal(await ui.locator(".work-companion").isVisible(), true);
+      assert.equal(await ui.locator("#signal-index").isVisible(), false);
+      await ui.locator("#signal-details-toggle").click();
       assert.equal(await ui.locator("#signal-index").isVisible(), true);
       await ui.locator("#practice-activity").selectOption("learn");
       assert.match(
@@ -385,6 +401,7 @@ try {
         false,
       );
       await ui.locator("#mode-work").click();
+      await openOptionalWorkTimer(ui);
       await ui.locator("#practice-intention").fill("Explain one idea");
       await ui.locator("#practice-duration").fill("1");
       await ui.locator("#practice-duration").press("Tab");
@@ -503,6 +520,7 @@ try {
         window.Telemetry.setMode("work");
         window.Telemetry.resetPractice();
       });
+      await openOptionalWorkTimer(ui);
       const before = await ui.evaluate(
         () => window.Telemetry.getModeState().practice.durationMs,
       );
@@ -552,6 +570,7 @@ try {
         await ui.setViewportSize({ width, height: 844 });
         for (const mode of ["rest", "work"]) {
           await ui.locator(`#mode-${mode}`).click();
+          await openOptionalWorkTimer(ui);
           const dimensions = await ui.evaluate(() => ({
             viewport: innerWidth,
             content: document.documentElement.scrollWidth,
@@ -618,6 +637,8 @@ try {
           T.setSessionDuration(1);
           window.scrollTo(0, document.documentElement.scrollHeight);
         }, mode);
+      await openOptionalWorkTimer(quick);
+      await quick.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
         await quick.waitForFunction(() => scrollY > 100);
         const box = await action.boundingBox();
         assert.ok(

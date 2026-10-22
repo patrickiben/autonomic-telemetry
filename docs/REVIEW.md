@@ -9,7 +9,7 @@ This repository is a refined, standalone version of the original Autonomic Telem
 | The device workflow centered on a Muse headband and Apple Watch, while the primary current wearable is Hume Band 2.0. | Hume comes first in the context workflow, with dated manual notes and explicit unknown/RMSSD/SDNN definitions. Apple Health source filtering retains support for Hume-shared records and Apple Watch users. No unverified Hume export or live API is assumed. |
 | Live Muse Web Bluetooth decoding and OSC bridge paths were presented alongside the demo despite incomplete acquisition and validation. | Removed the unsupported physiological feature pipelines and OSC bridge. Muse S now has a separate experimental raw Bluetooth preview; only normalized JSON/CSV sessions enter the signal model, while Apple Health XML remains context. |
 | Demo values and parts of the portrait used unseeded randomness. | A deterministic synthetic session, timestamp-based playback, restart, moment presets, and scrubbing make demonstrations reproducible. |
-| Calibration and saved-baseline paths could make a session's reference provenance hard to assess. | Fixed session reference, visible source labels, and no persistent baseline or automatic browser storage. |
+| Calibration and saved-baseline paths could make a session's reference provenance hard to assess. | Fixed session reference, visible recording-source labels, and no persistent physiological baseline. Task storage is a separate, optional local preference. |
 | Apple Health SDNN and sparse retrospective records were described as a live-model reference. | Apple Health is context only. SDNN is not substituted for RMSSD and cannot seed calibration. Latest records are selected by timestamp and checked for units and age. |
 | A claimed SDNN component was derived from the RMSSD standardized value, double-counting a related input. | Three explicit score channels only: HR, RMSSD, respiratory rate. EEG and model novelty do not enter the index. |
 | The score mixed physiological proxies and complex model quantities, with confident tier names. | Transparent weighted standardized shifts with visible contributions, fixed channel membership, and descriptive tier names. Cutoffs are labeled heuristic. |
@@ -22,7 +22,11 @@ This repository is a refined, standalone version of the original Autonomic Telem
 
 ## Two modes and mobile use
 
-Rest prioritizes a quiet practice timer and optional breathing guide, while Work adds focused-work, learning, and skill-practice prompts. Their timers use real time independently of recording playback; switching modes pauses timers without changing the signal model. Ease/focus ratings and recaps are self-reports. A fixed mobile timer control, readable entry fields, narrow-screen layouts, and guided device setup reduce interaction steps.
+Rest prioritizes a quiet practice timer and optional breathing guide. Work opens as an untimed task companion: one current task, small steps, a restart note, breaks, a queue, and a place to park distractions. Finishing leaves the next choice open. A small progress trail follows only the user's checkoffs. Work's focus, learning, and skill-practice timer is optional and closed by default.
+
+Both modes offer raw Muse EEG, PPG, and motion visuals, with per-stream freshness and explicit waiting, live, retained, synthetic, or ambient labels. Missing data never silently becomes a synthetic animation. These views convey raw signal shapes rather than attention, calmness, or task success. Motion can be softened or hidden, and reduced-motion preferences are honored.
+
+The modes' timers use real time independently of recording playback; switching modes pauses timers without changing the signal model. Ease/focus ratings and recaps are self-reports. A fixed mobile task or timer control, readable entry fields, narrow-screen layouts, and guided device setup reduce interaction steps. Remembering tasks is optional and off by default; local task storage excludes sensor and Health records. Explicit JSON export remains separate.
 
 ## What remains experimental
 

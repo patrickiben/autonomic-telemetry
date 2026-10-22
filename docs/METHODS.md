@@ -2,25 +2,35 @@
 
 This document describes the practice tools, experimental signal model, and data contract implemented in the console. The design favors inspectable arithmetic and clear missing-data behavior. None of the custom signal outputs has been clinically validated. Numerical precision in the UI is not a confidence interval.
 
-## Practice modes and clocks
+## Modes, workbench, and clocks
 
-**Rest & meditation** is the default quiet workspace. It prioritizes the visual breathing guide and a 10-minute practice timer; signal panels start tucked behind **Show signal details**. Activities are rest and relaxation, comfortable breathing, or meditation, with an intention and optional self-rated ease before and after. **Work & learning** starts with a 25-minute focus block, a task intention, optional self-rated focus, and distraction, break, and progress markers; signal details start visible. Its activities are focused work, learning, or skill practice, each with a brief self-directed prompt. Quality information and wearable context stay shared between modes.
+**Rest & meditation** is the default quiet workspace, with an optional breathing guide, a 10-minute practice timer, an intention, and optional self-rated ease. Rest activities are relaxation, comfortable breathing, or meditation. **Work & learning** starts with an untimed task companion: one current task, small step checkoffs, a queue, distraction parking, a checkpoint for returning, break/resume, and completed-task history. A focus timer is optional and its disclosure starts closed. The task workflow does not require a wearable or countdown.
 
-Themes are presentation choices: Rest uses deep evergreen, sage, and warm neutrals; Work uses midnight blue, indigo, periwinkle, and cool accents. Each scheme stays consistent across backgrounds, panels, controls, dialogs, and timers. Theme colors do not encode a physiological state or alter any calculation. On phones, a fixed bottom bar exposes the same practice timer and quick controls while the page scrolls; it is not a separate timer.
+Tasks, steps, interruptions, and completion are user-entered records. The interface supports self-directed organization, including ADHD-friendly workflows, without claiming to treat ADHD, infer attention from EEG, or measure learning, productivity, or task quality. Marking a task complete records a user's choice. It does not depend on a physiological threshold, and unchecked steps remain unchecked. The progress trail counts the user's checkoffs; it is not sensor-driven.
 
-Each mode holds its own practice draft and timer. Available duration presets are 5/10/20 minutes for rest and 25/45/60 minutes for work; custom durations range from 1 to 180 whole minutes. Duration, activity, and the optional before-rating are set while idle. Start, pause/resume, reset, and finish are explicit controls. Timer elapsed time follows the wall clock, not the recording's timestamp, playback multiplier, or scrubber. Paused time does not contribute to elapsed practice time. A timer completes at its planned duration or when explicitly finished early. Reset preserves duration, intention, activity, and existing recaps; it clears the active timer, ratings, and reflection. The independent visual pacer is not a breathing measurement.
+Themes are presentation choices: Rest uses deep evergreen, sage, and warm neutrals; Work uses midnight blue, indigo, periwinkle, and cool accents. Each scheme stays consistent across backgrounds, panels, controls, dialogs, and timers. Theme colors do not encode a physiological state or alter any calculation. Mobile layouts keep work controls accessible and offer quick practice controls when using the timer.
 
-Changing mode pauses a running practice and the pacer while retaining the loaded dataset, provenance, fixed reference, signal model, markers, and wearable context. It does not recalibrate the reference, alter index weights or thresholds, change samples, or imply that the same physiology has a different medical meaning in another mode.
+The two modes retain separate practice drafts and timers. Duration presets are 5/10/20 minutes for rest and 25/45/60 minutes for an optional work timer, with custom durations from 1 to 180 whole minutes. Duration, activity, and the optional before-rating are set while idle. Start, pause/resume, reset, and finish are explicit controls. Elapsed time follows the wall clock, not the recording's timestamp, playback multiplier, or scrubber. Paused time does not contribute to elapsed practice time. A countdown completes at its planned duration or when explicitly finished early. Reset preserves duration, intention, activity, and completed recaps while clearing the current timer, ratings, and reflection. The visual pacer is independent and is not a breathing measurement.
 
-Practice completion is quiet and produces a timestamped self-reported recap: mode, activity, planned duration, elapsed time, intention, and any supplied before/after rating or reflection. Intentions are limited to 160 characters and reflections to 300. Ratings are optional integers from 1 (very little ease or focus) to 5 (ample). Ease and focus are different questions, not interchangeable measurements; neither is inferred from wearable signals. No relaxation, productivity, performance, or learning score is calculated, and no improvement is promised. The recap is a record of using a timer and reporting an experience, not an assessment of meditation quality, task output, or cognitive performance. Up to 200 completed recaps are kept, discarding the oldest beyond that limit; the interface shows the latest eight.
+Switching modes pauses a running practice and the pacer while retaining the workbench, dataset, provenance, reference, markers, and wearable context. It does not recalibrate, alter score weights or thresholds, change samples, or assign a different physiological meaning to the same recording.
 
-Practice drafts and recaps stay in local page memory. Explicit JSON export preserves this workspace along with the recording. A reload without an exported file clears it. Importing a file containing workspace notes replaces the current workspace and restores any exported running timers as paused. Older recording imports without workspace information retain the current practice drafts and recaps while pausing the active timer and pacer. Opening a new recording never changes the signal model's definitions.
+Timed-practice completion is quiet and produces a timestamped self-reported recap: mode, activity, planned duration, elapsed time, intention, and optional before/after ratings or reflection. Intentions are limited to 160 characters and reflections to 300. Ratings are optional integers from 1 (very little ease or focus) to 5 (ample). Ease and focus are different questions and are not inferred from wearable signals. Up to 200 practice recaps are retained in memory, with the latest eight displayed. Task completion history is separate from these timer recaps.
+
+Explicit JSON export preserves the workbench and practice workspace alongside the recording. Importing workspace notes restores any running timers as paused and replaces the task board when a workbench is supplied. A file without a workbench retains the current task board; a file without any workspace also retains current practice drafts and notes while pausing the active timer and pacer. Opening a recording does not change the model definitions. By default, workspace information is memory-only; optional task-board persistence is described under Privacy below.
 
 ## 1. Scope and acquisition
 
 The scored session model visualizes normalized time-series summaries. It does not estimate heart rate, RMSSD, breathing, EEG spectra, or signal quality from raw sensors. An importer's `quality: "good"` is an assertion supplied with the file, not a quality judgment independently verified by the console.
 
 A separate experimental Muse S Bluetooth preview inspects raw device input: EEG voltage, PPG ADC counts, acceleration, battery, packet counts, and freshness. It is hardware-unverified and does not provide model features, change the selected session's provenance, or enter its index, reference, or event detector. The labeled demo or imported recording remains the signal model's source. Raw preview data stays in a bounded memory buffer (approximately 60 seconds, at most 10,000 packets) and is not exported. Hume Band 2.0 and Apple Watch paths provide daily context rather than a live scored feed. See [Device setup](DEVICES.md) for acquisition boundaries and browser constraints.
+
+### Bio-reactive visual companion
+
+The visual companion can use raw Muse S input, an explicitly selected synthetic demonstration, or an ambient animation with no device link. Its default Signal bloom maps relative raw EEG amplitude and sample-to-sample variation to layered organic contours. Signal tide shows the EEG waveform, Pulse ribbon represents raw PPG ADC counts without beat detection, and Motion field represents acceleration magnitude including gravity. That raw motion quantity is distinct from the gravity-removed `motion_g` field accepted by the scored session model. Live bloom geometry changes only with the received sample window; no simulated heartbeat or breathing cycle is added.
+
+A live raw label requires a connected, streaming device and fresh data for the selected signal within five seconds. Stale or disconnected Muse input freezes and dims the last frame; it never silently substitutes demonstration or ambient motion. Display autoscaling is labeled. Neither shape nor color is an attention, meditation, stress, or productivity score, and no visual input feeds the pattern-shift model.
+
+Low-motion animation is the default. Reduced-motion preferences make demonstration and ambient visuals static and limit live snapshots to at most once per second. Quiet view hides the canvas while keeping source status and controls available. These visual settings are neither persisted nor exported. See [Bio-reactive visuals](BIOREACTIVITY.md) for exact mappings and freshness rules.
 
 The bundled deterministic eight-minute demo supplies one synthetic sample per second. Playback can advance faster than wall time without changing the sample timestamps or numerical results. A preloaded two-minute synthetic segment supplies its reference. Reference, Change, Easing, and Motion presets jump to moments in that same recording. Synthetic provenance remains visible and survives export.
 
@@ -37,7 +47,7 @@ Top-level JSON fields:
 | `samples` | Array of normalized sample objects |
 | `markers` | Array of `{timestamp, label}` annotations |
 | `context` | Optional retrospective wearable-context snapshot |
-| `workspace` | Optional version-1 practice workspace; independent of signal schema version 2 |
+| `workspace` | Optional version-1 workspace for practice and the workbench; independent of signal schema version 2 |
 
 Every normalized sample uses these fields:
 
@@ -64,9 +74,28 @@ The optional `workspace` object uses its own `schema_version: 1` and contains:
 | `active_mode` | `rest` or `work` |
 | `practices` | Independent `rest` and `work` practice drafts |
 | `sessions` | At most 200 completed practice recaps |
-| `signal_details` | Boolean visibility preference for `rest` and `work` |
+| `signal_details` | Boolean visibility preference for `rest` and `work`; both default to false |
+| `work_timer_visible` | Optional boolean; false by default |
+| `workbench` | Optional self-directed task board and distraction parking |
 
 Each draft records `mode`, `phase` (`idle`, `running`, `paused`, `complete`), `activity`, `durationMs`, `elapsedMs`, derived `remainingMs`, `intention`, optional `before`/`after` ratings, `outcome`, `startedAt`, `endedAt`, and `entryId`. Activities are `rest`/`breath`/`meditation` in rest mode and `focus`/`learn`/`practice` in work mode. Unset ratings and timestamps remain `null`. Completed session entries add an `id` and `source: "self-reported"`. Durations and elapsed times are milliseconds; timestamps are epoch milliseconds. Wall-clock timer anchors are not exported. Import validates the workspace, recalculates remaining time, and changes `running` to `paused`; it does not run a timer retroactively while the file was closed.
+
+### Optional task workbench
+
+`workspace.workbench` is independent of the timers and signal model. Its `version: 1` contract is:
+
+| Field | Contract |
+| --- | --- |
+| `tasks` | At most 200 tasks, including completed history |
+| `currentTaskId` | The sole active task's ID, or `null` when there is no active task |
+| `onBreak` | Boolean; true only while a current task exists |
+| `parking` | At most 200 parked thoughts |
+
+Each task has `id`, `title`, `state` (`queued`, `active`, or `done`), `steps`, `createdAt`, nullable `completedAt`, and `restartNote`. There are at most 50 steps per task, each with `id`, `text`, and a boolean `done`. Titles, step text, and restart notes are limited to 160 characters. Each parked thought has `id`, `text` up to 300 characters, and `createdAt`. IDs must be unique across tasks, steps, and parked thoughts. Timestamps are numeric epoch milliseconds.
+
+The first added task becomes current; additional tasks are queued. Making a queued task current puts the previous active task aside. Taking a pause retains the current task and checkpoint without starting a countdown. Completing a task does not check off its remaining steps or automatically select another task. Reopening a completed task makes it current if no task is active; otherwise it returns to the queue. The interface displays the latest eight completed tasks while retaining up to the overall 200-task limit. At capacity, remove a task before adding one; history is not silently discarded.
+
+The exported workbench excludes the remember setting. Import validates task state, IDs, timestamps, text limits, and checkoff types. It does not turn on browser persistence; if the user already enabled remembering, the imported board follows that existing preference. Workbench export/import does not carry raw Muse data, Health data, or bio-reactive settings inside the task object.
 
 Markers still locate the recording's current cursor via `timestamp`. New markers also preserve `created_at` as the actual wall-clock creation time and `mode` as `rest` or `work`. A practice timer does not automatically insert recording markers. This distinction matters when inspecting historical or synthetic data: marking a distraction now does not imply it happened at that historical recording time.
 
@@ -157,7 +186,9 @@ HealthKit's HRV quantity is **SDNN**. It is kept distinct from RMSSD and cannot 
 
 ## 8. Privacy and reproducibility
 
-There are no fetch calls, remote assets, analytics, browser-storage writes, or automatic uploads. Imported content and practice information are held in memory for the current page. A reload clears them. Export explicitly creates a JSON file that preserves provenance, timestamps, null values, quality flags, markers, wearable context, and practice workspace information. Intentions, ratings, and recaps can contain personal information; review exports before sharing.
+The app sends no task information, recordings, or raw signals to a server. Without prior consent, information is held only in page memory. **Remember tasks on this device** starts off in a fresh browser; enabling it writes the serialized task workbench only under local-storage key `autonomic_workbench_v1`. A valid saved task copy restores on the next visit with remembering enabled. Turning the checkbox off removes that saved copy and retains the current in-memory task board. Storage failures are reported; if the browser cannot remove a saved copy, the interface says to clear site data. Raw Muse streams, Health context, imported samples, practice ratings, and timed-practice recaps are not automatically persisted. Browser storage can be unavailable or cleared; explicit JSON export remains a separate way to keep a workspace.
+
+Export preserves provenance, sample timestamps, null values, quality flags, markers, wearable context, the workbench, and practice workspace information. It does not include the raw Muse preview or bio-reactive animation settings. Task text, parked distractions, intentions, ratings, and recaps can contain personal information; review exports before sharing.
 
 The synthetic session and playback controls allow reproducible review of the interface. JSON export includes the complete loaded recording, not just the portion already played. Passing software tests verifies the tested software behavior; it cannot establish clinical accuracy or validate a physiological interpretation.
 
@@ -166,5 +197,6 @@ The synthetic session and playback controls allow reproducible review of the int
 - [Billman GE (2013). The LF/HF ratio does not accurately measure cardiac sympathovagal balance.](https://pmc.ncbi.nlm.nih.gov/articles/PMC3576706/) Supports caution about interpreting LF/HF; this release omits that ratio.
 - [Laborde S, Mosley E, Thayer JF (2017). Heart rate variability and cardiac vagal tone in psychophysiological research.](https://pmc.ncbi.nlm.nih.gov/articles/PMC5316555/) Supports careful HRV measurement, study design, analysis, and reporting. HRV interpretation depends on recording methods and context.
 - [Apple HealthKit documentation: heartRateVariabilitySDNN.](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/heartratevariabilitysdnn) Defines Apple's SDNN quantity; it does not define RMSSD.
+- [NIMH (2024): ADHD—What You Need to Know.](https://www.nimh.nih.gov/sites/default/files/documents/health/publications/adhd-2024.pdf) General context for smaller task steps, written reminders, and short breaks. This is a design rationale, not validation of the app, EEG feedback, or a treatment claim.
 
 These references provide context only. They do not support or validate the custom composite, its weights, thresholds, novelty metric, event detector, or any clinical use.

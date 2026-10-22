@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="dark" />
     <meta
       name="description"
-      content="A guide to Autonomic Telemetry: quiet rest and meditation, focused work and learning, independent practice timers, optional signal exploration, and local privacy."
+      content="A guide to Autonomic Telemetry: quiet rest, an untimed task companion, bio-reactive visuals, optional timers, and local privacy."
     />
     <title>Field Guide · Autonomic Telemetry</title>
     <style>
@@ -679,7 +679,7 @@
       <h1>A space for your practice.<br />A guide to your signals.</h1>
       <p>
         Rest and meditation. Work and learning. A guide to choosing your space,
-        keeping a simple practice, and exploring signals when they are useful.
+        keeping one next step in view, and exploring signals when they are useful.
       </p>
       <div class="tags">
         <span class="tag accent">EXPERIMENTAL</span
@@ -739,126 +739,81 @@
         </aside>
 
         <section class="card" id="start">
-          <div class="section-head">
-            <span class="num">01</span>
-            <h2>Choose your space</h2>
-          </div>
-          <p class="lead">
-            Start with what you want the next few minutes to be for.
-          </p>
+          <div class="section-head"><span class="num">01</span><h2>Choose your space</h2></div>
+          <p class="lead">Make room for a quiet pause—or make the next small action visible.</p>
           <div class="grid">
-            <div class="mini">
-              <div class="label">Rest &amp; meditation</div>
-              <p>
-                The default quiet view puts a 10-minute practice timer,
-                intention, and optional breathing guide first. Signal panels are
-                tucked behind <strong>Show signal details</strong>. You can note
-                your ease before and after, if that feels useful.
-              </p>
-            </div>
-            <div class="mini">
-              <div class="label">Work &amp; learning</div>
-              <p>
-                A 25-minute focus block makes room for a task intention,
-                optional focus ratings, and distraction, break, or progress
-                markers. Signal details begin visible.
-              </p>
-            </div>
+            <div class="mini"><div class="label">Rest &amp; meditation</div>
+              <p>The default quiet view offers a 10-minute practice timer, an intention,
+                and an optional breathing guide. You can note your ease before and after.
+                Signal details stay optional.</p></div>
+            <div class="mini"><div class="label">Work &amp; learning</div>
+              <p>An untimed companion for one current task, small steps, a queue, and
+                a place to park distractions. Leave a checkpoint for returning after a
+                break. The focus timer is optional and starts closed.</p></div>
           </div>
-          <p>
-            Rest uses deep evergreen, sage, and warm neutrals; Work uses
-            midnight blue, indigo, periwinkle, and cool accents. Each theme
-            stays consistent across the background, panels, controls, dialogs,
-            and timer. These colors distinguish the spaces, not physiological
-            states; all signal calculations stay the same.
-          </p>
-          <p>
-            Choose a preset—5, 10, or 20 minutes for rest; 25, 45, or 60 minutes
-            for work—or a custom duration from 1 to 180 minutes. Start, pause,
-            reset, and finish are explicit controls. The timer follows real
-            elapsed time, independently of the recording's playback and
-            scrubber. Completion stays quiet, with no automatic sound or
-            notification.
-          </p>
-          <p>
-            On a phone, a quick practice timer stays fixed at the bottom while
-            you scroll, with Begin, Pause, Resume, or New session controls. It
-            operates the same practice timer shown above.
-          </p>
-          <p>
-            Rest offers rest and relaxation, comfortable breathing, or
-            meditation. Work offers focused work, learning, or skill practice,
-            with a short prompt for each. Choose the duration, activity, and
-            optional before-rating before beginning. Reset keeps the duration,
-            intention, activity, and completed notes while clearing the timer,
-            current ratings, and reflection.
-          </p>
-          <p>
-            Each mode keeps its own practice draft and timer. Switching mode
-            pauses a running practice and the breathing pacer. Your recording,
-            reference, model, markers, and wearable context stay in place; the
-            physiology calculations do not change.
-          </p>
-          <div class="rule">
-            <strong>A recap, not a grade.</strong> Finish early or let the
-            countdown complete. The recap records time, intention, activity,
-            planned and elapsed duration, mode, and optional ease or focus
-            ratings from 1 (very little) to 5 (ample). Add a few words to
-            remember or a next step. These are your reports, not signal-derived
-            assessments of relaxation, productivity, learning, or performance.
-            Nothing here promises an improvement.
-          </div>
-          <p>
-            Practice information stays in the page's memory. Export explicitly
-            to keep both mode drafts and recaps; reopening the JSON restores
-            running timers as paused. Opening an older recording without
-            workspace notes keeps your current practice drafts and pauses the
-            timer and pacer. Reloading without an exported file clears them.
-          </p>
-          <h3>When you want to explore signals</h3>
-          <p>
-            Open signal details and use the synthetic recording as a known story
-            to learn what each display can show.
-          </p>
+          <h3>A way to use it while you work</h3>
           <ol>
-            <li>
-              Open the console and keep the <strong>synthetic</strong> label in
-              view. The scenario is a generated example, not a person's
-              recording.
-            </li>
-            <li>
-              Use the Reference, Change, Easing, and Motion presets to jump to
-              key moments, then explore with play/pause, playback speed,
-              restart, and the timeline scrubber.
-            </li>
-            <li>
-              Compare the index's contribution bars with the actual HR, RMSSD,
-              and respiratory-rate traces. Notice how excluded data creates a
-              gap instead of a confident score.
-            </li>
+            <li>Choose Work &amp; learning, then Add task. The first task becomes current. Use Add step to make the next action small and visible.</li>
+            <li>Check off steps as you do them. Further tasks go to Tasks for later. Use Make current when you want to switch.</li>
+            <li>Use Park it for a distracting thought. Before Take a pause, leave a short breadcrumb about where to restart.</li>
+            <li>Use Return to task when you choose, or Task complete to record your decision. Completion preserves your actual step checkoffs; Reopen brings the task back.</li>
           </ol>
-          <p>
-            The demo supplies a deterministic eight-minute, 1 Hz series and a
-            preloaded two-minute reference. Faster playback changes how quickly
-            you watch it; it does not change the recorded time scale. Restart
-            returns to the beginning of the same data.
-          </p>
-          <div class="grid">
-            <div class="mini">
-              <div class="label">Reference shift</div>
-              <p>
-                How far the current summaries have moved in selected directions
-                from a fixed comparison segment.
-              </p>
-            </div>
-            <div class="mini">
-              <div class="label">Novelty</div>
-              <p>
-                How unusual the latest step is. A sustained shift can remain
-                high on the index after novelty falls.
-              </p>
-            </div>
-          </div>
+          <p>These are self-directed organization tools, including for ADHD-friendly
+            workflows. They do not treat ADHD or infer your attention, learning, or
+            productivity from EEG. No timer or wearable is required to use the task companion.</p>
+          <p>Rest uses deep evergreen, sage, and warm neutrals; Work uses midnight
+            blue, indigo, periwinkle, and cool accents. Themes change presentation,
+            not physiological calculations.</p>
+          <h3>A living visual companion</h3>
+          <p>Keep a visual beside your work or rest. Choose raw Muse S input, an
+            explicitly labeled synthetic demonstration, or an ambient animation.
+            Signal tide uses raw EEG; Pulse ribbon uses raw PPG counts without beat
+            detection; Motion field uses acceleration, including gravity. Their shapes
+            are not attention, calmness, or performance scores.</p>
+          <p>Choose Connect a device → Muse S → Choose &amp; connect Muse S in a
+            supported browser, then keep the visual source set to Muse S. Its
+            LIVE RAW label requires fresh packets for the selected signal within
+            five seconds. If that signal goes
+            stale or disconnects, the last frame freezes and dims; it does not quietly
+            become a demo. Source status stays visible. Gentle rendering is the
+            default, reduced-motion settings are respected, and Quiet view hides the
+            visual while leaving status and controls available. See
+            <a href="docs/BIOREACTIVITY.md">Bio-reactive visuals</a> for the exact mappings.</p>
+          <h3>Use time when it helps</h3>
+          <p>Rest has 5-, 10-, and 20-minute presets; Show optional timer in Work opens
+            25-, 45-, and 60-minute presets. Both accept 1–180 whole minutes and have
+            start, pause/resume, reset, and finish controls. Real elapsed time stays
+            separate from recording playback. Finishing early or reaching the end
+            produces a quiet, self-reported recap, with optional ease or focus ratings
+            and a short reflection. It is not a grade.</p>
+          <p>Switching modes pauses a running practice and the pacer while retaining
+            the task board, recording, reference, model, markers, and wearable context.
+            You can leave signal details closed while working.</p>
+          <p>On a phone, the fixed work bar keeps the next step in view with Step
+            done, Return, or Task done. A timer bar appears in Work only when the
+            optional timer is open.</p>
+          <div class="rule"><strong>Keep what you choose.</strong> Export JSON to keep
+            tasks, practice drafts, and recaps with the recording. The optional
+            <strong>Remember tasks on this device</strong> checkbox starts off in a
+            fresh browser; enabling it saves only the task board and distraction
+            parking locally. Turning it off removes that saved copy while keeping
+            the current list in memory. Importing JSON does not enable saving; an
+            existing choice to remember remains in effect. Raw Muse and Health data
+            are not saved by that option.</div>
+          <h3>When you want to explore the recording</h3>
+          <p>Open signal details and keep its provenance label in view. The synthetic
+            recording is a deterministic eight-minute, 1 Hz example with a preloaded
+            two-minute reference. Use its Reference, Change, Easing, and Motion
+            presets to inspect key moments. Playback speed changes how quickly you
+            watch the recording, not its timestamps, the practice timer, or the live
+            Muse input. Connecting Muse does not turn the synthetic recording into
+            measured physiological features.</p>
+          <div class="grid"><div class="mini"><div class="label">Pattern shift</div>
+            <p>Movement in selected directions from a fixed comparison segment,
+              using supplied heart and breath summaries.</p></div>
+            <div class="mini"><div class="label">Novelty</div><p>The size of the latest
+              standardized step. A sustained shift can remain high on the index
+              after novelty falls.</p></div></div>
         </section>
 
         <section class="card" id="devices">
@@ -1225,11 +1180,12 @@
             unknown quality.
           </p>
           <div class="rule">
-            <strong>Local processing, explicit files.</strong> The console makes
-            no network requests and writes no browser storage. Imports stay in
-            the current page's memory; a reload clears them. Exported JSON is a
-            file under your control and may contain sensitive health
-            information, marker text, intentions, ratings, or practice recaps.
+            <strong>Local processing, explicit choices.</strong> Imported recordings,
+            Health context, and raw Muse data stay in page memory. The only optional
+            browser persistence is the task board and distraction parking, enabled
+            by Remember tasks on this device; turning it off clears those saved task
+            records. Exports may contain health information, tasks, parked thoughts,
+            marker text, intentions, ratings, or practice recaps. Review them before sharing.
           </div>
           <p>
             Before posting a repository, inspect its files and Git staging area.
@@ -1244,7 +1200,7 @@
             <h2>Evidence and limits</h2>
           </div>
           <p>
-            The references below inform measurement and interpretation cautions.
+            The references below provide measurement and organization context.
             <strong
               >They do not validate this console's composite, tiers, novelty
               statistic, or event detector.</strong
@@ -1280,6 +1236,11 @@
                 Apple's definition of its SDNN quantity. SDNN and RMSSD remain
                 different measures here.
               </p>
+            </li>
+            <li>
+              <a href="https://www.nimh.nih.gov/sites/default/files/documents/health/publications/adhd-2024.pdf">NIMH · ADHD guide · 2024</a>
+              <p>General context for smaller steps, written reminders, and breaks.
+                This guidance does not validate the app or its EEG visuals.</p>
             </li>
           </ul>
           <p>

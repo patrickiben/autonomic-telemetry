@@ -2,7 +2,7 @@
 
 **[Open the live app](https://patrickiben.github.io/autonomic-telemetry/)** · [Field guide](https://patrickiben.github.io/autonomic-telemetry/Autonomic_Telemetry_Field_Guide.html)
 
-A private-by-default browser workspace for rest and meditation, focused work and learning, and optional exploration of wearable summaries. Open one HTML file, choose a mode, and give the next few minutes an intention. A companion field guide explains the practice tools, signal displays, and their limits.
+A private-by-default browser workspace for rest and meditation, everyday work and learning, and optional exploration of wearable signals. Choose a quiet pause or keep one current task, its next small steps, and a place to park distractions in view. A companion field guide explains the tools, visuals, and their limits.
 
 **This is an experimental visualization, not a validated measure of stress, sympathetic activity, illness, or recovery.** The custom index and event thresholds are design choices. They have no clinical validation or confidence intervals.
 
@@ -24,20 +24,24 @@ Visit [localhost:8090](http://localhost:8090/Autonomic_Telemetry_Console.html). 
 
 | | Rest & meditation | Work & learning |
 | --- | --- | --- |
-| Starting view | Quiet, with signal details tucked away | Signal details visible |
-| Practice | 10-minute rest or meditation period | 25-minute focus block |
-| Useful controls | Optional visual breathing guide, intention, ease before/after | Task intention, focus before/after, distraction, break, or progress markers |
-| Duration presets | 5, 10, or 20 minutes | 25, 45, or 60 minutes |
+| Starting view | Quiet pause, optional breathing guide | Untimed task companion |
+| Main tools | 10-minute practice, intention, optional ease check-in | One current task, small step checkoffs, queue, and distraction parking |
+| Returning to it | Pause or finish whenever you choose | Break/resume and a checkpoint note for where to restart |
+| Optional timer | 5, 10, or 20 minutes, or a custom duration | Closed by default; 25, 45, or 60 minutes, or a custom duration |
 
-Each mode has a consistent visual theme across the background, panels, controls, dialogs, and timer: deep evergreen, sage, and warm neutrals for Rest; midnight blue, indigo, periwinkle, and cool accents for Work. The colors distinguish the spaces; they do not change or classify physiology.
+Rest & meditation is the default. Work & learning starts without a countdown: name one current task, make the next action small, and check off steps as you go. Put other work in the queue and stray thoughts in distraction parking. Before a break, leave a checkpoint so returning does not require reconstructing everything. Complete the task when you decide it is done; the completed history records your action, not a sensor's judgment.
 
-Rest & meditation is the default, with rest, comfortable breathing, or meditation activities. Work & learning offers focused work, learning, or skill practice, each with a short self-directed prompt. Both modes offer a configurable 1–180 whole-minute practice timer with start, pause/resume, reset, and finish controls. Set the duration and optional before-rating before starting; reset the timer to change them. The timer follows real elapsed time independently of the recording's playback speed or scrub position. Finish early or let the countdown complete; completion is quiet, with no automatic sound or notification.
+This is self-directed organization, with small starts and easy returns that can suit ADHD-friendly workflows. It does not treat ADHD or determine focus, learning, or productivity from EEG. You can work without starting a timer, connecting a wearable, or chasing a physiological score.
 
-Each mode keeps its own practice draft and timer. Switching modes pauses a running practice and the pacer; it keeps the loaded recording, reference, model, markers, and wearable context. The physiological calculations do not change with the mode. In Rest, open **Show signal details** when you want to inspect the recording.
+Rest uses deep evergreen, sage, and warm neutrals; Work uses midnight blue, indigo, periwinkle, and cool accents. Each theme is consistent across backgrounds, panels, controls, dialogs, and timers. Themes change presentation; the physiological calculations are identical.
 
-Optional ease or focus ratings run from 1 (very little) to 5 (ample) and describe your own experience. A completed-practice recap records the mode, activity, intention, planned and elapsed time, and available before/after ratings; you can add a short reflection or next step. Reset keeps the chosen duration, intention, activity, and completed notes while clearing the current timer and ratings. Up to 200 recaps stay in memory, with the latest eight displayed. None scores relaxation, productivity, or learning, or promises improvement.
+Timers remain available for rest or an optional focus block, with custom durations of 1–180 whole minutes. They follow actual elapsed time independently of the recording's playback speed and scrubber. Optional ease or focus ratings and short reflections are self-reported. Switching modes pauses a running practice and the pacer while retaining the recording, model, wearable context, and notes. It does not recalibrate or change the score.
 
-**Export JSON** preserves both practice drafts, recaps, active mode, and each mode's signal-detail preference with the recording. Reopening that export restores running timers as paused. Opening an older recording without workspace notes keeps your current practice drafts and pauses the active timer and pacer. A reload clears everything that was not exported.
+**Export JSON** preserves the workbench, practice drafts, recaps, active mode, and signal-detail preferences with the recording. Reopened running timers restore as paused. **Remember tasks on this device** is optional and off by default; it saves only task-board and parking information locally, not raw sensor or Health data. See privacy details below.
+
+To keep the visuals beside your work, choose **Connect a device → Muse S → Choose & connect Muse S** in a supported browser, then leave the visual source set to **Muse S**. Without fresh packets it waits quietly; synthetic and ambient visuals require your explicit choice. Work on the task board as you normally would. The progress trail responds to your step and task checkoffs, while the raw-signal visual remains a separate view.
+
+Signal-analysis details start closed in both modes. Open **Show signal details** when you want to explore the recording. On a phone, tap the left side of the task bar to return to your current task.
 
 ![Work and learning mode](docs/work-mode.png)
 
@@ -48,6 +52,7 @@ Optional ease or focus ratings run from 1 (very little) to 5 (ample) and describ
 - A descriptive novelty trace and coincident change events, with explicit quality and motion gating.
 - Aligned heart-rate/respiratory-rate association, heart-rate persistence, RMSSD dispersion, and a standardized heart-rate/RMSSD portrait.
 - A visual breathing pacer and separate wall-time practice timers that operate independently of the recording and its scores.
+- A bio-reactive visual companion: an organic EEG signal bloom, signal tide, raw PPG ribbon, or motion field. Live Muse, demonstration, ambient, and stale input are labeled explicitly. Demonstration uses generated data and ambient is decorative. None is an attention or productivity score. See [Bio-reactive visuals](docs/BIOREACTIVITY.md).
 - Normalized JSON/CSV import, user markers, and JSON export that preserves source labels and missing values.
 - Hume Band 2.0 daily context notes, with an explicit HRV definition selector and date.
 - Retrospective context from Apple Health `export.xml`, kept separate from the session reference and model.
@@ -56,7 +61,7 @@ Choose **Connect a device** for the guided setup, starting with Hume Band 2.0 an
 
 Both practice modes use responsive layouts for phones, tablets, and desktops. The experimental Muse preview requires supported desktop Chromium or Chrome on Android and HTTPS or localhost; it is unavailable in iPhone/iPad browsers and Firefox. The practice, file, and context workflows do not require Bluetooth.
 
-A phone layout keeps a quick practice timer at the bottom of the screen, with Begin, Pause, Resume, and New session actions. Touch controls are at least 44 pixels high, and mobile entry fields use readable text sizes to avoid automatic input zoom. Both modes and the device guide fit narrow screens.
+A phone layout keeps the current task and its **Step done**, **Return**, or **Task done** action within reach in a fixed bottom bar. The Work timer bar appears only when the optional timer is open. Touch controls are at least 44 pixels high, and mobile entry fields use readable text sizes to avoid automatic input zoom. Both modes and the device guide fit narrow screens.
 
 ## Hume Band 2.0 first; Apple Watch also welcome
 
@@ -101,7 +106,9 @@ For Apple Health, select the unzipped `export.xml`, then choose its source name 
 
 ## Privacy and sharing
 
-The app makes no network requests and uses no browser persistence. Imported data, intentions, ratings, and practice recaps remain in the current page's memory; a reload clears them. Exports are ordinary files under your control and can contain sensitive health information, marker text, and personal reflections. Keep personal recordings outside the repository and review every file before publishing. The repository examples are synthetic; `.gitignore` excludes common local data directories and Health export filenames, but cannot recognize every sensitive filename.
+The app sends no recordings or task information to a server. By default, information stays in the current page's memory and a reload clears it. If you enable **Remember tasks on this device**, only the task board and distraction parking are written to this browser's local storage; they return in that browser and do not sync across devices. Turning the option off removes the saved copy while keeping the current list in memory. If storage fails, the app reports it and lets you continue in memory. Raw Muse data, Health context, imported recordings, ratings, and practice recaps are not automatically saved there. Importing a JSON file does not enable saving; an existing choice to remember tasks remains in effect.
+
+Exports are files under your control and may contain health information, task text, distractions, marker text, and personal reflections. Review them before sharing. Keep personal files outside the repository; `.gitignore` cannot recognize every sensitive filename. The included examples are synthetic.
 
 Loading the app from GitHub Pages still involves a request to GitHub for the static page. The console does not send imported recordings to GitHub or another service.
 
@@ -111,7 +118,7 @@ The application itself requires no build. Automated checks use Node.js and Playw
 
 ```sh
 npm ci
-npx playwright install chromium
+npx playwright install --only-shell chromium
 npm test
 ```
 
@@ -130,8 +137,9 @@ For a fork, first enable **Settings → Pages → GitHub Actions**, then run the
 - [Billman (2013): LF/HF does not accurately measure cardiac sympathovagal balance](https://pmc.ncbi.nlm.nih.gov/articles/PMC3576706/).
 - [Laborde, Mosley & Thayer (2017): HRV research design, analysis, and reporting recommendations](https://pmc.ncbi.nlm.nih.gov/articles/PMC5316555/).
 - [Apple HealthKit: heart rate variability SDNN](https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/heartratevariabilitysdnn).
+- [NIMH: ADHD—What You Need to Know](https://www.nimh.nih.gov/sites/default/files/documents/health/publications/adhd-2024.pdf). General context for smaller task steps, written reminders, and breaks; it does not validate this app or its EEG visuals.
 
-These sources inform physiology and measurement cautions. They do **not** validate this dashboard's index, tiers, novelty calculation, or event detector. Only HR increases, RMSSD decreases, and respiratory-rate increases contribute to the index. A low score means little shift in those scored directions; large changes in the opposite directions can also score zero. The score does not establish closeness to the reference, a cause, or a health condition.
+These sources provide physiology and organization context. They do **not** validate this dashboard's index, tiers, novelty calculation, event detector, or effectiveness as a work tool. Only HR increases, RMSSD decreases, and respiratory-rate increases contribute to the index. A low score means little shift in those scored directions; large changes in the opposite directions can also score zero. The score does not establish closeness to the reference, a cause, or a health condition.
 
 ## Reuse
 
