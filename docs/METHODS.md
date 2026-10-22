@@ -1,14 +1,30 @@
 # Methods and data contract
 
-This document describes the experimental model implemented in the console. The design favors inspectable arithmetic and clear missing-data behavior. None of the custom outputs has been clinically validated. Numerical precision in the UI is not a confidence interval.
+This document describes the practice tools, experimental signal model, and data contract implemented in the console. The design favors inspectable arithmetic and clear missing-data behavior. None of the custom signal outputs has been clinically validated. Numerical precision in the UI is not a confidence interval.
+
+## Practice modes and clocks
+
+**Rest & meditation** is the default quiet workspace. It prioritizes the visual breathing guide and a 10-minute practice timer; signal panels start tucked behind **Show signal details**. Activities are rest and relaxation, comfortable breathing, or meditation, with an intention and optional self-rated ease before and after. **Work & learning** starts with a 25-minute focus block, a task intention, optional self-rated focus, and distraction, break, and progress markers; signal details start visible. Its activities are focused work, learning, or skill practice, each with a brief self-directed prompt. Quality information and wearable context stay shared between modes.
+
+Themes are presentation choices: Rest uses deep evergreen, sage, and warm neutrals; Work uses midnight blue, indigo, periwinkle, and cool accents. Each scheme stays consistent across backgrounds, panels, controls, dialogs, and timers. Theme colors do not encode a physiological state or alter any calculation. On phones, a fixed bottom bar exposes the same practice timer and quick controls while the page scrolls; it is not a separate timer.
+
+Each mode holds its own practice draft and timer. Available duration presets are 5/10/20 minutes for rest and 25/45/60 minutes for work; custom durations range from 1 to 180 whole minutes. Duration, activity, and the optional before-rating are set while idle. Start, pause/resume, reset, and finish are explicit controls. Timer elapsed time follows the wall clock, not the recording's timestamp, playback multiplier, or scrubber. Paused time does not contribute to elapsed practice time. A timer completes at its planned duration or when explicitly finished early. Reset preserves duration, intention, activity, and existing recaps; it clears the active timer, ratings, and reflection. The independent visual pacer is not a breathing measurement.
+
+Changing mode pauses a running practice and the pacer while retaining the loaded dataset, provenance, fixed reference, signal model, markers, and wearable context. It does not recalibrate the reference, alter index weights or thresholds, change samples, or imply that the same physiology has a different medical meaning in another mode.
+
+Practice completion is quiet and produces a timestamped self-reported recap: mode, activity, planned duration, elapsed time, intention, and any supplied before/after rating or reflection. Intentions are limited to 160 characters and reflections to 300. Ratings are optional integers from 1 (very little ease or focus) to 5 (ample). Ease and focus are different questions, not interchangeable measurements; neither is inferred from wearable signals. No relaxation, productivity, performance, or learning score is calculated, and no improvement is promised. The recap is a record of using a timer and reporting an experience, not an assessment of meditation quality, task output, or cognitive performance. Up to 200 completed recaps are kept, discarding the oldest beyond that limit; the interface shows the latest eight.
+
+Practice drafts and recaps stay in local page memory. Explicit JSON export preserves this workspace along with the recording. A reload without an exported file clears it. Importing a file containing workspace notes replaces the current workspace and restores any exported running timers as paused. Older recording imports without workspace information retain the current practice drafts and recaps while pausing the active timer and pacer. Opening a new recording never changes the signal model's definitions.
 
 ## 1. Scope and acquisition
 
-The console visualizes normalized time-series summaries. It does not acquire live device data or estimate heart rate, RMSSD, breathing, EEG spectra, or signal quality from raw sensors. An importer's `quality: "good"` is an assertion supplied with the file, not a quality judgment independently verified by the console.
+The scored session model visualizes normalized time-series summaries. It does not estimate heart rate, RMSSD, breathing, EEG spectra, or signal quality from raw sensors. An importer's `quality: "good"` is an assertion supplied with the file, not a quality judgment independently verified by the console.
+
+A separate experimental Muse S Bluetooth preview inspects raw device input: EEG voltage, PPG ADC counts, acceleration, battery, packet counts, and freshness. It is hardware-unverified and does not provide model features, change the selected session's provenance, or enter its index, reference, or event detector. The labeled demo or imported recording remains the signal model's source. Raw preview data stays in a bounded memory buffer (approximately 60 seconds, at most 10,000 packets) and is not exported. Hume Band 2.0 and Apple Watch paths provide daily context rather than a live scored feed. See [Device setup](DEVICES.md) for acquisition boundaries and browser constraints.
 
 The bundled deterministic eight-minute demo supplies one synthetic sample per second. Playback can advance faster than wall time without changing the sample timestamps or numerical results. A preloaded two-minute synthetic segment supplies its reference. Reference, Change, Easing, and Motion presets jump to moments in that same recording. Synthetic provenance remains visible and survives export.
 
-Muse Web Bluetooth and OSC paths from the original prototype are unsupported and removed. Future integrations would need protocol verification, timing and unit checks, artifact handling, and validation against appropriate reference recordings.
+The original Muse-derived physiological features and OSC bridge are unsupported and removed. Converting any experimental raw preview into a scored feed would require protocol verification, timing and unit checks, artifact handling, and validation against appropriate reference recordings.
 
 ## 2. Normalized JSON and CSV
 
@@ -20,6 +36,8 @@ Top-level JSON fields:
 | `provenance` | `{kind: "synthetic" | "user-supplied", label: string}` |
 | `samples` | Array of normalized sample objects |
 | `markers` | Array of `{timestamp, label}` annotations |
+| `context` | Optional retrospective wearable-context snapshot |
+| `workspace` | Optional version-1 practice workspace; independent of signal schema version 2 |
 
 Every normalized sample uses these fields:
 
@@ -36,6 +54,21 @@ Every normalized sample uses these fields:
 CSV headers use the sample field names above, with no extra columns. Blank numeric cells become `null`. A missing value is never converted to a zero measurement. Use ISO 8601 timestamps with seconds and an explicit timezone (`Z` or `±HH:MM`), numeric epoch milliseconds in JSON, or 13-digit epoch milliseconds in CSV. Epoch-number inputs are limited to 2000–2100; seconds are not accepted. Rows must arrive in order, with at least one second between samples. Dense summaries must be aggregated before import. A session accepts 1–20,000 samples in a file up to 20 MB. CSV defaults to `user-supplied`; JSON must explicitly declare its provenance kind. A source label is not certification of a measurement. Markers annotate the recording and do not change the calculations.
 
 Supported input bounds are HR 25–240 bpm, RMSSD 0–500 ms, respiratory rate 3–60 breaths/min, optional EEG ratio 0–100, and motion 0–16 g. Out-of-range values are rejected rather than clipped. These are software input bounds, not physiological normal ranges.
+
+### Optional practice workspace
+
+The optional `workspace` object uses its own `schema_version: 1` and contains:
+
+| Field | Contract |
+| --- | --- |
+| `active_mode` | `rest` or `work` |
+| `practices` | Independent `rest` and `work` practice drafts |
+| `sessions` | At most 200 completed practice recaps |
+| `signal_details` | Boolean visibility preference for `rest` and `work` |
+
+Each draft records `mode`, `phase` (`idle`, `running`, `paused`, `complete`), `activity`, `durationMs`, `elapsedMs`, derived `remainingMs`, `intention`, optional `before`/`after` ratings, `outcome`, `startedAt`, `endedAt`, and `entryId`. Activities are `rest`/`breath`/`meditation` in rest mode and `focus`/`learn`/`practice` in work mode. Unset ratings and timestamps remain `null`. Completed session entries add an `id` and `source: "self-reported"`. Durations and elapsed times are milliseconds; timestamps are epoch milliseconds. Wall-clock timer anchors are not exported. Import validates the workspace, recalculates remaining time, and changes `running` to `paused`; it does not run a timer retroactively while the file was closed.
+
+Markers still locate the recording's current cursor via `timestamp`. New markers also preserve `created_at` as the actual wall-clock creation time and `mode` as `rest` or `work`. A practice timer does not automatically insert recording markers. This distinction matters when inspecting historical or synthetic data: marking a distraction now does not imply it happened at that historical recording time.
 
 ## 3. Eligibility and fixed reference
 
@@ -124,7 +157,7 @@ HealthKit's HRV quantity is **SDNN**. It is kept distinct from RMSSD and cannot 
 
 ## 8. Privacy and reproducibility
 
-There are no fetch calls, remote assets, analytics, browser-storage writes, or automatic uploads. Imported content is held in memory for the current page. A reload clears it. Export explicitly creates a JSON file that preserves provenance, timestamps, null values, quality flags, and markers. Such a file may contain personal information; review it before sharing.
+There are no fetch calls, remote assets, analytics, browser-storage writes, or automatic uploads. Imported content and practice information are held in memory for the current page. A reload clears them. Export explicitly creates a JSON file that preserves provenance, timestamps, null values, quality flags, markers, wearable context, and practice workspace information. Intentions, ratings, and recaps can contain personal information; review exports before sharing.
 
 The synthetic session and playback controls allow reproducible review of the interface. JSON export includes the complete loaded recording, not just the portion already played. Passing software tests verifies the tested software behavior; it cannot establish clinical accuracy or validate a physiological interpretation.
 

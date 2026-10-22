@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
     <meta
       name="description"
-      content="An honest field guide to the experimental Autonomic Telemetry console: synthetic sessions, fixed references, data quality, Hume and Apple Health context, and privacy."
+      content="A guide to Autonomic Telemetry: quiet rest and meditation, focused work and learning, independent practice timers, optional signal exploration, and local privacy."
     />
     <title>Field Guide · Autonomic Telemetry</title>
     <style>
@@ -675,11 +675,11 @@
         <circle cx="205" cy="45" r="5" fill="#72d9cf" />
         <circle cx="205" cy="152" r="4" fill="#efc88f" />
       </svg>
-      <div class="eyebrow">A companion for curious observation</div>
-      <h1>Read the signals.<br />Keep the limits in view.</h1>
+      <div class="eyebrow">A companion for practice and reflection</div>
+      <h1>A space for your practice.<br />A guide to your signals.</h1>
       <p>
-        A field guide to the console's reference, patterns, and provenance—with
-        a practical path for Hume Band 2.0 and Apple Watch users.
+        Rest and meditation. Work and learning. A guide to choosing your space,
+        keeping a simple practice, and exploring signals when they are useful.
       </p>
       <div class="tags">
         <span class="tag accent">EXPERIMENTAL</span
@@ -692,7 +692,7 @@
         <div class="toc-label">In this guide</div>
         <ol>
           <li>
-            <a href="#start"><span class="num">01</span>Start with the demo</a>
+            <a href="#start"><span class="num">01</span>Choose your space</a>
           </li>
           <li>
             <a href="#devices"
@@ -723,8 +723,8 @@
           </li>
         </ol>
         <p class="toc-note">
-          A descriptive workbench for comparing a recording with its own
-          reference. Every number needs its source and context.
+          Make room for an intention. Signal exploration is optional; every
+          number still needs its source and context.
         </p>
       </nav>
       <main id="main">
@@ -741,15 +741,89 @@
         <section class="card" id="start">
           <div class="section-head">
             <span class="num">01</span>
-            <h2>Start with the demo</h2>
+            <h2>Choose your space</h2>
           </div>
           <p class="lead">
-            Use a known story to understand what each display can show.
+            Start with what you want the next few minutes to be for.
+          </p>
+          <div class="grid">
+            <div class="mini">
+              <div class="label">Rest &amp; meditation</div>
+              <p>
+                The default quiet view puts a 10-minute practice timer,
+                intention, and optional breathing guide first. Signal panels are
+                tucked behind <strong>Show signal details</strong>. You can note
+                your ease before and after, if that feels useful.
+              </p>
+            </div>
+            <div class="mini">
+              <div class="label">Work &amp; learning</div>
+              <p>
+                A 25-minute focus block makes room for a task intention,
+                optional focus ratings, and distraction, break, or progress
+                markers. Signal details begin visible.
+              </p>
+            </div>
+          </div>
+          <p>
+            Rest uses deep evergreen, sage, and warm neutrals; Work uses
+            midnight blue, indigo, periwinkle, and cool accents. Each theme
+            stays consistent across the background, panels, controls, dialogs,
+            and timer. These colors distinguish the spaces, not physiological
+            states; all signal calculations stay the same.
+          </p>
+          <p>
+            Choose a preset—5, 10, or 20 minutes for rest; 25, 45, or 60 minutes
+            for work—or a custom duration from 1 to 180 minutes. Start, pause,
+            reset, and finish are explicit controls. The timer follows real
+            elapsed time, independently of the recording's playback and
+            scrubber. Completion stays quiet, with no automatic sound or
+            notification.
+          </p>
+          <p>
+            On a phone, a quick practice timer stays fixed at the bottom while
+            you scroll, with Begin, Pause, Resume, or New session controls. It
+            operates the same practice timer shown above.
+          </p>
+          <p>
+            Rest offers rest and relaxation, comfortable breathing, or
+            meditation. Work offers focused work, learning, or skill practice,
+            with a short prompt for each. Choose the duration, activity, and
+            optional before-rating before beginning. Reset keeps the duration,
+            intention, activity, and completed notes while clearing the timer,
+            current ratings, and reflection.
+          </p>
+          <p>
+            Each mode keeps its own practice draft and timer. Switching mode
+            pauses a running practice and the breathing pacer. Your recording,
+            reference, model, markers, and wearable context stay in place; the
+            physiology calculations do not change.
+          </p>
+          <div class="rule">
+            <strong>A recap, not a grade.</strong> Finish early or let the
+            countdown complete. The recap records time, intention, activity,
+            planned and elapsed duration, mode, and optional ease or focus
+            ratings from 1 (very little) to 5 (ample). Add a few words to
+            remember or a next step. These are your reports, not signal-derived
+            assessments of relaxation, productivity, learning, or performance.
+            Nothing here promises an improvement.
+          </div>
+          <p>
+            Practice information stays in the page's memory. Export explicitly
+            to keep both mode drafts and recaps; reopening the JSON restores
+            running timers as paused. Opening an older recording without
+            workspace notes keeps your current practice drafts and pauses the
+            timer and pacer. Reloading without an exported file clears them.
+          </p>
+          <h3>When you want to explore signals</h3>
+          <p>
+            Open signal details and use the synthetic recording as a known story
+            to learn what each display can show.
           </p>
           <ol>
             <li>
               Open the console and keep the <strong>synthetic</strong> label in
-              view. The scenarios are generated examples, not a person's
+              view. The scenario is a generated example, not a person's
               recording.
             </li>
             <li>
@@ -792,6 +866,11 @@
             <span class="num">02</span>
             <h2>Your wearable context</h2>
           </div>
+          <p>
+            Choose <strong>Connect a device</strong> for a short guide, starting
+            with Hume Band 2.0 and also offering Apple Watch and Muse S. Opening
+            the guide alone does not access Bluetooth or your health data.
+          </p>
           <h3>Hume Band 2.0</h3>
           <p>
             Choose <strong>Add Hume reading</strong> to copy the date, resting
@@ -831,10 +910,27 @@
             reference. No sleep-stage or recovery estimate is derived. Shared
             physiology views are device neutral.
           </div>
+          <h3>Muse S · experimental raw preview</h3>
+          <p>
+            The guided device setup offers a raw Bluetooth preview, with
+            hardware behavior still unverified. It shows raw EEG, PPG, motion,
+            packet freshness, and battery where available. It does not derive
+            heart rate, RMSSD, breathing, or a pattern-shift score. Your signal
+            session remains the labeled synthetic demo or imported recording.
+            Raw preview data is held briefly in memory and is not exported.
+          </p>
+          <p>
+            Use supported desktop Chromium or Chrome on Android with HTTPS or
+            localhost. This preview is unavailable in iPhone/iPad browsers and
+            Firefox. Use the explicit Disconnect control to end it; closing the
+            setup panel alone leaves the preview connected.
+          </p>
           <p class="small">
-            Earlier Muse Web Bluetooth and OSC sketches have been retired. A
-            supported live feed would require verified acquisition, timing,
-            artifact handling, and signal-processing validation.
+            The earlier Muse-derived physiological features and OSC bridge are
+            retired. See <a href="docs/DEVICES.md">Device setup</a> for browser
+            requirements and the preview's limits. Both practice modes adapt to
+            a phone-sized screen; Bluetooth support still depends on the browser
+            and platform.
           </p>
         </section>
 
@@ -1012,6 +1108,13 @@
             typed; it does not establish causation or change the calculations.
             The detector's threshold has no validated false-positive rate.
           </p>
+          <p>
+            A new marker sits at the recording's current cursor and separately
+            preserves the actual time and practice mode when you created it. On
+            historical or synthetic data, a note made now is not evidence that
+            the event happened at that recording time. Starting or finishing a
+            practice does not automatically mark the recording.
+          </p>
         </section>
 
         <section class="card" id="lenses">
@@ -1114,18 +1217,19 @@
             CSV is labeled <strong>user-supplied</strong>; JSON must explicitly
             declare provenance. Neither becomes a “verified measurement.”
             Exports preserve provenance, missing values, timestamps, quality,
-            markers, and context notes for the complete loaded recording.
-            Synthetic JSON sessions remain labeled synthetic. The repository's
-            <a href="examples/README.md">example notes</a> identify its six-row
-            CSV template as synthetic format data with intentionally unknown
-            quality.
+            markers, context notes, and the practice workspace for the complete
+            loaded recording. Older files without practice information still
+            open normally. Synthetic JSON sessions remain labeled synthetic. The
+            repository's <a href="examples/README.md">example notes</a> identify
+            its six-row CSV template as synthetic format data with intentionally
+            unknown quality.
           </p>
           <div class="rule">
             <strong>Local processing, explicit files.</strong> The console makes
             no network requests and writes no browser storage. Imports stay in
             the current page's memory; a reload clears them. Exported JSON is a
-            file under your control and may contain sensitive health information
-            or marker text.
+            file under your control and may contain sensitive health
+            information, marker text, intentions, ratings, or practice recaps.
           </div>
           <p>
             Before posting a repository, inspect its files and Git staging area.

@@ -1,10 +1,10 @@
 # Autonomic Telemetry
 
-A private-by-default browser workbench for exploring how cardiac and respiratory summaries change against a fixed session reference. Open one HTML file, try a reproducible synthetic session, or inspect a normalized recording. A companion field guide explains every display and its limits.
+A private-by-default browser workspace for rest and meditation, focused work and learning, and optional exploration of wearable summaries. Open one HTML file, choose a mode, and give the next few minutes an intention. A companion field guide explains the practice tools, signal displays, and their limits.
 
 **This is an experimental visualization, not a validated measure of stress, sympathetic activity, illness, or recovery.** The custom index and event thresholds are design choices. They have no clinical validation or confidence intervals.
 
-![Autonomic Telemetry console](docs/console-desktop.png)
+![Rest and meditation mode](docs/rest-mode.png)
 
 ## Start here
 
@@ -18,18 +18,43 @@ python3 -m http.server 8090
 
 Visit [localhost:8090](http://localhost:8090/Autonomic_Telemetry_Console.html). Read the [Field Guide](Autonomic_Telemetry_Field_Guide.html) for a tour or [Methods](docs/METHODS.md) for the exact calculations and data contract.
 
+## Two spaces for different intentions
+
+| | Rest & meditation | Work & learning |
+| --- | --- | --- |
+| Starting view | Quiet, with signal details tucked away | Signal details visible |
+| Practice | 10-minute rest or meditation period | 25-minute focus block |
+| Useful controls | Optional visual breathing guide, intention, ease before/after | Task intention, focus before/after, distraction, break, or progress markers |
+| Duration presets | 5, 10, or 20 minutes | 25, 45, or 60 minutes |
+
+Each mode has a consistent visual theme across the background, panels, controls, dialogs, and timer: deep evergreen, sage, and warm neutrals for Rest; midnight blue, indigo, periwinkle, and cool accents for Work. The colors distinguish the spaces; they do not change or classify physiology.
+
+Rest & meditation is the default, with rest, comfortable breathing, or meditation activities. Work & learning offers focused work, learning, or skill practice, each with a short self-directed prompt. Both modes offer a configurable 1–180 whole-minute practice timer with start, pause/resume, reset, and finish controls. Set the duration and optional before-rating before starting; reset the timer to change them. The timer follows real elapsed time independently of the recording's playback speed or scrub position. Finish early or let the countdown complete; completion is quiet, with no automatic sound or notification.
+
+Each mode keeps its own practice draft and timer. Switching modes pauses a running practice and the pacer; it keeps the loaded recording, reference, model, markers, and wearable context. The physiological calculations do not change with the mode. In Rest, open **Show signal details** when you want to inspect the recording.
+
+Optional ease or focus ratings run from 1 (very little) to 5 (ample) and describe your own experience. A completed-practice recap records the mode, activity, intention, planned and elapsed time, and available before/after ratings; you can add a short reflection or next step. Reset keeps the chosen duration, intention, activity, and completed notes while clearing the current timer and ratings. Up to 200 recaps stay in memory, with the latest eight displayed. None scores relaxation, productivity, or learning, or promises improvement.
+
+**Export JSON** preserves both practice drafts, recaps, active mode, and each mode's signal-detail preference with the recording. Reopening that export restores running timers as paused. Opening an older recording without workspace notes keeps your current practice drafts and pauses the active timer and pacer. A reload clears everything that was not exported.
+
+![Work and learning mode](docs/work-mode.png)
+
 ## What you can explore
 
 - A deterministic 1 Hz, eight-minute synthetic session, with a preloaded two-minute reference, accelerated playback, play/pause, restart, a timeline scrubber, and presets that jump to key moments.
 - A transparent 0–100 **pattern-shift index** based on heart rate, RMSSD, and respiratory rate, with channel contributions visible.
 - A descriptive novelty trace and coincident change events, with explicit quality and motion gating.
 - Aligned heart-rate/respiratory-rate association, heart-rate persistence, RMSSD dispersion, and a standardized heart-rate/RMSSD portrait.
-- A visual breathing pacer that operates independently of the recording and its scores.
+- A visual breathing pacer and separate wall-time practice timers that operate independently of the recording and its scores.
 - Normalized JSON/CSV import, user markers, and JSON export that preserves source labels and missing values.
 - Hume Band 2.0 daily context notes, with an explicit HRV definition selector and date.
 - Retrospective context from Apple Health `export.xml`, kept separate from the session reference and model.
 
-There is **no live device connection** in this release. Earlier Muse Web Bluetooth and OSC sketches have been retired. They would require a separately validated acquisition and signal-processing implementation before becoming supported features.
+Choose **Connect a device** for the guided setup, starting with Hume Band 2.0 and also offering Apple Watch and Muse S. **Muse S has an experimental raw Bluetooth preview**, with hardware behavior still unverified. It shows raw EEG, PPG, motion, packet freshness, and battery where available; it does not produce heart rate, RMSSD, breathing estimates, or a pattern-shift score. The session recording remains the labeled demo or imported data, and raw preview packets are not included in exports. Hume Band 2.0 and Apple Watch use the context workflows below. See [Device setup](docs/DEVICES.md) for the supported paths and browser limits.
+
+Both practice modes use responsive layouts for phones, tablets, and desktops. The experimental Muse preview requires supported desktop Chromium or Chrome on Android and HTTPS or localhost; it is unavailable in iPhone/iPad browsers and Firefox. The practice, file, and context workflows do not require Bluetooth.
+
+A phone layout keeps a quick practice timer at the bottom of the screen, with Begin, Pause, Resume, and New session actions. Touch controls are at least 44 pixels high, and mobile entry fields use readable text sizes to avoid automatic input zoom. Both modes and the device guide fit narrow screens.
 
 ## Hume Band 2.0 first; Apple Watch also welcome
 
@@ -74,7 +99,7 @@ For Apple Health, select the unzipped `export.xml`, then choose its source name 
 
 ## Privacy and sharing
 
-The app makes no network requests and uses no browser persistence. Imported data remains in the current page's memory; a reload clears it. Exports are ordinary files under your control and can contain sensitive health information and marker text. Keep personal recordings outside the repository and review every file before publishing. The repository examples are synthetic; `.gitignore` excludes common local data directories and Health export filenames, but cannot recognize every sensitive filename.
+The app makes no network requests and uses no browser persistence. Imported data, intentions, ratings, and practice recaps remain in the current page's memory; a reload clears them. Exports are ordinary files under your control and can contain sensitive health information, marker text, and personal reflections. Keep personal recordings outside the repository and review every file before publishing. The repository examples are synthetic; `.gitignore` excludes common local data directories and Health export filenames, but cannot recognize every sensitive filename.
 
 Loading the app from GitHub Pages still involves a request to GitHub for the static page. The console does not send imported recordings to GitHub or another service.
 
