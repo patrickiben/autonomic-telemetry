@@ -238,6 +238,7 @@ class AdapterTests(_AdapterFixture):
     async def test_missing_optional_channels_use_p21_without_fabrication(self):
         client, stop, packets, phases, task = await self.launch(Client(missing=(*muse.PPG, muse.ACC)))
         await self.ready(client)
+        await eventually(lambda: phases and phases[-1]["phase"] == "waiting")
         self.assertIn(muse.encode_command("p21"), [data for _, data, _ in client.writes])
         self.assertIn("Unavailable: PPG 0, PPG 1, PPG 2, accelerometer", phases[-1]["message"])
         client.notify(muse.EEG[0], EEG_PACKET)
