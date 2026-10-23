@@ -1,6 +1,6 @@
 # Live inferred-arousal methods
 
-The immersive canvas combines a personal **experimental inferred-arousal estimate** with artistic raw-signal visuals. The estimate is a transparent inference from cardiac patterns relative to an initial personal reference. It is not direct sympathetic activity, a classification of mental overactivity, or a validated measure of attention, stress, meditation, or health.
+The immersive canvas maps a personal **experimental inferred-arousal estimate** into a nebula or galaxy. The estimate is a transparent inference from cardiac patterns relative to an initial personal reference. It is not direct sympathetic activity, a classification of mental overactivity, or a validated measure of attention, stress, meditation, or health.
 
 The separate [Advanced Signal Lab](../Autonomic_Telemetry_Signal_Lab.html) retains its recording model and research tools. Its [pattern-shift index](SIGNAL_LAB_METHODS.md) and [research lenses](RESEARCH_ENGINE.md) are different calculations, not alternate displays of this live estimate.
 
@@ -77,25 +77,23 @@ Rest offers an optional four-second inhale/six-second exhale guide, change since
 
 Open **Reference & signals** for reference progress, component values, source, reference comparison, contributions, recent history, and reset. An unavailable estimate shows a dash rather than zero. Reference learning shows its progress; this is data collection, not a claim that the person's state is known.
 
-## Raw-signal visuals
+## Score-driven visualization
 
-The estimate modulates the light's expansion, pace, and complexity. The light also responds directly to raw Muse EEG variation, optical variation, acceleration, and Hume's reported rate. Those raw artistic mappings have separate feature gates; raw variation is not additional evidence for the estimate. The visual's size, color, or beauty is not an additional score. EEG context has zero weight in the estimate.
+An available displayed estimate alone controls cloud extent, brightness, color warmth, and star-arm spread. Lower values produce a smaller, cooler aqua cloud; 50 maps to lavender at the fixed personal-reference orbit; higher values spread farther and become brighter coral/peach. The reference orbit marks 50 rather than moving with the current value. Work renders a slow spiral galaxy and Rest a diffuse nebula, with the same score-to-size and score-to-color meanings.
 
-For inspection, the raw packet display mappings use:
+Raw EEG and optical variation add minor filament texture only. Raw motion no longer translates or distorts the score cloud, and reported HR does not independently set its expansion or pace. These presentation changes do not alter motion gating, feature extraction, reference formation, or the scoring formula. EEG context still has zero estimate weight. The visual key explains the mapping; it supplies no additional physiological evidence.
 
-```text
-EEG texture = clamp(population_SD(packet) / 85, 0, 1)
-PPG expansion = clamp(population_SD(packet) / max(abs(mean(packet)) × 0.02, 1), 0, 1)
-Motion distortion = clamp(abs(latest_XYZ_magnitude - 1 g) × 2, 0, 1)
-```
+Rest's paced-breathing cue appears as a separate outer ring. Breathing animation does not resize the estimate cloud, alter the reference orbit, or lower the estimate. The ring guides timing, not measured respiration.
 
-Reported HR adjusts the field's pace smoothly, not individual measured beats. Raw visual variation can exist while a derived feature is withheld. The display must keep those two availability states distinct.
+Waiting, held, or stale estimates remove the score-encoded halo and return to a distinct ambient sky. The display does not animate an unavailable estimate toward 50. Raw-source labels and feature/estimate availability remain separate, so accepted raw packets need not produce a score cloud.
+
+Gentler movement and the system's reduced-motion preference freeze decorative drift while permitting static score updates. Still image freezes canvas updates for fresh values. If the estimate becomes stale, held, or unavailable, the score encoding clears once even while Still image remains enabled. The number and status continue updating. Soft/Vivid intensity changes presentation without changing the score's direction or reference meaning.
 
 ## Source, freshness, and controls
 
 The initial view is Work with Ambient input and no running timer. Try a demo explicitly selects generated variation with its own declared synthetic reference, so its estimate can be explored immediately. Demonstration data stay labeled and separate from live personal references. A simulated Mac bridge is also Demo.
 
-Accepted recent packets are required for a Live source badge. A Bluetooth connection alone is insufficient. Raw visual effects become stale independently after seven seconds and fade toward ambient; the estimate additionally follows the stricter feature validity and freshness rules. Continued ambient animation is not continued measurement. A fresh remaining source can still shape the display under its own label.
+Accepted recent packets are required for a Live source badge. A Bluetooth connection alone is insufficient. Raw texture effects become stale independently after seven seconds; the estimate follows the stricter feature validity and freshness rules. An unavailable estimate removes its score-encoded halo rather than appearing to settle to 50. Continued ambient animation is not continued measurement, even if another raw source remains live.
 
 The bridge rejects packets more than five seconds old, estimates the Mac-to-phone clock offset conservatively, and preserves original Mac receipt time. Session IDs and increasing sequence numbers prevent old or duplicate events from becoming new evidence. Receipt time and nominal sampling cadence are not independently verified physiological event times.
 

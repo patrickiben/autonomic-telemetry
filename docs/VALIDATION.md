@@ -1,5 +1,13 @@
 # Release verification
 
+## Arousal visualization update — October 23, 2026
+
+The main page now maps the available estimate to cloud extent, brightness, and warmth around a fixed reference orbit. Work uses a spiral galaxy; Rest uses a diffuse nebula and an independent optional breathing ring. The embedded inference engine is byte-for-byte unchanged from the preceding release, as are the feature extractors and device bridge.
+
+All **173 automated checks** pass locally: 53 Chromium browser checks, 33 research-math checks, 19 arousal-engine checks, and 68 Python bridge checks. Six new browser checks exercise the actual inference and rendering paths using invented feature frames. They verify image-derived expansion, brightness, and warmth across low/reference/high values in both modes; intermediate transitions; independent waiting/stale/held animation; reduced motion; Still image and signal expiry; and separation of the breathing guide from score extent. No browser errors or external runtime requests occurred.
+
+Desktop and 390-pixel phone previews were reviewed at synthetic estimates of 25, 50, and 75. The production demo supplies the updated repository screenshots. This checks presentation and software behavior, not physiological validity or performance on a physical iPhone.
+
 ## Signal Lab appearance update — October 23, 2026
 
 The Lab now shares the main page's midnight palette, serif title, and rounded controls. Aqua, lavender, coral, mint, and pale gold distinguish signals and research views. The breathing guide is more compact on desktop; the analytical models, recordings, device adapters, and import/export behavior are unchanged.

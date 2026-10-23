@@ -6,6 +6,8 @@ An immersive canvas with a personal, experimental **inferred arousal estimate**.
 
 Work supports continuous observation and an optional sustained-elevation cue. Rest adds paced breathing and a personal settling trend. Both use the same estimate; their different palettes and controls do not change the scoring rules. An optional timer stays secondary to the experience.
 
+The estimate controls the galaxy or nebula's extent, brightness, and warmth against a fixed reference orbit at 50. Work uses a slow spiral; Rest uses a diffuse cloud with a separate breathing ring.
+
 The **[Advanced Signal Lab](Autonomic_Telemetry_Signal_Lab.html)** preserves the separate recording explorer, pattern-shift model, reference and novelty diagnostics, import/export, and research lenses. Its recording score is distinct from the canvas's live inferred-arousal estimate.
 
 ![Rest mode with explicitly labeled synthetic signals](docs/rest-mode.png)

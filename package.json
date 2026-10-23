@@ -4,7 +4,7 @@
   "private": true,
   "description": "Personal arousal biofeedback for work and rest, with a local wearable bridge.",
   "scripts": {
-    "test": "node scripts/arousal.test.cjs && node scripts/research-math.test.mjs && node scripts/experience.mjs && node scripts/signal-lab.mjs && node scripts/research-ui.mjs"
+    "test": "node scripts/arousal.test.cjs && node scripts/research-math.test.mjs && node scripts/experience.mjs && node scripts/visual-feedback.mjs && node scripts/signal-lab.mjs && node scripts/research-ui.mjs"
   },
   "engines": {
     "node": ">=22"
