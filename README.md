@@ -80,7 +80,7 @@ The public experience is hosted at [patrickiben.github.io/autonomic-telemetry](h
 
 ## Reuse
 
-No repository license has been selected yet. Protocol adapters preserve applicable upstream notices.
+Original project code is available under the [MIT License](LICENSE). Protocol adapters preserve applicable upstream notices.
 
 ## Code license and third-party material
 
