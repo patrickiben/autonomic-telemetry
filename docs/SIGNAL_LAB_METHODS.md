@@ -1,12 +1,16 @@
 # Advanced Signal Lab methods
 
-These methods belong to [Autonomic_Telemetry_Signal_Lab.html](../Autonomic_Telemetry_Signal_Lab.html), the separate advanced analysis page. The immersive canvas has its own live inferred-arousal model and artistic raw-signal mappings, described in [Methods](METHODS.md). Its reference, 50-centered estimate, and derived live features do not silently enter this recording model. The Lab's pattern-shift index below is a different, one-sided 0–100 calculation.
+[Signal Lab](../Autonomic_Telemetry_Signal_Lab.html) now begins its analytical views with **Integrated arousal model**: the same `multivariate-1` engine that drives the main visual. It automatically replays the normalized recording through its cursor, or opens an exact feature export from the main page. Its formula, two-minute fixed profile, zero-reference scale, quality gates, and causal event detector are documented in [Live multivariate methods](METHODS.md). Rewinding replays only the available prefix; future observations cannot train the current result.
 
-The Lab preserves normalized recordings, a fixed reference, the transparent experimental pattern-shift index, novelty events, descriptive lenses, markers, JSON export, and retrospective wearable context. The score and thresholds have no clinical validation or confidence interval. Raw Bluetooth diagnostics are separate from the model: they do not derive RMSSD or breathing or silently turn a demo recording into measured data.
+The remaining sections below document the retained **Directional shift · comparison model**, its normalized recording schema, fixed reference, first-difference novelty, descriptive lenses, markers, JSON export, and retrospective wearable context. That three-signal model is deliberately separate from the integrated headline. Both are experimental; their thresholds are not clinical cutoffs. Raw Bluetooth diagnostics do not silently turn a demo recording into measured data.
 
 The Lab's retained direct-browser Muse diagnostics use the Classic transport and have not been physically verified here. The immersive canvas's Mac bridge separately supports Classic and Athena transport, plus Hume's reported rate; its hardware evidence does not validate this recording model or imply Athena support in the Lab's browser adapter. See [Devices](DEVICES.md).
 
 The additional **Original research lenses** are documented separately in [Research engine methods](RESEARCH_ENGINE.md): rolling AR(1)/EWMA surprise, regularized multivariate distance, covariance/PCA concentration, sample entropy, signed cross-lags, and RR-only interval metrics. They restore research capabilities with explicit mathematical definitions and input requirements; they are not an unchanged copy of the prototype or clinical measures. The core first-difference novelty below remains distinct from AR prediction-error surprise, and the core HR/RMSSD portrait remains distinct from a PCA lens.
+
+## Live analysis session replay
+
+Use **Open a live analysis session** in the integrated panel for the main page's `live-multivariate-1` JSON export. It preserves feature and browser-observation timestamps, per-channel quality/source, synthetic versus personal provenance, model version, and any explicit starting reference. The imported session has its own cursor. **Follow the recording again** restores the normalized-recording cursor. A file accepts up to 20,000 frames and 30 MB. The main page visibly stops its in-memory recording at 20,000 frames while live analysis continues.
 
 ## 1. Normalized JSON and CSV
 
@@ -29,15 +33,16 @@ Every normalized sample uses these fields:
 | `heart_rate_bpm` | Number or `null`; beats/minute | Index and descriptive lenses |
 | `rmssd_ms` | Number or `null`; milliseconds | Index and descriptive lenses |
 | `resp_rate_brpm` | Number or `null`; breaths/minute | Index and descriptive lenses |
-| `eeg_beta_alpha` | Number or `null`; supplied ratio | Supplied value in Temporal texture; no physiological interpretation or index weight |
+| `eeg_beta_alpha` | Number or `null`; supplied ratio | Integrated model term and descriptive view; no weight in the three-signal comparison |
+| `pulse_sdnn_ms` | Optional number or `null`; milliseconds | Explicitly supplied sample SDNN for the integrated model; no weight in the comparison |
 | `motion_g` | Number or `null`; gravity-removed motion magnitude in g | Motion gate |
 | `quality` | `good`, `poor`, or `unknown` | Eligibility gate |
 
 CSV headers use the sample field names above, with no extra columns. Blank numeric cells become `null`. A missing value is never converted to a zero measurement. Use ISO 8601 timestamps with seconds and an explicit timezone (`Z` or `±HH:MM`), numeric epoch milliseconds in JSON, or 13-digit epoch milliseconds in CSV. Epoch-number inputs are limited to 2000–2100; seconds are not accepted. Rows must arrive in order, with at least one second between samples. Dense summaries must be aggregated before import. A session accepts 1–20,000 samples in a file up to 20 MB. CSV defaults to `user-supplied`; JSON must explicitly declare its provenance kind. A source label is not certification of a measurement. Markers annotate the recording and do not change the calculations.
 
-Supported input bounds are HR 25–240 bpm, RMSSD 0–500 ms, respiratory rate 3–60 breaths/min, optional EEG ratio 0–100, and motion 0–16 g. Out-of-range values are rejected rather than clipped. These are software input bounds, not physiological normal ranges.
+Supported input bounds are HR 25–240 bpm, RMSSD 0–500 ms, respiratory rate 3–60 breaths/min, optional EEG ratio 0–100, optional pulse SDNN 0–500 ms, and motion 0–16 g. Out-of-range values are rejected rather than clipped. These are software input bounds, not physiological normal ranges.
 
-## 2. Eligibility and fixed reference
+## 2. Comparison model: eligibility and fixed reference
 
 
 A model-eligible sample must satisfy all of the following:
@@ -50,9 +55,9 @@ The initial reference needs at least 60 eligible samples spanning at least 119 s
 
 A later sample must have the **same** available index-channel set as the reference. If a reference used all three channels, a later row missing RMSSD is not rescored as a two-channel composite. The index is withheld. This avoids an apparent shift caused only by changing weights. Quality and motion exclusions are applied before model outputs; invalid segments are not bridged to manufacture continuity.
 
-There is no automatic baseline persistence and no Apple Health baseline seeding. Reloading or starting another recording discards the current session's reference.
+There is no automatic baseline persistence or Apple Health baseline seeding. Reloading or starting another recording discards the comparison model's reference. The integrated model separately supports an explicit reference carried by a main-page session export.
 
-## 3. Pattern-shift index
+## 3. Comparison model: pattern-shift index
 
 Let `mu[j]` and `sd[j]` be a channel's reference mean and sample standard deviation. The effective standard deviation is `max(sd[j], floor[j])`. Floors prevent an almost constant reference from producing extreme scores for tiny changes.
 

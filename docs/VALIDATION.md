@@ -1,5 +1,34 @@
 # Release verification
 
+## Version 2.4.0: integrated multivariate restoration — October 23, 2026
+
+The main page and Signal Lab now run the shared `multivariate-1` model. The original nominal weighted features, covariance term, bounded temporal modifiers, and causal-surprise onset detector are integrated into the live calculation. Actual pulse SDNN replaces the prototype's scaled-RMSSD proxy. The scale returns to a zero-reference origin. [Methods](METHODS.md) defines the numerical changes; [capability status](CAPABILITIES.md) identifies remaining input requirements.
+
+All **219 automated checks** pass locally: 68 Chromium browser checks, 29 multivariate-engine checks, 33 research-math checks, 19 historical two-feature engine checks, and 70 Python bridge checks. The historical engine is retained for regression comparison and is no longer embedded in the main page.
+
+The new model checks cover original weights and modifiers, covariance-only excursions, independent SDNN and EEG contributions, fixed full/partial profiles, missing and late channels, source changes, motion/freshness holds, causal prediction and onset convergence, plateau suppression, signed lead–lag, gap censoring, strict reference imports, and snapshot isolation. Browser checks exercise the actual main-page ingress and visual, not a duplicate score implementation.
+
+Session checks download the main page's actual JSON and reproduce the value, history, prediction errors, weights, events, and full mathematical snapshot in Signal Lab. They cover Live → Demo → Live continuity, background live frames, future-reference and invalid-source rejection without replacing a working replay, nonfinite-motion serialization, browser observation times for delayed input, and Rest comparison resets after an unrendered signal gap. Rewinding and appending future data preserve causal-prefix results. An additional 20,000-frame replay probe remained finite and bounded.
+
+Seventeen feature-extractor tests include actual sample SDNN from the same accepted optical intervals as RMSSD, matched quality/provenance/freshness metadata, and stale/reset behavior. No respiratory feature is fabricated. Existing transport, private-route, SSE, cancellation, and teardown tests remain in the 70-check Python suite.
+
+Desktop and phone renders were inspected, including the live mathematical detail and integrated recording panel. Both fit 320, 390, 768, and 1440-pixel widths. The six visual-feedback checks retain image-based extent, brightness, and warmth comparisons across zero-reference, moderate, and high values in both modes, plus reduced-motion, Still, stale/held clearing, and breathing separation. Repository images use the explicitly labeled synthetic demo. No external runtime requests or browser page errors occurred.
+
+This release was tested with deterministic software and transport fixtures. No new physical-device or iPhone test was performed, and these checks do not validate physiological accuracy. Restart an existing Mac bridge after updating to load the pulse-SDNN extractor. Saved references and session files remain explicit local downloads.
+
+Repeat with:
+
+```sh
+npm ci
+npx playwright install --only-shell chromium
+npm test
+python3 -m unittest discover -s bridge -p 'test_*.py' -v
+```
+
+After changing shared model/view sources, regenerate the self-contained pages with `python3 scripts/embed-arousal.py` and `python3 scripts/embed-multivariate-panel.py`. The generated copies were checked for reproducibility.
+
+The entries below document earlier releases and their then-current models.
+
 ## Arousal visualization update — October 23, 2026
 
 The main page now maps the available estimate to cloud extent, brightness, and warmth around a fixed reference orbit. Work uses a spiral galaxy; Rest uses a diffuse nebula and an independent optional breathing ring. The embedded inference engine is byte-for-byte unchanged from the preceding release, as are the feature extractors and device bridge.

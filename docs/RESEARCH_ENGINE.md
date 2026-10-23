@@ -1,6 +1,6 @@
-# Preserved experimental research engine
+# Shared research mathematics and recording lenses
 
-The Signal Lab keeps the revised pattern-shift analysis and adds independent mathematical tools from the original prototype. These tools do not change the core pattern score, its change-rate novelty, or its HR–RMSSD portrait. Their outputs describe supplied recordings; none is a stress, focus, calm, sympathetic-activity, or clinical measurement.
+`research-math.js` supplies the audited numerical primitives used by the restored live **[multivariate model](METHODS.md)** and by Signal Lab's independent **Original research lenses**. The live engine combines selected terms in the headline and events; its own window, reference, floor, and gating rules are documented in Methods. The independent recording evaluator described below remains an additional lens and does not alter the older three-signal comparison score, change-rate novelty, or HR–RMSSD portrait. Its outputs describe supplied observations.
 
 The implementation is `research-math.js`, a dependency-free pure JavaScript module. It does not contact devices, make network requests, retain browser data, or replace missing observations. The original private files were inspected for capabilities; their defective physiological shortcuts were not copied into this module.
 
@@ -21,9 +21,9 @@ The implementation is `research-math.js`, a dependency-free pure JavaScript modu
 | Health Auto Export JSON                         | Source/date/unit-preserving context records                   | Never inserted into session features or relabeled as RMSSD                              |
 | RR spectrum / LF–HF / respiratory concentration | Explicit unavailable interface with its requirements          | The prototype's unvalidated spectral estimates are not presented as usable measurements |
 
-The old OSC network adapter is not restored by this numerical module. The current Mac bridge supplies supported raw Muse streams, Hume-reported heart rate, and separately gated live features. Restoring additional OSC routes requires separate transport validation. This research module does not assign arousal tiers or causal spike attribution and does not fabricate missing physiological channels. The canvas's separate [live inferred-arousal estimate](METHODS.md) is not an output of these research lenses.
+The old OSC network adapter is not restored by this numerical module. The current Mac bridge supplies supported raw Muse streams, Hume-reported heart rate, and separately gated live features. The integrated headline is computed by `multivariate-engine.js` using this module's numerical primitives; the stand-alone `evaluate()` recording lens remains a separate calculation. See [capability status](CAPABILITIES.md) for remaining spectral/RSA input requirements. No missing physiological channels or causal spike attributions are fabricated.
 
-## Eligibility and windows
+## Independent recording evaluator: eligibility and windows
 
 `evaluate(samples, options)` accepts 2–20,000 rows with strictly increasing epoch-millisecond `timestamp` values. Supported channels are `heart_rate_bpm`, `rmssd_ms`, `resp_rate_brpm`, `eeg_beta_alpha`, and `motion_g`. Numeric strings are not silently converted by the evaluator.
 

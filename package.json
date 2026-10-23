@@ -1,10 +1,10 @@
 {
   "name": "autonomic-telemetry",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "private": true,
   "description": "Personal arousal biofeedback for work and rest, with a local wearable bridge.",
   "scripts": {
-    "test": "node scripts/arousal.test.cjs && node scripts/research-math.test.mjs && node scripts/experience.mjs && node scripts/visual-feedback.mjs && node scripts/signal-lab.mjs && node scripts/research-ui.mjs"
+    "test": "node scripts/arousal.test.cjs && node scripts/multivariate.test.cjs && node scripts/research-math.test.mjs && node scripts/experience.mjs && node scripts/visual-feedback.mjs && node scripts/multivariate-ui.mjs && node scripts/signal-lab.mjs && node scripts/research-ui.mjs"
   },
   "engines": {
     "node": ">=22"

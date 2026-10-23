@@ -10,7 +10,7 @@ The phone uses the local app address, rather than the GitHub Pages address, for 
 
 ## Muse S
 
-Muse supplies raw EEG voltage, optical PPG counts, acceleration, and available telemetry. The raw adapter decodes packets. A separate experimental bridge processor can extract pulse-interval variability and EEG spectral context under explicit motion, continuity, and signal gates. Eligible **PRV-RMSSD** can contribute to the personal inferred-arousal estimate; it is not ECG-derived HRV. EEG remains context with zero estimate weight. Neither low motion nor accepted packets prove contact quality or a mental state. See [live methods](METHODS.md).
+Muse supplies raw EEG voltage, optical PPG counts, acceleration, and available telemetry. A separate experimental bridge processor extracts pulse RMSSD, actual pulse SDNN, and EEG beta/alpha under motion, continuity, and signal gates. These eligible features contribute to the restored multivariate estimate. Pulse variability is optical PRV, not ECG-derived HRV; SDNN is calculated independently from the same accepted intervals as RMSSD. Neither low motion nor accepted packets prove contact quality or a mental state. No respiratory rate is derived by the current bridge. See [live methods](METHODS.md).
 
 The Mac adapter detects the transport from the available Bluetooth characteristics. It supports the Classic layout and the newer Athena multiplexed layout (`0013`), with eight raw EEG channels, four optical channels, and acceleration. Channel indices are preserved without assuming anatomical or wavelength roles beyond the source protocol. Hardware, permissions, firmware, and available characteristics can affect connectivity; this does not establish compatibility with every Muse variant.
 
@@ -22,7 +22,7 @@ Protocol context comes from pinned primary implementations: Classic [`muse-js`](
 
 ## Hume Band 2.0
 
-The Mac adapter requests current device-reported heart rate through an independent vendor-protocol implementation. It accepts nonzero readings with valid frame type and checksum. Zero replies mean unavailable or warming up, not zero bpm. The visual uses rate to alter its pace; it does not infer beat timing, RR intervals, RMSSD, or raw PPG.
+The Mac adapter requests current device-reported heart rate through an independent vendor-protocol implementation. It accepts nonzero readings with valid frame type and checksum. Zero replies mean unavailable or warming up, not zero bpm. Reported rate supplies the HR term in the integrated estimate; it does not supply beat timing, RR intervals, RMSSD, SDNN, or usable raw PPG.
 
 The pinned [upstream interoperability source](https://github.com/brendangooden/j2208-band-tools/tree/62ce48357e25d1c68e4c3e0bfd8d2cf1bbd745e9) reports one Hume Band V2 on firmware `0.0.3.9`. That is the upstream test unit, not a firmware identification of the owner's band. This is not a manufacturer SDK integration. The adapter only starts, renews, and stops the narrow current-HR measurement; it does not change monitoring settings, firmware, or stored history. Live measurement can increase battery use.
 

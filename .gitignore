@@ -29,3 +29,6 @@ HealthExport*.zip
 # JSON files downloaded by this app may contain personal context.
 autonomic-session*.json
 _site/
+
+# Explicit personal reference downloads
+autonomic-reference*.json

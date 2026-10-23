@@ -17,7 +17,9 @@ parabolic peak interpolation, interval/morphology/periodicity gates, and a
 quiet, fresh accelerometer window. No rejected beats are silently repaired.
 Two optical channels must agree, or a single clean channel must agree with
 fresh Hume HR. Channel names/wavelengths are not assumed for Athena. RMSSD is
-the root mean square of successive *pulse* interval differences (PRV). The
+the root mean square of successive *pulse* interval differences (PRV); pulse
+SDNN is the sample standard deviation (N-1) of those same accepted intervals,
+not a rescaled RMSSD or ECG-derived NN measurement. The
 32 s window and every numerical quality threshold are engineering choices,
 not manufacturer validation or a substitute for ECG/contact-quality review.
 
@@ -151,6 +153,16 @@ def _filter(values: list[float], cutoff: float, highpass: bool) -> list[float]:
     return result
 
 
+def _pulse_interval_metrics(intervals: list[float]) -> dict[str, float]:
+    """Describe already accepted optical intervals; no ECG/NN inference.
+
+    The caller's pulse gates require at least 20 finite, in-range intervals.
+    Both metrics use exactly that interval population, without beat repair.
+    """
+    return {"rmssd_ms": _rms([b - a for a, b in zip(intervals, intervals[1:])]),
+            "sdnn_ms": statistics.stdev(intervals)}
+
+
 def pulse_variability(values: list[float], protocol: str = "unknown") -> dict[str, Any]:
     """Conservative pulse-interval statistics; never an ECG/NN estimator."""
     n = PPG_HZ * PPG_SECONDS
@@ -208,10 +220,10 @@ def pulse_variability(values: list[float], protocol: str = "unknown") -> dict[st
     periodicity = math.fsum(u * v for u, v in zip(a, b)) / math.sqrt(math.fsum(u * u for u in a) * math.fsum(v * v for v in b))
     if periodicity < 0.6:
         return {"valid": False, "reason": "Optical periodicity gate failed."}
-    rmssd = _rms([b - a for a, b in zip(intervals, intervals[1:])])
-    if rmssd > 250:
+    metrics = _pulse_interval_metrics(intervals)
+    if metrics["rmssd_ms"] > 250:
         return {"valid": False, "reason": "Pulse RMSSD exceeds the declared experimental range."}
-    return {"valid": True, "rmssd_ms": rmssd, "pulse_rate_bpm": 60000 / _mean(intervals),
+    return {"valid": True, **metrics, "pulse_rate_bpm": 60000 / _mean(intervals),
             "intervals": len(intervals), "periodicity": periodicity,
             "reason": "Software pulse gates passed; PRV is not ECG HRV and nominal timing is assumed."}
 
@@ -342,7 +354,8 @@ class FeatureExtractor:
         if not _finite(now_ms):
             raise ValueError("Feature snapshot needs finite epoch milliseconds")
         values: dict[str, Any] = {"type": "features", "received_at": now_ms,
-                                  "heart_rate_bpm": None, "pulse_rmssd_ms": None, "eeg_beta_alpha": None, "motion": None}
+                                  "heart_rate_bpm": None, "pulse_rmssd_ms": None, "pulse_sdnn_ms": None,
+                                  "eeg_beta_alpha": None, "motion": None}
         quality = {}
         fresh_hr = self.hr if self.hr and 0 <= now_ms - self.hr[1] <= HEART_FRESH_MS else None
         if fresh_hr:
@@ -410,19 +423,24 @@ class FeatureExtractor:
             else:
                 self.selected_ppg = selected
                 values["pulse_rmssd_ms"] = result["rmssd_ms"]
+                values["pulse_sdnn_ms"] = result["sdnn_ms"]
                 source = f"muse:{signal.protocol}:optical-channel-{selected}"
-                quality["pulse_rmssd_ms"] = self._quality(True, result["reason"], signal.last_ms, source, channel=selected,
+                pulse_quality = self._quality(True, result["reason"], signal.last_ms, source, channel=selected,
                     protocol=signal.protocol, source_kind=signal.source_kind, sample_rate_hz=PPG_HZ, window_seconds=PPG_SECONDS,
                     pulse_intervals=result["intervals"], pulse_rate_bpm=result["pulse_rate_bpm"], periodicity=result["periodicity"],
                     corroboration="optical-channel agreement" if agreement else "Hume pulse-rate agreement", timing_assumed=True,
-                    contact_verified=False, metric="pulse rate variability RMSSD; not ECG HRV")
+                    contact_verified=False)
+                quality["pulse_rmssd_ms"] = {**pulse_quality, "metric": "pulse rate variability RMSSD; not ECG HRV"}
+                quality["pulse_sdnn_ms"] = {**pulse_quality, "metric": "pulse-interval sample SDNN; not ECG HRV"}
                 if fresh_hr is None:
                     values["heart_rate_bpm"] = result["pulse_rate_bpm"]
                     quality["heart_rate_bpm"] = self._quality(True, "Rate from accepted optical pulse intervals, not from amplitude or EEG.", signal.last_ms,
                         source + ":pulse-rate", same_sensor_as_pulse_rmssd=True, source_kind=signal.source_kind)
         if "pulse_rmssd_ms" not in quality:
-            quality["pulse_rmssd_ms"] = self._quality(False, ppg_reason,
+            pulse_quality = self._quality(False, ppg_reason,
                 max((s.last_ms for s in self.ppg.values() if s.last_ms is not None), default=None), "muse:optical-pulse-intervals")
+            quality["pulse_rmssd_ms"] = {**pulse_quality, "metric": "pulse rate variability RMSSD; not ECG HRV"}
+            quality["pulse_sdnn_ms"] = {**pulse_quality, "metric": "pulse-interval sample SDNN; not ECG HRV"}
         values["quality"] = quality
         values["method"] = {"version": 1, "experimental": True, "eeg_context_only": True,
                             "nominal_sample_timing": True, "small_packet_losses_may_be_undetected": True,

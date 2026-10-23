@@ -1,0 +1,19 @@
+.math-view { margin-top:24px; border-top:1px solid var(--line); padding-top:22px; }
+.math-view h3 { font-size:19px; margin:0 0 10px; }
+.math-view h4 { font-size:14px; margin:20px 0 8px; }
+.math-view .math-note,.math-view small { color:var(--muted); font-size:12px; line-height:1.65; }
+.math-view .math-notice { color:#e8d4a6; font-size:13px; line-height:1.6; }
+.math-view .math-equation { font-size:12px; line-height:1.7; color:#d3c9ef; border-left:2px solid #b9a5ec; padding:8px 12px; background:rgba(185,165,236,.04); }
+.math-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:18px 0; }
+.math-cell { border:1px solid var(--line); border-radius:16px; padding:14px; background:rgba(184,183,255,.035); min-width:0; }
+.math-cell>span { display:block; color:var(--muted); font-size:11px; letter-spacing:.02em; }
+.math-cell strong { display:block; font-size:25px; margin:7px 0; font-weight:500; color:#bfb6f5; }
+.math-cell:nth-child(2n) strong { color:#a9e4e8; }
+.math-cell:nth-child(3n) strong { color:#efb0bc; }
+.math-cell small { display:block; font-size:11px; }
+.math-view details { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:15px 0; }
+.math-view summary { cursor:pointer; font-size:13px; line-height:1.6; }
+.math-view svg { display:block; width:100%; max-height:190px; margin:16px 0 8px; }
+.math-lags p,.math-events p { font-size:12px; color:var(--muted); line-height:1.65; }
+.math-view .math-events { margin-top:12px; }
+@media(max-width:360px) { .math-grid { grid-template-columns:1fr; } }

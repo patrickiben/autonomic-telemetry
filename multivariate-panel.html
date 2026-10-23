@@ -1,0 +1,100 @@
+<style>
+  #multivariate-replay { margin:24px 0; padding:clamp(20px,3vw,36px); border:1px solid var(--line); border-radius:24px; background:linear-gradient(135deg,rgba(184,183,255,.11),rgba(137,216,228,.055)); }
+  #multivariate-replay .multi-head { display:flex; justify-content:space-between; gap:18px; align-items:start; flex-wrap:wrap; }
+  #multivariate-replay h2 { margin:5px 0 12px; }
+  #multivariate-replay .multi-number { font-size:64px; line-height:1.15; color:#c4bcfb; font-weight:500; }
+  #multivariate-replay .multi-actions { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0; }
+  #multivariate-replay .multi-actions button { min-height:44px; }
+  #multivariate-replay .multi-bars { display:grid; gap:10px; margin:22px 0; }
+  #multivariate-replay .multi-row { display:grid; grid-template-columns:minmax(135px,1fr) 2fr 54px; align-items:center; gap:12px; font-size:12px; }
+  #multivariate-replay .multi-bar { height:5px; background:rgba(185,188,220,.12); border-radius:8px; overflow:hidden; }
+  #multivariate-replay .multi-bar i { height:100%; display:block; background:#bcb1f4; border-radius:8px; }
+  #multivariate-replay label { display:block; font-size:12px; color:var(--muted); margin:12px 0; }
+  #multi-cursor { width:100%; }
+  @media(min-width:1000px) { #multivariate-replay .math-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+  @media(max-width:450px) { #multivariate-replay .multi-row { grid-template-columns:1fr 1fr 45px; gap:8px; } }
+</style>
+<section id="multivariate-replay" aria-labelledby="multi-heading">
+  <div class="multi-head"><div><div class="eyebrow">The same engine as the live visual</div><h2 id="multi-heading">Integrated arousal model</h2><p id="multi-status" class="small">Following this recording's cursor.</p></div><div><div class="multi-number" id="multi-value">—</div><span id="multi-label" class="small">Building a reference</span></div></div>
+  <p class="small">The original multivariate structure: directional features, covariance distance, temporal-pattern modifiers, and causal surprise events. The fixed profile shows exactly which inputs are available. The three-signal directional score below remains a separate comparison model.</p>
+  <div class="multi-actions"><button id="multi-open" class="secondary">Open a live analysis session</button><button id="multi-recording" class="ghost" hidden>Follow the recording again</button></div>
+  <input type="file" id="multi-file" accept=".json,application/json" hidden />
+  <label id="multi-cursor-label" hidden>Inspect exported session <input id="multi-cursor" type="range" min="0" max="0" value="0" step="1" /></label>
+  <div id="multi-bars" class="multi-bars"></div>
+  <div id="multi-analysis"></div>
+</section>
+<script>
+(() => {
+  'use strict';
+  const $=id=>document.getElementById(id), T=window.Telemetry, M=window.TelemetryMultivariate;
+  const panel=$('multivariate-replay'); $('signal-index').before(panel);
+  let engine=null, clock=0, lastIndex=-1, dataset=null, external=null, snapshot=null, pending=false;
+  function frameFromSample(s, synthetic) {
+    const map={heart_rate_bpm:'heart_rate_bpm',pulse_rmssd_ms:'rmssd_ms',resp_rate_brpm:'resp_rate_brpm',eeg_beta_alpha:'eeg_beta_alpha',pulse_sdnn_ms:'pulse_sdnn_ms'};
+    const f={type:'features',received_at:s.timestamp,source:synthetic?'synthetic':'device-reported',motion:s.motion_g,quality:{}};
+    for(const [key,field] of Object.entries(map)) {
+      f[key]=Number.isFinite(s[field])?s[field]:null;
+      f.quality[key]={valid:s.quality==='good'&&f[key]!==null,received_at:s.timestamp,source:synthetic?'Synthetic recording':'Imported recording: '+field,reason:f[key]===null?'This recording does not supply '+field+'.':s.quality!=='good'?'Recording quality is not eligible.':'Supplied recording feature.'};
+    }
+    return f;
+  }
+  function inputs() {
+    if(external)return {frames:external.frames,synthetic:external.provenance.kind==='synthetic',cursor:Number($('multi-cursor').value),seed:external.reference,demo:external.demo_reference};
+    const state=T.getState();
+    return {samples:state.dataset.samples,synthetic:state.dataset.provenance.kind==='synthetic',cursor:state.cursor,demo:false};
+  }
+  function reset() {engine=null;lastIndex=-1;dataset=null;}
+  function update() {
+    pending=false;
+    const input=inputs(), source=input.frames||input.samples;
+    if(!source?.length)return;
+    if(!engine||source!==dataset||input.cursor<lastIndex){
+      dataset=source;clock=(input.frames?(source[0].observed_at??source[0].received_at):source[0].timestamp);
+      engine=M.create({synthetic:input.synthetic,now:()=>clock});
+      if(input.seed) {const result=engine.importReference(input.seed);if(result===false||result?.available===false)throw Error(result?.reason||'The saved reference is invalid.');}
+      else if(input.demo)engine.loadDemoReference();
+      lastIndex=-1;
+    }
+    for(let i=lastIndex+1;i<=input.cursor;i++){
+      const frame=input.frames?source[i]:frameFromSample(source[i],input.synthetic);clock=frame.observed_at??frame.received_at;engine.ingest(frame);
+    }
+    lastIndex=input.cursor;snapshot=engine.snapshot(clock);
+    if(!external)for(const c of snapshot.components||[]) {
+      if(c.key==='pulse_rmssd_ms')c.label='Supplied RMSSD';
+      if(c.key==='pulse_sdnn_ms')c.label='Supplied SDNN';
+    }
+    const ready=snapshot.phase==='ready';
+    $('multi-value').textContent=ready?Math.round(snapshot.value):'—';
+    $('multi-label').textContent=ready?snapshot.label:snapshot.phase==='calibrating'?'Building a reference':snapshot.reason;
+    $('multi-status').textContent=(input.synthetic?'SYNTHETIC':'USER-SUPPLIED')+' · '+(external?'Exported live session':'Recording replay')+' · '+(input.cursor+1)+' / '+source.length+' frames · '+(snapshot.coverage||'')+(snapshot.reference?.ready?'':' · reference '+Math.round((snapshot.reference?.progress||0)*100)+'%');
+    const bars=$('multi-bars');bars.replaceChildren();
+    for(const c of snapshot.components||[]){
+      const row=document.createElement('div');row.className='multi-row';const name=document.createElement('span');name.textContent=c.label;
+      const bar=document.createElement('div');bar.className='multi-bar';const fill=document.createElement('i');fill.style.width=(Number.isFinite(c.contribution)?Math.min(100,Math.max(0,c.contribution*2)):0)+'%';bar.append(fill);
+      const value=document.createElement('span');value.textContent=ready&&Number.isFinite(c.contribution)?c.contribution.toFixed(1)+' pt':'—';row.append(name,bar,value);bars.append(row);
+    }
+    window.TelemetryAnalysisView.render($('multi-analysis'),{...snapshot,viewTitle:'Mathematical state at this cursor'});
+  }
+  function schedule() {if(!pending){pending=true;requestAnimationFrame(()=>{try{update();}catch(e){pending=false;$('multi-status').textContent=e.message;}});}}
+  function openSession(input) {
+    if(!input||input.schema_version!=='live-multivariate-1'||input.model_version!=='multivariate-1'||!['synthetic','user-supplied'].includes(input.provenance?.kind)||!Array.isArray(input.frames)||!input.frames.length||input.frames.length>20000)throw Error('Choose an exported multivariate analysis session with 1–20,000 frames.');
+    const synth=input.provenance.kind==='synthetic';
+    if(input.demo_reference&&!synth)throw Error('A personal session cannot use a synthetic reference.');
+    if(input.frames.some((f,i)=>!f||!Number.isFinite(f.received_at)||(i&&f.received_at<=input.frames[i-1].received_at)||f.source!==(synth?'synthetic':'device-reported')))throw Error('Frames need increasing timestamps and consistent provenance.');
+    if(input.frames.some((f,i)=>{const t=f.observed_at??f.received_at, previous=i?(input.frames[i-1].observed_at??input.frames[i-1].received_at):null;return !Number.isFinite(t)||t<f.received_at-100||t>f.received_at+5000||(i&&t<previous);} ))throw Error('Frame observation times must preserve ordered, fresh input delivery.');
+    if(input.reference&&Number.isFinite(input.reference.end)&&input.reference.end>input.frames[0].received_at)throw Error('The reference must precede this session; future observations cannot seed a replay.');
+    if(input.reference&&!M.create({synthetic:synth,now:()=>input.frames[0].received_at}).importReference(input.reference))throw Error('The saved reference is invalid for this session.');
+    external=JSON.parse(JSON.stringify(input));reset();
+    $('multi-cursor').max=external.frames.length-1;$('multi-cursor').value=external.frames.length-1;
+    $('multi-cursor-label').hidden=false;$('multi-recording').hidden=false;update();return snapshot;
+  }
+  $('multi-open').onclick=()=>{ $('multi-file').value='';$('multi-file').click(); };
+  $('multi-file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>30*1024*1024)throw Error('Session files must be under 30 MB.');openSession(JSON.parse(await f.text()));}catch(err){$('multi-status').textContent=err.message;}};
+  $('multi-cursor').oninput=schedule;
+  $('multi-recording').onclick=()=>{external=null;reset();$('multi-cursor-label').hidden=true;$('multi-recording').hidden=true;update();};
+  window.addEventListener('telemetry:cursor',()=>{if(!external)schedule();});
+  window.addEventListener('telemetry:recording-changed',()=>{if(!external){reset();schedule();}});
+  window.TelemetryMultivariateReplay=Object.freeze({getState:()=>JSON.parse(JSON.stringify(snapshot)),openSession,refresh:update,seek(index){if(!external)throw Error('Open a live session first.');if(!Number.isInteger(index)||index<0||index>=external.frames.length)throw Error('Cursor is outside this session.');$('multi-cursor').value=index;update();return snapshot;}});
+  update();
+})();
+</script>

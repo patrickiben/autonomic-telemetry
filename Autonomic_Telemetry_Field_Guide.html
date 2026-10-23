@@ -666,7 +666,7 @@
           <li><a href="#lab"><span class="num">06</span>Advanced Signal Lab</a></li>
           <li><a href="#privacy"><span class="num">07</span>Data and methods</a></li>
         </ol>
-        <p class="toc-note">Arousal is inferred from cardiac patterns. Neither the estimate nor the light is a grade.</p>
+        <p class="toc-note">Arousal is inferred from physiological patterns. Neither the estimate nor the light is a grade.</p>
       </nav>
       <main id="main">
         <section class="card" id="start">
@@ -674,31 +674,33 @@
           <p class="lead">The signal takes the screen. The controls wait nearby.</p>
           <p>Work opens as a slow spiral galaxy; Rest uses a diffuse nebula. Both
             share the same visual scale: lower estimates are smaller and cooler aqua,
-            50 is lavender at a fixed personal-reference orbit, and higher estimates
+            middle values are lavender, and higher estimates
             spread farther with brighter coral/peach light. The visual key explains
-            the mapping.</p>
+            the mapping; the dotted orbit marks the zero-reference origin.</p>
           <p>The initial source is Ambient: decorative movement with no device
             connected. Choose Try a demo to see explicitly synthetic variation.
             Choose Connect for real wearable input. No timer starts automatically.</p>
           <h3>Your personal estimate</h3>
-          <p>The experimental inferred-arousal estimate compares Hume's reported
-            heart rate and eligible Muse pulse-interval variability with an initial
-            personal reference. Sit comfortably while the two-minute reference
-            forms. On the 0–100 scale, 50 represents that reference: higher values
-            reflect higher HR and/or lower pulse variability; lower values reflect
-            the opposite pattern.</p>
-          <p>An explicitly labeled HR-only estimate uses its own reference when
-            pulse variability is unavailable. Feature reasons and reference progress
-            matter: raw packets can arrive before an estimate is ready. EEG is
-            separate context with no estimate weight. The weights, stability floors,
-            and display thresholds are heuristics, not validated physiological limits.</p>
-          <p>Open Reference &amp; signals to inspect the reference, components,
-            source, contribution, and recent history, or reset the reference.
-            An unavailable estimate shows a dash, not zero. The estimate alone sets
-            the cloud's extent, brightness, warmth, and star-arm spread; raw EEG
-            and optical variation add only minor filament texture.</p>
+          <p>The experimental inferred-arousal estimate now uses the original
+            multivariate architecture: heart rate, pulse RMSSD, actual pulse SDNN,
+            EEG beta/alpha, supplied breathing, and covariance distance, with bounded
+            temporal modifiers. Let a fixed two-minute personal reference form.
+            Zero is its origin on the one-sided 0–100 scale.</p>
+          <p>The available channels and their weights freeze with the reference.
+            The current Muse/Hume bridge can supply four physiological channels;
+            breathing remains unavailable. A missing required channel holds the
+            estimate. Newly available channels require a new reference. HR-only
+            use is explicitly limited. Weights and thresholds are experimental.</p>
+          <p>Open Reference &amp; signals to inspect the weighted sum, modifiers,
+            reference, contributions, prediction surprise, covariance, entropy,
+            autocorrelation, signed lags, PCA, and onset events. You can save/open a
+            reference or export the feature session for exact replay in Signal Lab.</p>
+          <p>An unavailable estimate shows a dash, not zero. The estimate sets the
+            cloud's extent, brightness, warmth, and star-arm spread; raw EEG and
+            optical variation add only minor filament texture. A low value means
+            little response under this model, not proof of calmness.</p>
           <div class="grid"><div class="mini"><div class="label">Work</div><p>Continuous observation, with an optional cue for a sustained elevation in your own estimate.</p></div><div class="mini"><div class="label">Rest</div><p>Paced breathing and a personal settling trend using the same estimate and reference.</p></div></div>
-          <p class="small">This is an inference from a cardiac pattern, not direct
+          <p class="small">This is an inference from physiological patterns, not direct
             sympathetic activity, a mental-state diagnosis, or a validated stress,
             attention, meditation, or health score. A change does not identify its
             cause. <a href="docs/METHODS.md">Formula, reference, and uncertainty</a></p>
@@ -709,7 +711,7 @@
             does not move the score cloud, and raw HR does not independently set
             its size or pace. The cloud encodes the personal estimate; its appearance
             is not extra evidence or another physiological score.</p>
-          <p>The bridge can extract eligible pulse-interval RMSSD from Muse optical
+          <p>The bridge can extract eligible pulse-interval RMSSD and actual SDNN from Muse optical
             data. This is PRV—pulse rate variability—not ECG-derived HRV. Motion,
             contact, breathing, and peak detection can affect it. Hume's reported
             rate does not supply individual pulse intervals or RMSSD.</p>
@@ -764,13 +766,13 @@
             <tr><td>Ambient · signal paused</td><td>The stream has become stale or interrupted.</td></tr>
           </tbody></table></div>
           <p>Waiting, held, or stale estimates remove the score-encoded halo and
-            show a distinct ambient sky. They are never animated back toward 50.
+            show a distinct ambient sky. Unavailable input is never shown as a return to the reference.
             Continuing ambient light is not a continuing measurement. A raw source
             can remain Live while the estimate is unavailable.</p>
           <p>Raw-signal variation is not proof of contact quality or a usable derived
             feature. Reported heart rate is not a series of measured heartbeat times.
             A Live badge can coexist with feature warm-up or reference collection.
-            An HR-only estimate is explicitly distinct from the two-feature track.</p>
+            An HR-only estimate is an explicitly limited fixed profile.</p>
         </section>
         <section class="card" id="space">
           <div class="section-head"><span class="num">05</span><h2>Make it yours</h2></div>
@@ -787,7 +789,7 @@
             A lower personal estimate is an observed trend, not proof of recovery.
             Breathing itself can alter pulse variability.</p>
           <p>Work's Elevation cue starts off. If enabled, a gentle message appears
-            after the estimate remains at least 67 for 60 seconds of valid data.
+            after the estimate remains at least 68 for 60 seconds of valid data.
             Rest shows change since entering that mode and a 60-second trend;
             interrupted data or a changed source, track, or reference resets the
             comparison. The same inference drives both modes.</p>
@@ -799,16 +801,14 @@
         </section>
         <section class="card" id="lab">
           <div class="section-head"><span class="num">06</span><h2>Advanced Signal Lab</h2></div>
-          <p>The <a href="Autonomic_Telemetry_Signal_Lab.html">separate Signal Lab</a>
-            keeps the detailed recording explorer: a fixed reference, transparent
-            experimental pattern-shift index, novelty events, quality gates,
-            descriptive diagnostics, markers, and import/export. Apple Health and
-            dated Hume entries remain retrospective context.</p>
-          <p>It analyzes a labeled synthetic or user-supplied recording. Its
-            one-sided pattern-shift index differs from the live canvas's 50-centered
-            inferred-arousal estimate. Raw browser diagnostics, live derived features,
-            and references do not silently cross between the two pages. Neither
-            page grades a mental or health state.</p>
+          <p><a href="Autonomic_Telemetry_Signal_Lab.html">Signal Lab</a> runs
+            the same integrated model as the main visual, following the recording
+            cursor automatically. Open an exported live analysis session to replay
+            its exact features, sources, reference, calculation, and events.</p>
+          <p>The Lab also retains the earlier three-signal comparison score,
+            separate research lenses, markers, and recording import/export.
+            Apple Health and dated Hume entries remain retrospective context.
+            Model and reference labels distinguish these analyses.</p>
           <p class="small"><a href="docs/SIGNAL_LAB_METHODS.md">Lab formulas, input contract, and limits</a></p>
           <p class="small">The Lab's Original research lenses have separate
             <a href="docs/RESEARCH_ENGINE.md">research engine definitions</a> for
@@ -819,8 +819,8 @@
           <div class="section-head"><span class="num">07</span><h2>Data and methods</h2></div>
           <p>Raw packets, derived features, personal references, and visual settings stay in memory. There is no account,
             recording database, automatic browser saving, or cloud upload of readings.
-            The immersive page has no recording import or session export; those
-            remain explicit actions in the Signal Lab.</p>
+            Session and reference downloads are explicit local actions. Open a main-page
+            feature export in Signal Lab to replay it; references can be opened on the main page.</p>
           <p>Software tests and simulation check code behavior. Bounded physical
             tests establish transport on the tested devices; they do not validate
             feature extraction or the inferred-arousal model. The estimate is

@@ -90,6 +90,22 @@ class SpectralAndPulseTests(unittest.TestCase):
         # Real sample-domain intervals alternate 1000/1125 ms; filtering is not exact beat truth.
         self.assertAlmostEqual(result["rmssd_ms"], 125, delta=5)
         self.assertGreaterEqual(result["intervals"], 20)
+        n = result["intervals"]
+        expected_sdnn = 125 * math.sqrt((n // 2) * ((n + 1) // 2) / (n * (n - 1)))
+        self.assertAlmostEqual(result["sdnn_ms"], expected_sdnn, delta=3)
+        self.assertGreater(result["rmssd_ms"], 1.8 * result["sdnn_ms"])
+
+    def test_pulse_sdnn_is_sample_spread_not_an_rmssd_proxy(self):
+        # Same 24 accepted intervals in two orders: sample SDNN is invariant,
+        # while successive-difference RMSSD changes from 125 to 125/sqrt(23).
+        alternating = F._pulse_interval_metrics([1000, 1125] * 12)
+        grouped = F._pulse_interval_metrics([1000] * 12 + [1125] * 12)
+        expected_sdnn = 62.5 * math.sqrt(24 / 23)
+        self.assertAlmostEqual(alternating["sdnn_ms"], expected_sdnn, places=10)
+        self.assertAlmostEqual(grouped["sdnn_ms"], expected_sdnn, places=10)
+        self.assertAlmostEqual(alternating["rmssd_ms"], 125, places=10)
+        self.assertAlmostEqual(grouped["rmssd_ms"], 125 / math.sqrt(23), places=10)
+        self.assertNotAlmostEqual(alternating["sdnn_ms"], alternating["rmssd_ms"])
 
     def test_ppg_flat_dropouts_noise_and_out_of_range_values_are_not_repaired(self):
         rng = random.Random(9)
@@ -108,6 +124,7 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(first["heart_rate_bpm"], 71)
         self.assertTrue(first["quality"]["heart_rate_bpm"]["valid"])
         self.assertIsNone(first["pulse_rmssd_ms"])
+        self.assertIsNone(first["pulse_sdnn_ms"])
         self.assertIsNone(first["eeg_beta_alpha"])
         self.assertEqual(first["quality"]["heart_rate_bpm"]["received_at"], BASE)
         stale = extractor.snapshot(BASE + 5001)
@@ -132,6 +149,42 @@ class ExtractorTests(unittest.TestCase):
         self.assertIn("optical-channel-", frame["quality"]["pulse_rmssd_ms"]["source"])
         self.assertEqual(frame["quality"]["pulse_rmssd_ms"]["source_kind"], "synthetic")
         json.dumps(frame, allow_nan=False)
+
+    def test_pulse_sdnn_matches_rmssd_source_support_time_and_quality_gates(self):
+        extractor = F.FeatureExtractor()
+        frame, _ = feed(extractor, hume=True)
+
+        def assert_pulse_parity(snapshot, valid):
+            rmssd_quality = snapshot["quality"]["pulse_rmssd_ms"]
+            sdnn_quality = snapshot["quality"]["pulse_sdnn_ms"]
+            self.assertEqual({k: v for k, v in rmssd_quality.items() if k != "metric"},
+                             {k: v for k, v in sdnn_quality.items() if k != "metric"})
+            self.assertEqual(sdnn_quality["valid"], valid)
+            self.assertIn("sample SDNN", sdnn_quality["metric"])
+            self.assertIn("not ECG HRV", sdnn_quality["metric"])
+            self.assertEqual(snapshot["pulse_rmssd_ms"] is not None, valid)
+            self.assertEqual(snapshot["pulse_sdnn_ms"] is not None, valid)
+            self.assertTrue(snapshot["method"]["no_respiration_inferred"])
+            json.dumps(snapshot, allow_nan=False)
+
+        assert_pulse_parity(frame, True)
+        self.assertEqual(frame["quality"]["pulse_sdnn_ms"]["received_at"], BASE + 39000)
+        self.assertIn("muse:athena:optical-channel-", frame["quality"]["pulse_sdnn_ms"]["source"])
+        self.assertEqual(frame["quality"]["pulse_sdnn_ms"]["source_kind"], "synthetic")
+
+        stale = extractor.snapshot(BASE + 40501)
+        assert_pulse_parity(stale, False)
+        self.assertEqual(stale["quality"]["pulse_sdnn_ms"]["received_at"], BASE + 39000)
+        self.assertEqual(stale["heart_rate_bpm"], 73, "Fresh Hume HR cannot refresh stale optical metrics")
+
+        extractor.reset("muse")
+        reset = extractor.snapshot(BASE + 40501)
+        assert_pulse_parity(reset, False)
+        self.assertIsNone(reset["quality"]["pulse_sdnn_ms"]["received_at"])
+
+        moved, _ = feed(F.FeatureExtractor(), motion_at=15)
+        assert_pulse_parity(moved, False)
+        self.assertIn("artifact", moved["quality"]["pulse_sdnn_ms"]["reason"])
 
     def test_hume_has_priority_without_becoming_a_second_optical_measurement(self):
         extractor = F.FeatureExtractor()

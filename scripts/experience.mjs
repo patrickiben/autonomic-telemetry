@@ -450,108 +450,61 @@ try {
   );
 
   await check(
-    "A fixed personal reference enables a visible estimate; Work and Rest share it",
+    "A fixed zero-reference multivariate profile is shared by Work and Rest and held on missing inputs",
     async () => {
       const { page, close } = await pageFor(standalone, { clock: true });
       let stamp = await page.evaluate(() => Date.now());
-      async function frame(
-        hr = 68,
-        prv = 45,
-        source = "Fixture cardiac source",
-      ) {
+      async function frame(hr = 68, prv = 45) {
         stamp += 1000;
         await page.clock.setSystemTime(stamp);
-        await page.evaluate(
-          ({ stamp, hr, prv, source }) =>
-            TelemetryLive.features({
-              received_at: stamp,
-              source: "device-reported",
-              heart_rate_bpm: hr,
-              pulse_rmssd_ms: prv,
-              motion: 0,
-              quality: {
-                heart_rate_bpm: { valid: true, received_at: stamp, source },
-                pulse_rmssd_ms: {
-                  valid: prv !== null,
-                  received_at: stamp,
-                  source: "Fixture optical signal",
-                  reason: prv === null ? "No usable optical waveform" : "",
-                },
-              },
-            }),
-          { stamp, hr, prv, source },
-        );
+        await page.evaluate(({ stamp, hr, prv }) => {
+          const values = { heart_rate_bpm: hr, pulse_rmssd_ms: prv, pulse_sdnn_ms: 65,
+            resp_rate_brpm: 12, eeg_beta_alpha: 1.5 };
+          return TelemetryLive.features({ received_at: stamp, source: "device-reported", ...values, motion: 0,
+            quality: Object.fromEntries(Object.entries(values).map(([key, value]) => [key, {
+              valid: value !== null, received_at: stamp, source: key === "heart_rate_bpm" ? "Fixture cardiac source" : "Fixture:" + key,
+              reason: value === null ? "No usable optical waveform" : "",
+            }])) });
+        }, { stamp, hr, prv });
       }
       await frame();
       assert.equal(await page.locator("#arousal-value").innerText(), "—");
-      assert.equal(
-        (await page.evaluate(() => TelemetryLive.getState())).arousal.phase,
-        "calibrating",
-      );
-      for (let i = 1; i < 120; i++) await frame();
+      assert.equal((await page.evaluate(() => TelemetryLive.getState())).arousal.phase, "calibrating");
+      for (let i = 1; i < 121; i++) await frame();
       let a = (await page.evaluate(() => TelemetryLive.getState())).arousal;
       assert.equal(a.phase, "ready");
-      assert.equal(a.value, 50);
-      assert.equal(a.track, "dual");
-      assert.equal(await page.locator("#arousal-value").innerText(), "50");
+      assert.equal(a.value, 0, "The restored directional model has no archived 50-point offset");
+      assert.equal(a.reference.value, 0);
+      assert.equal(a.track, "multivariate");
+      assert.equal(a.weights.coveredNominal, 100);
+      const frozenWeights = a.weights;
+      assert.equal(await page.locator("#arousal-value").innerText(), "0");
       await page.locator("#rest-mode").click();
-      assert.equal(
-        (await page.evaluate(() => TelemetryLive.getState())).arousal.value,
-        50,
-      );
-      assert.match(
-        await page.locator("#arousal-trend").innerText(),
-        /starting level/,
-      );
-      assert.match(
-        await page.locator("#mode-action").innerText(),
-        /breathing guide/i,
-      );
+      assert.equal((await page.evaluate(() => TelemetryLive.getState())).arousal.value, 0);
+      assert.match(await page.locator("#arousal-trend").innerText(), /starting level/);
+      assert.match(await page.locator("#mode-action").innerText(), /breathing guide/i);
       await page.locator("#mode-action").click();
-      // The cue text is filled by requestAnimationFrame; the test owns a virtual clock.
       await page.clock.runFor(50);
       await page.locator("#breath-cue").waitFor({ state: "visible" });
       for (let i = 0; i < 20; i++) await frame(80, 25);
-      assert.match(
-        await page.locator("#arousal-trend").innerText(),
-        /higher since entering Rest/,
-      );
+      assert.match(await page.locator("#arousal-trend").innerText(), /higher since entering Rest/);
       await frame(80, null);
-      assert.equal(
-        (await page.evaluate(() => TelemetryLive.getState())).arousal.track,
-        "hr",
-      );
-      assert.match(
-        await page.locator("#arousal-coverage").innerText(),
-        /HR-only.*limited/,
-      );
-      assert.match(
-        await page.locator("#arousal-trend").innerText(),
-        /starting level/,
-        "Coverage switches must not compare different reference scales",
-      );
+      a = (await page.evaluate(() => TelemetryLive.getState())).arousal;
+      assert.equal(a.phase, "held");
+      assert.equal(a.value, null);
+      assert.equal(a.track, "multivariate", "Missing PRV cannot switch to a different HR-only model");
+      assert.deepEqual(a.weights, frozenWeights, "Fixed profile weights cannot be shuffled after missingness");
+      assert.equal(await page.locator("#arousal-value").innerText(), "—");
       await page.clock.fastForward(6000);
       assert.equal(await page.locator("#arousal-value").innerText(), "—");
-      assert.equal(
-        (await page.evaluate(() => TelemetryLive.getState())).restStartValue,
-        null,
-      );
-      await frame(72, null);
-      assert.match(
-        await page.locator("#arousal-trend").innerText(),
-        /starting level/,
-        "Resuming after stale data starts a fresh Rest comparison",
-      );
+      assert.equal((await page.evaluate(() => TelemetryLive.getState())).restStartValue, null);
+      stamp = await page.evaluate(() => Date.now());
+      await frame(72, 45);
+      assert.match(await page.locator("#arousal-trend").innerText(), /starting level/, "Resuming after held/stale data starts a new Rest comparison");
       await page.locator("#arousal-button").click();
-      assert.match(
-        await page.locator("#arousal-components").innerText(),
-        /Fixture cardiac source/,
-      );
+      assert.match(await page.locator("#arousal-components").innerText(), /Fixture cardiac source/);
       await page.locator("#reset-reference").click();
-      assert.equal(
-        (await page.evaluate(() => TelemetryLive.getState())).arousal.phase,
-        "waiting",
-      );
+      assert.equal((await page.evaluate(() => TelemetryLive.getState())).arousal.phase, "waiting");
       assert.equal(await page.locator("#arousal-value").innerText(), "—");
       await close();
     },
@@ -566,6 +519,13 @@ try {
       let a = (await page.evaluate(() => TelemetryLive.getState())).arousal;
       assert.equal(a.phase, "ready");
       assert.equal(a.source, "synthetic");
+      assert.equal(a.modelVersion, "multivariate-1");
+      assert.equal(a.weights.coveredNominal, 100);
+      assert.deepEqual(a.reference.profile, [
+        "heart_rate_bpm", "pulse_rmssd_ms", "resp_rate_brpm", "eeg_beta_alpha", "pulse_sdnn_ms",
+      ]);
+      assert.ok(a.components.find(c => c.key === "eeg_beta_alpha").valid);
+      assert.ok(a.components.find(c => c.key === "turbulence").included);
       assert.match(
         await page.locator("#arousal-coverage").innerText(),
         /Synthetic demo/,
@@ -604,7 +564,7 @@ try {
           { stamp, hr },
         );
       }
-      for (let i = 0; i < 120; i++) await frame(68);
+      for (let i = 0; i < 121; i++) await frame(68);
       assert.equal(
         (await page.evaluate(() => TelemetryLive.getState())).elevationCue,
         false,
@@ -779,11 +739,17 @@ try {
                 received_at,
                 source: "device-reported",
                 heart_rate_bpm: 68,
+                pulse_sdnn_ms: 55,
                 quality: {
                   heart_rate_bpm: {
                     valid: true,
                     received_at: componentAt,
                     source: "Fixture",
+                  },
+                  pulse_sdnn_ms: {
+                    valid: true,
+                    received_at: componentAt,
+                    source: "Fixture optical intervals",
                   },
                 },
               },
@@ -815,6 +781,11 @@ try {
         "synthetic",
         "Simulated relay cannot claim measured feature provenance",
       );
+      assert.equal(result.acceptedFeatures[0].quality.pulse_sdnn_ms.valid, false,
+        "New pulse SDNN must obey the same supporting-data freshness rule");
+      assert.equal(result.acceptedFeatures[1].pulse_sdnn_ms, 55,
+        "Pulse SDNN must survive the real relay adapter without being dropped or relabeled");
+      assert.equal(result.acceptedFeatures[1].quality.pulse_sdnn_ms.source, "Fixture optical intervals");
       const supportAge =
         result.acceptedFeatures[1].received_at -
         result.acceptedFeatures[1].quality.heart_rate_bpm.received_at;

@@ -1,118 +1,116 @@
-# Live inferred-arousal methods
+# Live multivariate inferred-arousal methods
 
-The immersive canvas maps a personal **experimental inferred-arousal estimate** into a nebula or galaxy. The estimate is a transparent inference from cardiac patterns relative to an initial personal reference. It is not direct sympathetic activity, a classification of mental overactivity, or a validated measure of attention, stress, meditation, or health.
+`multivariate-1` restores the original integrated architecture beneath the main Work/Rest visual. The same engine runs in **Signal Lab → Integrated arousal model**, automatically following the recording cursor or replaying an exported live session. It combines eligible physiological features, covariance distance, temporal modifiers, and a separate causal-surprise onset detector.
 
-The separate [Advanced Signal Lab](../Autonomic_Telemetry_Signal_Lab.html) retains its recording model and research tools. Its [pattern-shift index](SIGNAL_LAB_METHODS.md) and [research lenses](RESEARCH_ENGINE.md) are different calculations, not alternate displays of this live estimate.
+This is the original experimental model structure with explicit numerical corrections. It is not the former two-feature cardiac model, and it is not a validated measure of sympathetic activity, thoughts, stress, or health. Model weights and thresholds are engineering choices inherited or explicitly adapted from the prototype.
 
-## Inputs and availability
+## Inputs and fixed coverage
 
-| Input | Role in the estimate | Boundary |
-| --- | --- | --- |
-| Hume device-reported heart rate, or eligible Muse pulse rate when Hume is absent | Increase relative to the personal reference | Reported rate or accepted optical pulse rate, not ECG heartbeat timestamps |
-| Muse optical pulse-interval RMSSD | Decrease in log pulse-interval variability relative to reference | Experimental PPG-derived PRV, not ECG-derived HRV |
-| Muse acceleration | Motion/continuity gate for derived Muse features | Low motion does not prove good contact or artifact-free data |
-| Muse EEG spectral context | Separate descriptive context, zero estimate weight | No direct mental-state or sympathetic interpretation |
+| Term | Original nominal weight | Current input |
+| --- | ---: | --- |
+| HR increase | 20 | Hume-reported HR preferred; accepted Muse optical pulse rate when Hume is absent |
+| RMSSD decrease | 30 | Muse pulse-interval RMSSD; explicitly supplied RMSSD in a recording |
+| Respiratory-rate increase | 15 | Explicitly supplied respiratory signal; the current bridge leaves this unavailable |
+| Multivariate turbulence | 15 | Regularized covariance distance across the fixed physiological profile |
+| EEG beta/alpha increase | 10 | Quality-gated Muse spectral ratio, or an explicitly supplied ratio |
+| SDNN decrease | 10 | Actual sample SD of accepted Muse pulse intervals, or explicitly supplied pulse SDNN |
 
-PRV means **pulse rate variability**. Its RMSSD is calculated from detected optical pulse intervals, not from the inverse of Hume's reported rate. PPG, pulse transit, breathing, fiducial-point detection, motion, and contact can all affect it. It is not renamed ECG RMSSD or substituted for Apple's SDNN.
+Motion is a quality gate, not a covariance feature or score contribution. Correlated HR, RMSSD, SDNN, and turbulence terms are retained to preserve the proposed architecture; their weights do not represent independent physiological evidence.
 
-The Mac bridge derives eligible features from actual packets. Invalid components retain a reason instead of becoming a zero measurement. Raw transport verification does not validate peak detection, PRV, EEG features, or the arousal inference. The HR-only track can operate without eligible PRV; the dual track needs both components. They keep separate references and trend histories. Switching coverage never silently renormalizes the dual score or compares two different tracks as though they were one continuous estimate.
+Calibration gathers at least 60 accepted observations spanning **120 elapsed seconds** with an unchanged eligible channel set and no gap over five seconds. Samples are admitted no faster than twice per second. Invalid motion or a missing required HR input interrupts collection. Means and sample standard deviations form the fixed reference; scale floors are 3 bpm, 5 ms RMSSD, 1 breath/min, 0.15 EEG ratio, and 5 ms SDNN.
 
-Hume is the preferred rate source. If it is absent, accepted Muse optical pulse intervals can supply pulse rate after agreement between two optical channels. Rate and PRV then come from the same sensor, explicitly flagged; they are related features, not two independent confirmations. Changing the rate source resets both tracks. Changing the optical channel/protocol resets the dual reference and history. Optical channel indices are retained without assuming their wavelengths.
+The available profile freezes at reference completion. Original weights are normalized **once** over that profile, including turbulence when at least two physiological channels exist. A bridge session with HR, pulse RMSSD, EEG, and pulse SDNN therefore covers 85 of the original 100 nominal weight points; respiration remains visibly absent. HR alone is an explicitly limited one-channel profile. Losing a frozen channel withholds the estimate rather than changing its weights. A newly eligible channel is listed as requiring a new reference. Changes to sources in the fixed profile reset calibration. Different profiles are different models and should not be compared as one uninterrupted scale.
 
 ## Feature extraction and quality gates
 
 The deterministic bridge processor emits feature frames at most once per second. It holds bounded raw windows in memory. Every component carries its own validity, reason, source, and supporting raw receipt time. A later computation or phone delivery does not make an old component fresh.
 
-**Optical PRV** uses 32 seconds of nominal 64 Hz data, requiring 2,048 contiguous samples and at least 20 detected pulse intervals. It detrends the signal, applies forward/backward second-order 0.5–5 Hz Butterworth filtering, detects prominent positive maxima, and refines peak positions by parabolic interpolation. The detector excludes the first and last second of the filtered window. It rejects clipping/dropouts, flat or tiny pulses, intervals outside approximately 333–1,500 ms, intervals more than 25% from their median, inconsistent peak amplitudes, weak periodicity, and RMSSD above 250 ms. Rejected beats are not silently repaired or interpolated into intervals.
+**Optical PRV (RMSSD and SDNN)** uses 32 seconds of nominal 64 Hz data, requiring 2,048 contiguous samples and at least 20 detected pulse intervals. It detrends the signal, applies forward/backward second-order 0.5–5 Hz Butterworth filtering, detects prominent positive maxima, and refines peak positions by parabolic interpolation. The detector excludes the first and last second of the filtered window. It rejects clipping/dropouts, flat or tiny pulses, intervals outside approximately 333–1,500 ms, intervals more than 25% from their median, inconsistent peak amplitudes, weak periodicity, and RMSSD above 250 ms. Rejected beats are not silently repaired or interpolated into intervals.
 
 The entire optical window needs quiet, fresh acceleration coverage. Two eligible optical channels must agree in pulse rate and RMSSD, or one eligible channel must agree in pulse rate with fresh Hume HR. A selected eligible channel remains selected instead of switching on every small quality fluctuation. These software consistency checks do not prove correct pulse detection, independence, or contact quality. Thirty-two-second PRV is a short-window experimental estimate, not a standard five-minute ECG measurement.
 
-**EEG context** uses four seconds of nominal 256 Hz samples with a Hann periodogram. It integrates alpha 8–12 Hz and beta 13–30 Hz, then reports the median beta/alpha ratio from at least two eligible channels among indices 0–3. Gates reject flatness, large voltage or clipping, insufficient alpha/broadband power, excessive low-frequency drift or high-frequency power, and motion. Eye and muscle artifacts can still pass. The ratio has zero weight in the arousal estimate.
+**EEG beta/alpha** uses four seconds of nominal 256 Hz samples with a Hann periodogram. It integrates alpha 8–12 Hz and beta 13–30 Hz, then reports the median beta/alpha ratio from at least two eligible channels among indices 0–3. Gates reject flatness, large voltage or clipping, insufficient alpha/broadband power, excessive low-frequency drift or high-frequency power, and motion. Eye and muscle artifacts can still pass. The eligible ratio now supplies the original model’s bounded 10-point nominal term. That experimental weight does not establish a mental-state measurement.
 
 Muse components expire after 1.5 seconds without supporting raw input; Hume HR expires after five seconds. Host gaps over 1.5 seconds, known packet-counter discontinuities, or protocol changes clear the affected raw window. Athena lacks verified per-channel sample timestamps/counters: sample positions use nominal cadence with host-coverage checks. Small undetected packet losses, timing error, and wavelength/placement effects remain possible.
 
 Motion is the RMS acceleration-vector deviation about its window mean, rather than acceleration magnitude including gravity. The derived-Muse quiet gate requires mean gravity magnitude 0.75–1.25 g, RMS deviation at most 0.05 g, and maximum deviation at most 0.2 g with sufficient continuous coverage. The live estimator additionally holds when a supplied current motion value exceeds 0.12 g; absent Muse motion does not by itself prevent a Hume HR-only track. All these limits are engineering gates, not validated physiological cutoffs. The [feature implementation](https://github.com/patrickiben/autonomic-telemetry/blob/main/bridge/features.py) defines the full numerical checks.
 
-## Initial personal reference
+Pulse SDNN is the sample standard deviation (N−1 denominator) of exactly the accepted optical intervals used by pulse RMSSD. It is independently calculated, not a rescaled RMSSD. Both retain the same source, window, quality decision, and supporting receipt timestamp. Neither is renamed ECG-derived HRV. The bridge does not currently estimate respiratory rate.
 
-Sit comfortably and follow reference progress. Each track requires at least 60 eligible feature frames spanning at least 119 seconds, representing approximately two minutes after that track's features become eligible. Reference observations accrue no faster than twice per second. Brief invalid data pause collection; a gap longer than five seconds in eligible data restarts an unfinished reference. Rate-source changes reset both tracks; optical channel/protocol changes reset the dual track. A reference describes the observed initial segment; the software cannot establish that the person was calm, resting physiologically, or in an optimal state.
+## Composite calculation
 
-Once formed, the reference stays fixed. Sustained later elevation is not quietly absorbed by a moving baseline. A later gap longer than five seconds clears the corresponding recent score/trend history while retaining that fixed reference. The references live in page memory, are separate from demonstration input, and are not automatically saved for another visit. Switching Work and Rest does not recalibrate them.
-
-## Formula
-
-Heart rate is averaged over a trailing 15-second window. PRV-RMSSD uses the eligible rolling optical analysis window, then a natural logarithm. For each reference feature, the center is its median and its robust spread is `1.4826 × median absolute deviation`. Stability floors prevent nearly constant data from producing extreme standardized shifts.
+For a fixed-profile physiological feature j:
 
 ```text
-h = (current_HR_15s_mean - reference_HR_median)
-    / max(3 bpm, reference_HR_robust_spread)
-
-p = (reference_ln_PRV_RMSSD_median - ln(current_PRV_RMSSD))
-    / max(0.15, reference_ln_PRV_robust_spread)
-
-h = clamp(h, -3, 3)
-p = clamp(p, -3, 3)
-
-dual_raw = clamp(50 + (50 / 3) × (0.6 × h + 0.4 × p), 0, 100)
-HR_only_raw = clamp(50 + (50 / 3) × h, 0, 100)
+z_j = direction_j × (current_j − reference_mean_j) / reference_scale_j
+feature_term_j = effective_weight_j × clamp(z_j, 0, 4) / 4
 ```
 
-The displayed value is the median of that track's raw scores in the trailing five-second window. The HR-only calculation uses its own personal reference; it is explicitly a one-feature estimate, not a two-feature score with an unannounced missing channel.
+Directions are positive for HR, respiration, and beta/alpha, and negative for RMSSD and SDNN. The input RMSSD is used directly, matching the original architecture; the superseded cardiac model’s logarithmic transformation and 50-centered scale are not used.
 
-A score of 50 represents the reference center. Higher values reflect a weighted pattern of higher HR and/or lower PRV; lower values reflect the opposite directions. Opposing changes can cancel in this composite, so the component values and coverage matter. The number is not a percentage probability or a proportion of maximal physiological arousal.
+Reference covariance is scaled by the same floored feature scales. Its off-diagonal entries retain the empirical covariance structure, with unit diagonals; `0.8 R + 0.2 I` regularizes the matrix. A deterministic symmetric eigendecomposition evaluates its inverse quadratic form:
 
-| Display range | Relative label |
-| --- | --- |
-| Below 40 | Below personal reference |
-| 40 through 60 | Around personal reference |
-| Above 60 | Above personal reference |
+```text
+distance = sqrt(z_rawᵀ × regularized_R⁻¹ × z_raw)
+turbulence_term = effective_weight_turbulence × clamp((distance − 2.5) / 6, 0, 1)
+base_score = sum(feature_terms) + turbulence_term
+```
 
-The weights, logarithm, spread floors, clipping, median filter, reference duration, and display thresholds are declared engineering choices. No study validates these coefficients, the 0–100 scale, its labels, or its uncertainty. Availability labels describe the available evidence; they are not statistical confidence intervals or accuracy probabilities. A low or middle estimate does not prove calmness, and a high estimate does not identify a cause.
+Unlike the directional terms, distance can respond to an excursion in either direction. It does not by itself identify arousal or cause. Motion is excluded from this covariance calculation so that artifact intensity cannot become an arousal contribution.
 
-## Work and Rest
+The original temporal modifiers are restored:
 
-Work supports continuous observation and an optional sustained-elevation cue: the estimate must remain at least 67 for 60 seconds of valid data. The cue is off initially; enabling it permits a gentle on-screen message. This is a personal heuristic for noticing a sustained pattern, not an alarm or a prediction. Missing, stale, or invalid data must not count toward a sustained cue.
+```text
+fragility = 0.6 × clamp((HR_lag1_correlation − 0.2) / 0.7, 0, 1)
+          + 0.4 × clamp((1.6 − RMSSD_sample_entropy) / 1.6, 0, 1)
+lead = positive breath-leading-HR correlation, bounded 0–1
+multiplier = 1 + 0.05 × fragility + 0.05 × lead
+raw_score = clamp(base_score × multiplier, 0, 100)
+displayed_score = median(raw_scores from the last five seconds)
+```
 
-Rest offers an optional four-second inhale/six-second exhale guide, change since entering Rest, and a 60-second personal trend. Its comparison resets after a track/source change, stale or held data, or reference reset. A change in the estimate is an observed within-track change, not proof of recovery or a treatment response. Breathing itself can change pulse variability. The guide is independent timing; it does not measure respiration or automatically lower the estimate. Work and Rest use identical scoring and reference rules.
+Unavailable modifiers contribute no increase and remain explicitly unavailable in inspection. HR lag-one correlation is calculated over eligible adjacent pairs. Entropy uses embedding dimension 2 and tolerance 0.2 × sample SD, with self-matches excluded; undefined match ratios remain unavailable. The lead modifier requires both channels and uniform cadence. Its lag search uses the strongest positive correlation; the separate diagnostic reports the strongest absolute signed correlation. Neither establishes causation or measured RSA.
 
-Open **Reference & signals** for reference progress, component values, source, reference comparison, contributions, recent history, and reset. An unavailable estimate shows a dash rather than zero. Reference learning shows its progress; this is data collection, not a claim that the person's state is known.
+**Zero is the reference origin**, replacing the superseded model’s 50-centered convention. At the exact reference means all terms are zero. A low value means little response under these particular terms, not proof of calmness or proximity in every physiological dimension. Display tiers use the original 25/46/68 boundaries and are labeled model responses.
 
-## Score-driven visualization
+Inspection shows the current weighted sum, multiplier, bounded raw result, and median-filtered display separately. Current component contributions need not sum to the smoothed number.
 
-An available displayed estimate alone controls cloud extent, brightness, color warmth, and star-arm spread. Lower values produce a smaller, cooler aqua cloud; 50 maps to lavender at the fixed personal-reference orbit; higher values spread farther and become brighter coral/peach. The reference orbit marks 50 rather than moving with the current value. Work renders a slow spiral galaxy and Rest a diffuse nebula, with the same score-to-size and score-to-color meanings.
+## Causal prediction and acute onsets
 
-Raw EEG and optical variation add minor filament texture only. Raw motion no longer translates or distorts the score cloud, and reported HR does not independently set its expansion or pace. These presentation changes do not alter motion gating, feature extraction, reference formation, or the scoring formula. EEG context still has zero estimate weight. The visual key explains the mapping; it supplies no additional physiological evidence.
+Each fixed-profile channel uses an AR(1) fit on up to 60 **prior** observations, with at least 12 observations to begin. The prediction is made before adding the target observation. Its residual is standardized against past EWMA residual variance (coefficient 0.04), with a floor based on the channel’s declared scale. The mean half-squared standardized residual across available predictors is the surprise statistic. It is not full Gaussian negative log-likelihood or a calibrated probability.
 
-Rest's paced-breathing cue appears as a separate outer ring. Breathing animation does not resize the estimate cloud, alter the reference orbit, or lower the estimate. The ring guides timing, not measured respiration.
+The reference surprise threshold is `max(reference_mean + 1.5 × reference_SD, reference_mean + 0.5)`. An onset additionally requires at least two of HR increase, RMSSD decrease, or respiration increase to step together: the last four observations versus the preceding sixteen, scaled by the larger of the channel floor and segment SD. A 20-second refractory period prevents repeated flags. EEG and SDNN cannot independently satisfy these two votes.
 
-Waiting, held, or stale estimates remove the score-encoded halo and return to a distinct ambient sky. The display does not animate an unavailable estimate toward 50. Raw-source labels and feature/estimate availability remain separate, so accepted raw packets need not produce a score cloud.
+Events are labeled **observed convergence**, with contributing channels and peak surprise. Their return interval ends when the transient subsides; gaps and excluded observations censor an open event. Related cardiac channels are not independent causal confirmations. No physiological/artifact cause is invented from unavailable fit, blink, or posture inputs. Quality holds clear current score encoding and reset rolling analysis before new usable data enter it.
 
-Gentler movement and the system's reduced-motion preference freeze decorative drift while permitting static score updates. Still image freezes canvas updates for fresh values. If the estimate becomes stale, held, or unavailable, the score encoding clears once even while Still image remains enabled. The number and status continue updating. Soft/Vivid intensity changes presentation without changing the score's direction or reference meaning.
+## Live mathematical inspection
 
-## Source, freshness, and controls
+The same accepted frames also update rolling correlation/eigenvalue concentration, standardized PCA, entropy, autocorrelation, and signed cross-lags. These diagnostics are no longer confined to a manually run recording panel. The composite uses turbulence, fragility, and the breath-leading modifier; surprise drives events. PCA and eigenvalue concentration remain descriptive views, as in the original architecture, rather than extra undocumented score weights.
 
-The initial view is Work with Ambient input and no running timer. Try a demo explicitly selects generated variation with its own declared synthetic reference, so its estimate can be explored immediately. Demonstration data stay labeled and separate from live personal references. A simulated Mac bridge is also Demo.
+Windows are bounded in memory; a snapshot reads cached calculations without retraining. Source changes restart reference formation. Missing/stale/invalid data cannot contribute to predictors, covariance history, smoothing, or cue duration. Uniform cadence is required to label lags in seconds.
 
-Accepted recent packets are required for a Live source badge. A Bluetooth connection alone is insufficient. Raw texture effects become stale independently after seven seconds; the estimate follows the stricter feature validity and freshness rules. An unavailable estimate removes its score-encoded halo rather than appearing to settle to 50. Continued ambient animation is not continued measurement, even if another raw source remains live.
+## Work, Rest, and the visual
 
-The bridge rejects packets more than five seconds old, estimates the Mac-to-phone clock offset conservatively, and preserves original Mac receipt time. Session IDs and increasing sequence numbers prevent old or duplicate events from becoming new evidence. Receipt time and nominal sampling cadence are not independently verified physiological event times.
+Both modes consume this same model. Work offers continuous observation and an optional cue after at least 60 valid seconds at or above 68. Rest adds an independent four-second inhale/six-second exhale guide, within-profile change since entering Rest, and a recent trend. A reference/source change or interruption resets the Rest comparison.
 
-Timer is optional: 10, 25, or 50 minutes, or a custom duration from 1 to 360 minutes, with pause/resume and end. It follows wall time rather than animation speed. Space offers less copy, gentler movement, a still image, Soft/Vivid color, and full screen where supported. Vivid is the default; reduced-motion preference initializes gentler movement.
+Higher scores make the galaxy/nebula wider, brighter, and warmer. The dotted orbit now marks the zero-reference origin. Breathing has a separate outer ring and never changes the score cloud. Raw EEG/optical variation adds only minor filament texture. Waiting, stale, or held estimates remove the score encoding and show ambient clouds. Reduced motion freezes decorative drift while allowing score changes; Still freezes fresh score images but clears them on expiry.
 
-## Transport and privacy
+## Replay, references, and privacy
 
-The standalone HTML has inline code, styles, and system fonts, with network connections prohibited by its content policy. It can connect directly to Classic Muse through supported Web Bluetooth. Newer Athena Muse, Hume, and iPhone live use the [Mac bridge](BRIDGE.md), which supplies the current derived-feature path. Classic/Athena detection uses Bluetooth characteristics, not the advertised name.
+**Export this analysis session** downloads accepted feature frames, their browser observation times, provenance, model version, and an explicit imported-reference seed when applicable. The first 20,000 frames per live/demo recording context are held in memory; reaching that limit stops recording with a visible notice while live analysis continues. No automatic file or cloud save occurs. Signal Lab’s **Open a live analysis session** replays these frames through the identical engine at their original feature and observation timestamps, preserving delivery-age quality decisions. Its cursor cannot train on future observations. The existing normalized recording format maps supplied features into the same engine with explicit source/quality labels. The older three-signal directional score and separate recording research lenses remain available as comparison tools.
 
-The bridge permits same-origin state, control, and event connections in the local copy. It processes raw packets and derived features in memory, without a recording database or cloud upload. Local HTTP is unencrypted and requires trusted private Wi-Fi. Private run links and QR codes grant access to that run and must stay private.
+**Save reference / Open reference** provide explicit local reference files. Imports validate model version, synthetic/personal provenance, feature profile, means/scales, correlation matrix, and source labels. An imported reference never restores a live score; fresh matching-source data are required. A synthetic reference cannot seed a personal session.
 
-The canvas does not automatically persist raw signals, personal references, or settings. Recording import/export and explicit reference-file tools remain in the separate Signal Lab. Reloading resets the live canvas. Use Disconnect and stop the bridge to release wearables. [Device tests](DEVICES.md) establish bounded transport behavior, not the validity of this new inference.
+The standalone main page remains self-contained and offline. The Mac bridge provides same-origin local transport for supported Muse and Hume devices; public GitHub Pages does not open a Bluetooth relay. Existing freshness, session, sequence, and source checks remain in effect. The [bridge guide](BRIDGE.md) describes trusted-Wi-Fi use. Restart an existing bridge process after installing this version to load the added pulse-SDNN extractor.
+
+The earlier `arousal-engine.js` remains in the repository only as the historical two-feature model with its own regression tests. It is no longer embedded in the main page. See [capability status](CAPABILITIES.md) for what is live, replayable, or still unavailable.
 
 ## Primary evidence and implementation sources
 
 - [Pieper et al.: ambulatory stressful events, worry, HR, and HRV](https://pubmed.ncbi.nlm.nih.gov/20410249/) provides primary observational context for cardiac patterns around stress-related experience. Such associations do not identify an individual's current mental state or validate this composite.
 - [Singstad et al.: simultaneous finger PPG/ECG at rest, mild exercise, and mild mental stress](https://pmc.ncbi.nlm.nih.gov/articles/PMC8713388/). Detection choices and artifacts materially affect PRV estimates; this is not a validation of forehead Muse PRV.
 - [Bent & Dunn: wrist optical sampling-rate experiment](https://pmc.ncbi.nlm.nih.gov/articles/PMC8057382/). RMSSD differed from ECG even at the highest tested optical sampling rate; 64 Hz alone does not establish ECG equivalence.
-- [Whitham et al.: scalp EEG during paralysis](https://pubmed.ncbi.nlm.nih.gov/17574912/). Muscle contamination complicates interpretation of higher-frequency scalp EEG, supporting separation of EEG context from the headline estimate.
+- [Whitham et al.: scalp EEG during paralysis](https://pubmed.ncbi.nlm.nih.gov/17574912/). Muscle contamination complicates interpretation of higher-frequency scalp EEG, requiring caution about the original model’s EEG contribution.
 - [Classic Muse source](https://github.com/urish/muse-js/tree/4e864578c55dd7e26d85b429863f47ccabac54a0), [Athena Muse source](https://github.com/eugenehp/muse-rs/blob/7d6a885cfbb076ec8d50e6f44935a357c65eaf80/src/parse.rs), and [Hume interoperability source](https://github.com/brendangooden/j2208-band-tools/tree/62ce48357e25d1c68e4c3e0bfd8d2cf1bbd745e9) inform transport and decoding.
 
 These sources support measurement boundaries and implementation context. They do not validate this custom inferred-arousal model, its thresholds, or outcomes from using it.
