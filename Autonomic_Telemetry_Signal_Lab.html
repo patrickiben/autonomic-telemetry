@@ -12,7 +12,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'"
     />
-    <title>Autonomic Telemetry · Signals in context</title>
+    <title>Signal Lab · Autonomic</title>
     <style>
       :root {
         --bg: #09171c;
@@ -1919,8 +1919,174 @@
         }
       }
     </style>
+    <style id="signal-lab-theme">
+      /* The lab keeps one signal palette, independent of the hidden practice modes. */
+      @media screen {
+        body.signal-lab[data-mode] {
+          --bg: #101323;
+          --panel: #1b2033;
+          --panel2: #22263c;
+          --line: #363b55;
+          --text: #efedf9;
+          --muted: #b9b9d0;
+          --soft: #a1a6c2;
+          --teal: #a6e4ea;
+          --blue: #beb7f6;
+          --violet: #f1b0b6;
+          --amber: #eee1ac;
+          --rose: #f1b0b6;
+          --mint: #bce7c9;
+          --radius: 24px;
+          --mode-accent: #c2bafa;
+          --surface-top: #202338;
+          --surface-bottom: #191f31;
+          --surface-input: #14192b;
+          --surface-control: #2b2e47;
+          --surface-hover: #393d59;
+          --hero-glow: #9b82df18;
+          --active-bg: #343451;
+          --active-border: #a59bd4;
+          --dial-track: #373a56;
+          --button-ink: #211f38;
+          --notice-bg: #b9b7f908;
+          --field-border: #535a78;
+          background:
+            radial-gradient(ellipse 850px 550px at 85% 0, #9a7bdc1a, transparent 75%),
+            radial-gradient(ellipse 600px 700px at 0 550px, #5ecac60b, transparent 80%),
+            var(--bg);
+        }
+        .signal-lab .top { border-color: #b9b7f91c; padding: 26px 0; }
+        .signal-lab .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 16px; }
+        .signal-lab .brand-flame { width: 25px; height: 29px; color: var(--mode-accent); }
+        .signal-lab nav a { font-size: 13px; }
+        .signal-lab .notice { margin-top: 22px; border-radius: 16px; }
+        .signal-lab .notice > span:first-child { color: var(--amber) !important; }
+        .signal-lab .lab-intro { position: relative; max-width: none; padding: 38px 0 8px; }
+        .signal-lab .lab-intro h1 {
+          font: 400 clamp(40px, 5vw, 56px)/1.15 Georgia, "Times New Roman", serif;
+          letter-spacing: -1.8px;
+          margin: 12px 0 16px;
+        }
+        .signal-lab .lab-intro p { max-width: 650px; font-size: 14px; }
+        .signal-lab .lab-intro p + p { margin-top: 18px; font-size: 13px; }
+        .signal-lab .lab-intro a { color: var(--blue); }
+        .signal-lab .lab-aurora { position: absolute; right: 3%; top: 22px; width: 230px; height: 180px; opacity: .8; pointer-events: none; }
+        .signal-lab .toolbar { padding: 24px 0; }
+        .signal-lab[data-mode] button { border-radius: 24px; min-height: 44px; }
+        .signal-lab[data-mode] button.primary {
+          background: linear-gradient(120deg, #c8bdf7, #b5cdf6);
+          border-color: #d1cafa;
+          box-shadow: 0 3px 22px #ab98f017;
+        }
+        .signal-lab[data-mode] button.primary:hover { background: #d2c9ff; }
+        .signal-lab[data-mode] input:not([type="range"]),
+        .signal-lab[data-mode] select,
+        .signal-lab[data-mode] textarea { border-radius: 12px; }
+        .signal-lab[data-mode] :focus-visible { outline-color: var(--mode-accent); }
+        .signal-lab .badge { border-radius: 7px; }
+        .signal-lab .badge.demo { background: #eee1ac09; border-color: #eee1ac40; }
+        .signal-lab[data-mode] .panel { box-shadow: 0 8px 30px #05081515; }
+        .signal-lab .panel-head h2 { font-weight: 500; }
+        .signal-lab .practice-workspace .pacer {
+          grid-template-columns: minmax(230px, 1fr) 190px minmax(260px, 1fr);
+          grid-template-rows: auto auto;
+          gap: 8px 24px;
+          align-items: center;
+          padding: 20px 28px;
+          text-align: left;
+        }
+        .signal-lab .pacer .panel-head { grid-column: 1; grid-row: 1; margin: 0; align-self: end; }
+        .signal-lab .pacer .panel-head .badge { display: none; }
+        .signal-lab .pacer > .small { grid-column: 1; grid-row: 2; align-self: start; margin: 0; max-width: 320px; }
+        .signal-lab .pacer .orb-stage { grid-column: 2; grid-row: 1 / 3; min-height: 150px; text-align: center; }
+        .signal-lab .pacer .orb-stage svg { width: 158px; height: 158px; }
+        .signal-lab .pacer .orb-text strong { font-size: 14px; }
+        .signal-lab .pacer .orb-text span { font-size: 10px; }
+        .signal-lab .pacer-controls { grid-column: 3; grid-row: 1 / 3; margin: 0; gap: 14px; }
+        .signal-lab .pacer-controls .small { margin: 0; }
+        .signal-lab[data-mode] .orb-stage circle[stroke] { stroke: url(#lab-breath-spectrum); opacity: .5; }
+        .signal-lab[data-mode] .orb-stage #orb { stroke: url(#lab-breath-spectrum); fill: #bcb6f90d; opacity: 1; }
+        .signal-lab[data-mode] .primary-panel {
+          background: radial-gradient(ellipse at 0 45%, #b19beb14, transparent 55%),
+            linear-gradient(135deg, var(--surface-top), var(--surface-bottom));
+          border-color: #aca0e349;
+        }
+        .signal-lab .reading .value { color: var(--mode-accent); }
+        .signal-lab #gauge-arc { stroke: var(--mode-accent); }
+        .signal-lab #gauge-dot { fill: var(--mode-accent); }
+        .signal-lab[data-mode] .signal:nth-child(1) { background: linear-gradient(145deg, #223340, #1a2434); border-color: #a6e4ea40; }
+        .signal-lab[data-mode] .signal:nth-child(2) { background: linear-gradient(145deg, #302d46, #212239); border-color: #beb7f64a; }
+        .signal-lab[data-mode] .signal:nth-child(3) { background: linear-gradient(145deg, #372b3b, #262235); border-color: #f1b0b642; }
+        .signal-lab .chart-key > span:first-child i { background: var(--mode-accent); }
+        .signal-lab .chart-key > span:nth-child(2) i { background: var(--amber) !important; }
+        .signal-lab .chart-key > span:nth-child(3) i { background: var(--teal) !important; }
+        .signal-lab[data-mode] .timeline-chart path[stroke="#8bd5c5"] { stroke: var(--mode-accent); }
+        .signal-lab[data-mode] .timeline-chart path[stroke="#b8abd5"],
+        .signal-lab[data-mode] .timeline-chart line[stroke="#b8abd5"] { stroke: var(--amber); }
+        .signal-lab .timeline-chart line[stroke="#93b8d6"] { stroke: var(--teal); }
+        .signal-lab .timeline-chart circle[fill="#93b8d6"] { fill: var(--teal); }
+        .signal-lab .timeline-chart line[stroke="#b7d6d1"] { stroke: var(--text); }
+        .signal-lab .timeline-chart rect[fill="#ddc393"] { fill: var(--amber); }
+        .signal-lab .timeline-chart rect[fill="#a2b9bb"] { fill: var(--muted); }
+        .signal-lab .summary-strip > :nth-child(1) .value { color: var(--mode-accent); }
+        .signal-lab .summary-strip > :nth-child(2) .value { color: var(--teal); }
+        .signal-lab .summary-strip > :nth-child(3) .value { color: var(--mint); }
+        .signal-lab .summary-strip > :nth-child(4) .value { color: var(--amber); }
+        .signal-lab .lower-grid > .panel:first-child { border-top-color: #bce7c966; }
+        .signal-lab .lower-grid > .panel:nth-child(2) { border-top-color: #eee1ac66; }
+        .signal-lab #portrait line { stroke: var(--field-border); }
+        .signal-lab #portrait circle { fill: var(--teal); }
+        .signal-lab #portrait text { fill: var(--muted); }
+        .signal-lab .advanced > summary { border-radius: 18px; background: #b9b7f906; }
+        .signal-lab #research-lenses { border-top-color: #f1b0b666; }
+        .signal-lab #research-lenses .research-cell { border-radius: 16px; background: #beb7f609; }
+        .signal-lab #research-lenses .research-cell:nth-child(2) strong { color: var(--blue); }
+        .signal-lab #research-lenses .research-cell:nth-child(3) strong { color: var(--violet); }
+        .signal-lab #research-lenses .research-cell:nth-child(4) strong { color: var(--mint); }
+        .signal-lab #research-lenses canvas { background: var(--surface-input); border-radius: 16px; }
+        .signal-lab[data-mode] dialog { border-radius: 24px; }
+        .signal-lab[data-mode] #device-dialog button,
+        .signal-lab[data-mode] #device-preview button { border-radius: 24px; }
+        .signal-lab[data-mode] #device-dialog .device-choices button { border-radius: 14px; }
+        .signal-lab[data-mode] #device-dialog button:focus-visible,
+        .signal-lab[data-mode] #device-preview button:focus-visible { outline-color: var(--mode-accent); }
+        .signal-lab[data-mode] #device-dialog .device-note { border-color: var(--amber); background: #eee1ac08; }
+        .signal-lab[data-mode] #device-dialog details,
+        .signal-lab[data-mode] #device-dialog .device-head { border-color: var(--line); }
+      }
+      @media screen and (max-width: 1100px) {
+        .signal-lab .lab-aurora { width: 165px; right: 0; opacity: .5; }
+        .signal-lab .lab-intro p { max-width: 70%; }
+        .signal-lab .practice-workspace .pacer { grid-template-columns: minmax(0, 1fr) 180px; gap: 6px 18px; }
+        .signal-lab .pacer .orb-stage { grid-column: 2; grid-row: 1 / 4; }
+        .signal-lab .pacer-controls { grid-column: 1; grid-row: 3; justify-content: start; margin-top: 8px; }
+      }
+      @media screen and (max-width: 640px) {
+        .signal-lab .top { padding: 20px 0; gap: 16px; }
+        .signal-lab .brand { font-size: 15px; }
+        .signal-lab nav { gap: 16px; }
+        .signal-lab .notice { margin-top: 16px; align-items: start; font-size: 11px; }
+        .signal-lab .lab-intro { padding: 30px 0 4px; }
+        .signal-lab .lab-intro h1 { font-size: 42px; }
+        .signal-lab .lab-intro p { max-width: none; font-size: 13px; }
+        .signal-lab .lab-aurora { width: 104px; height: 100px; top: 15px; opacity: .6; }
+        .signal-lab .lab-intro .eyebrow { font-size: 9px; letter-spacing: 1px; }
+        .signal-lab .toolbar > .row:first-child { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+        .signal-lab .toolbar button { padding: 10px 12px; }
+        .signal-lab .source-detail { gap: 8px; }
+        .signal-lab .practice-workspace .pacer { padding: 20px; gap: 10px; }
+        .signal-lab .pacer .panel-head { align-self: stretch; }
+        .signal-lab .pacer .orb-stage { width: 100%; min-height: 144px; }
+        .signal-lab .pacer-controls { justify-content: center; flex-wrap: wrap; margin: 0; }
+        .signal-lab .pacer > .small { max-width: none; text-align: center; margin: 0; }
+        .signal-lab .panel-head { flex-wrap: wrap; }
+      }
+      @media print {
+        .lab-aurora { display: none; }
+      }
+    </style>
   </head>
-  <body data-mode="rest">
+  <body class="signal-lab" data-mode="rest">
     <a class="skip" href="#main">Skip to workspace</a>
     <div class="wrap">
       <header class="top row between">
@@ -1928,12 +2094,11 @@
           href="Autonomic_Telemetry_Console.html"
           class="brand"
           style="color: var(--text); text-decoration: none"
-          ><span class="brand-mark" aria-hidden="true"></span>Autonomic
-          Telemetry</a
+          ><svg class="brand-flame" width="25" height="29" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 2C5 7 2 13 4 19c2 6 14 6 16 0 2-6-1-12-8-17Z"/><path d="M12 8c-4 4-6 8-4 12s7 3 8-1c1-4-1-8-4-11Z"/></svg>Autonomic</a
         >
         <nav aria-label="Main">
           <a href="Autonomic_Telemetry_Field_Guide.html">Field guide ↗</a
-          ><a class="nav-methods" href="docs/METHODS.md">Methods</a
+          ><a class="nav-methods" href="docs/SIGNAL_LAB_METHODS.md">Methods</a
           ><span class="eyebrow">v2.3</span>
         </nav>
       </header>
@@ -2011,6 +2176,24 @@
         </p>
       </section>
       <section class="lab-intro">
+        <svg class="lab-aurora" viewBox="0 0 230 180" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="lab-spectrum" x1="20" y1="150" x2="210" y2="20" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#a6e4ea"/><stop offset=".45" stop-color="#beb7f6"/><stop offset=".75" stop-color="#f1b0b6"/><stop offset="1" stop-color="#eee1ac"/>
+            </linearGradient>
+            <radialGradient id="lab-halo"><stop stop-color="#bcb3f2" stop-opacity=".2"/><stop offset="1" stop-color="#bcb3f2" stop-opacity="0"/></radialGradient>
+          </defs>
+          <ellipse cx="115" cy="90" rx="112" ry="88" fill="url(#lab-halo)"/>
+          <g stroke="url(#lab-spectrum)" stroke-width=".8" transform="rotate(-28 115 90)">
+            <ellipse cx="115" cy="90" rx="104" ry="46" opacity=".4"/>
+            <ellipse cx="115" cy="90" rx="97" ry="52" opacity=".5"/>
+            <ellipse cx="115" cy="90" rx="89" ry="59" opacity=".7"/>
+            <ellipse cx="115" cy="90" rx="80" ry="65" opacity=".85"/>
+            <ellipse cx="115" cy="90" rx="70" ry="69" opacity=".7"/>
+            <ellipse cx="115" cy="90" rx="59" ry="72" opacity=".5"/>
+            <ellipse cx="115" cy="90" rx="47" ry="74" opacity=".4"/>
+          </g>
+        </svg>
         <div class="eyebrow">Autonomic Telemetry · Advanced tools</div>
         <h1>Signal Lab</h1>
         <p>
@@ -2183,9 +2366,12 @@
               <svg viewBox="0 0 190 190" aria-hidden="true">
                 <defs>
                   <radialGradient id="orb-glow">
-                    <stop offset="0" stop-color="#8bd5c5" stop-opacity=".12" />
-                    <stop offset="1" stop-color="#8bd5c5" stop-opacity="0" />
+                    <stop offset="0" stop-color="#beb7f6" stop-opacity=".16" />
+                    <stop offset="1" stop-color="#a6e4ea" stop-opacity="0" />
                   </radialGradient>
+                  <linearGradient id="lab-breath-spectrum" x1="0" y1="0" x2="1" y2="1">
+                    <stop stop-color="#a6e4ea"/><stop offset=".5" stop-color="#beb7f6"/><stop offset="1" stop-color="#f1b0b6"/>
+                  </linearGradient>
                 </defs>
                 <circle cx="95" cy="95" r="92" fill="url(#orb-glow)" />
                 <circle
@@ -2644,7 +2830,7 @@
         </div>
         <p style="margin-top: 12px">
           Educational use · Experimental score and thresholds · Not a medical
-          device · Revised October 22, 2026
+          device · Revised October 23, 2026
         </p>
       </footer>
     </div>
@@ -7090,7 +7276,8 @@ python3 -m http.server 8090
         loY = Math.min(...ys),
         hiY = Math.max(...ys);
       ctx.clearRect(0, 0, 1000, 300);
-      ctx.strokeStyle = "#93b8d6";
+      const palette = getComputedStyle(document.body);
+      ctx.strokeStyle = palette.getPropertyValue("--blue").trim() || "#beb7f6";
       ctx.lineWidth = 1.7;
       ctx.beginPath();
       points.forEach((p, i) => {
@@ -7099,7 +7286,7 @@ python3 -m http.server 8090
         i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
       });
       ctx.stroke();
-      ctx.fillStyle = "#a2b9bb";
+      ctx.fillStyle = palette.getPropertyValue("--muted").trim() || "#b9b9d0";
       ctx.font = "13px system-ui";
       ctx.fillText("Standardized PCA · recording order · PC1 / PC2", 25, 25);
     }

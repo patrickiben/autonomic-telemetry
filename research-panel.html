@@ -237,7 +237,8 @@
         loY = Math.min(...ys),
         hiY = Math.max(...ys);
       ctx.clearRect(0, 0, 1000, 300);
-      ctx.strokeStyle = "#93b8d6";
+      const palette = getComputedStyle(document.body);
+      ctx.strokeStyle = palette.getPropertyValue("--blue").trim() || "#beb7f6";
       ctx.lineWidth = 1.7;
       ctx.beginPath();
       points.forEach((p, i) => {
@@ -246,7 +247,7 @@
         i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
       });
       ctx.stroke();
-      ctx.fillStyle = "#a2b9bb";
+      ctx.fillStyle = palette.getPropertyValue("--muted").trim() || "#b9b9d0";
       ctx.font = "13px system-ui";
       ctx.fillText("Standardized PCA · recording order · PC1 / PC2", 25, 25);
     }

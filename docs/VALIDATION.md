@@ -1,4 +1,12 @@
-# Release verification — October 22, 2026
+# Release verification
+
+## Signal Lab appearance update — October 23, 2026
+
+The Lab now shares the main page's midnight palette, serif title, and rounded controls. Aqua, lavender, coral, mint, and pale gold distinguish signals and research views. The breathing guide is more compact on desktop; the analytical models, recordings, device adapters, and import/export behavior are unchanged.
+
+All 26 Signal Lab browser checks and 5 research-interface checks pass after the update. Rendered layouts were reviewed at desktop and phone sizes, with additional overflow checks at 320, 390, 768, and 1440 pixels. The pattern-shift gauge and timeline use the same color, individual signal colors remain distinct, and print retains a white background. No browser errors or external runtime requests occurred. Updated screenshots use the built-in synthetic recording.
+
+## Version 2.3.0 — October 22, 2026
 
 Version 2.3.0 passes **167 automated checks**: 47 Chromium browser checks, 33 pure research-math checks, 19 personal-arousal engine checks, and 68 Python bridge checks. Repeat with:
 
