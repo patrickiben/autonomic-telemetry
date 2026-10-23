@@ -81,3 +81,9 @@ The public experience is hosted at [patrickiben.github.io/autonomic-telemetry](h
 ## Reuse
 
 No repository license has been selected yet. Protocol adapters preserve applicable upstream notices.
+
+## Code license and third-party material
+
+Original project code is licensed under [MIT](LICENSE), copyright 2026 Patrick Iben.
+Third-party code, fonts, data, model assets and outputs retain their respective licenses and terms;
+they are not relicensed by this file.

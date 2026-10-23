@@ -508,7 +508,9 @@ try {
         /breathing guide/i,
       );
       await page.locator("#mode-action").click();
-      assert.equal(await page.locator("#breath-cue").isVisible(), true);
+      // The cue text is filled by requestAnimationFrame; the test owns a virtual clock.
+      await page.clock.runFor(50);
+      await page.locator("#breath-cue").waitFor({ state: "visible" });
       for (let i = 0; i < 20; i++) await frame(80, 25);
       assert.match(
         await page.locator("#arousal-trend").innerText(),

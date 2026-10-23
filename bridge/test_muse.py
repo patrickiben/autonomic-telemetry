@@ -193,6 +193,8 @@ class AdapterTests(_AdapterFixture):
 
         client, stop, packets, _, task = await self.launch(status=status)
         await self.ready(client)
+        # The final stream command can be recorded before its async status callback runs.
+        await eventually(lambda: phases and phases[-1]["phase"] == "waiting")
         self.assertEqual(phases[-1]["phase"], "waiting")
         client.notify(muse.EEG[2], EEG_PACKET)
         client.notify(muse.PPG[1], PPG_PACKET)
@@ -247,6 +249,7 @@ class AdapterTests(_AdapterFixture):
     async def test_partial_ppg_subscription_uses_p50_and_reports_missing(self):
         client, stop, _, phases, task = await self.launch(Client(failed_subscriptions=muse.PPG[:2]))
         await self.ready(client)
+        await eventually(lambda: phases and phases[-1]["phase"] == "waiting")
         self.assertIn(muse.encode_command("p50"), [data for _, data, _ in client.writes])
         self.assertIn("PPG 0, PPG 1", phases[-1]["message"])
         stop.set()
