@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { readFile } from "node:fs/promises";
 import { chromium } from "playwright";
 
 // Invented complete feature frames exercise the production multivariate model
@@ -59,7 +60,7 @@ async function fixture({ mode = "work", reducedMotion = "no-preference" } = {}) 
     }));
     for (let i = 0; i < 25; i++) await frame(values);
     const target = (await page.evaluate(() => TelemetryLive.getState().arousal)).value;
-    if (before.available && !before.paused && Math.abs(before.value - target) > 1) {
+    if (mode === "work" && before.available && !before.paused && Math.abs(before.value - target) > 1) {
       await page.clock.runFor(120);
       const intermediate = await visual();
       assert.ok(intermediate.value > Math.min(before.value, target) && intermediate.value < Math.max(before.value, target), "Fresh changes must visibly interpolate before settling");
@@ -86,12 +87,23 @@ async function fixture({ mode = "work", reducedMotion = "no-preference" } = {}) 
       return { energy: energy / (width * height), radiusMoment: Math.sqrt(moment / Math.max(energy, 1)), redBlueRatio: red / Math.max(blue, 1), image: canvas.toDataURL() };
     });
   }
+  async function restPixels() {
+    return page.evaluate(() => {
+      const rest = TelemetryLive.getVisualState().rest;
+      const source = document.getElementById(rest.renderer === "webgl2" ? "rest-field" : "field");
+      const c = document.createElement("canvas"); c.width = 320; c.height = 256;
+      const g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(source, 0, 0, 320, 256);
+      const d = g.getImageData(0, 0, 320, 256).data; let red = 0, blue = 0, lit = 0;
+      for (let i = 0; i < d.length; i += 4) { red += d[i]; blue += d[i + 2]; if (d[i] + d[i + 1] + d[i + 2] > 120) lit++; }
+      return { redBlueRatio: red / Math.max(blue, 1), lit: lit / (320 * 256), renderer: rest.renderer, image: c.toDataURL() };
+    });
+  }
   async function toggle(id) { await page.locator("#space-button").click(); await page.locator(`#${id}`).click(); await page.locator("#space-sheet [data-close]").click(); }
-  return { page, frame, settle, reference, level, visual, pixels, toggle, close: () => context.close() };
+  return { page, frame, settle, reference, level, visual, pixels, restPixels, toggle, close: () => context.close() };
 }
 
 try {
-  for (const mode of ["work", "rest"]) await check(`${mode === "work" ? "Work" : "Rest"} paints ordered zero-reference, moderate, and high multivariate estimates`, async () => {
+  for (const mode of ["work"]) await check("Work paints ordered zero-reference, moderate, and high multivariate estimates", async () => {
     const f = await fixture({ mode });
     try {
       await f.reference(); const captures = [];
@@ -110,7 +122,22 @@ try {
         assert.notEqual(higher.pixels.image, lower.pixels.image);
       }
       modeReferences.set(mode, captures[0].pixels.image);
-      if (mode === "rest") assert.notEqual(modeReferences.get("work"), modeReferences.get("rest"), "Modes must have distinct compositions at the same zero-reference estimate");
+    } finally { await f.close(); }
+  });
+
+  // Measured in the still view, where only the data changes the picture; the moving view breathes.
+  await check("Rest paints zero-reference, moderate, and high estimates as warmer, denser lattice light", async () => {
+    const f = await fixture({ mode: "rest", reducedMotion: "reduce" });
+    try {
+      await f.reference(); const captures = [];
+      for (const level of ["reference", "moderate", "high"]) { await f.level(level); captures.push(await f.restPixels()); }
+      for (let i = 1; i < captures.length; i++) {
+        const lower = captures[i - 1], higher = captures[i];
+        assert.ok(higher.redBlueRatio > lower.redBlueRatio, "Lattice light must become warmer");
+        assert.ok(higher.lit > lower.lit, "More of the lattice must light up");
+        assert.notEqual(higher.image, lower.image);
+      }
+      assert.notEqual(captures[0].image, modeReferences.get("work"), "Modes must have distinct compositions at the same zero-reference estimate");
     } finally { await f.close(); }
   });
 
@@ -161,15 +188,45 @@ try {
     } finally { await f.close(); }
   });
 
-  await check("Rest breathing animates its separate ring without changing zero-reference model size", async () => {
+  await check("Rest breathing bends the lens and moves light through the lattice without changing the estimate", async () => {
+    const f = await fixture({ mode: "rest" });
+    try {
+      await f.reference(); await f.level("reference");
+      const samples = [];
+      for (let i = 0; i < 10; i++) {
+        await f.settle(1000);
+        samples.push({ rest: (await f.visual()).rest, value: await f.page.evaluate(() => TelemetryLive.getState().arousal.value),
+          cue: await f.page.locator("#breath-cue").innerText(), image: (await f.restPixels()).image });
+      }
+      assert.ok(samples.every(s => s.rest.breath === "guide" && s.value === samples[0].value), "Breathing never changes the estimate");
+      const lens = samples.map(s => s.rest.thetaE), wave = samples.map(s => s.rest.wave);
+      assert.ok(Math.max(...lens) - Math.min(...lens) > .03, "The Einstein radius must follow the breath");
+      assert.ok(Math.max(...wave) - Math.min(...wave) > 5, "The wave must travel through the lattice");
+      assert.ok(samples.some(s => s.cue === "Breathe in") && samples.some(s => s.cue === "Breathe out"));
+      assert.ok(new Set(samples.map(s => s.image)).size > 5);
+    } finally { await f.close(); }
+  });
+
+  await check("Reduced motion keeps Rest still and unwarped while the breath cue continues", async () => {
     const f = await fixture({ mode: "rest", reducedMotion: "reduce" });
     try {
-      await f.reference(); await f.level("reference"); const before = await f.visual();
-      await f.page.locator("#mode-action").click(); await f.page.clock.runFor(32);
-      assert.equal((await f.visual()).breathing, true); const initial = await f.pixels(); await f.settle(3500); const later = await f.visual();
-      assert.equal(later.value, before.value); assert.equal(later.radiusScale, before.radiusScale); assert.equal(later.clock, before.clock);
-      assert.notEqual((await f.pixels()).image, initial.image); assert.equal(await f.page.locator("#breath-cue").isVisible(), true);
+      await f.reference(); await f.level("reference");
+      const cues = new Set(), stills = [];
+      for (let i = 0; i < 10; i++) {
+        await f.settle(1000);
+        const rest = (await f.visual()).rest;
+        assert.equal(rest.thetaE, 0, "No lens in the still view"); assert.equal(rest.wave, -100, "No moving wave in the still view");
+        cues.add(await f.page.locator("#breath-cue").innerText());
+        stills.push({ serial: rest.serial, image: (await f.restPixels()).image });
+      }
+      assert.ok(cues.has("Breathe in") && cues.has("Breathe out"), "The text cue keeps the breath");
+      const sameMoment = stills.filter(s => s.serial === stills[0].serial);
+      assert.ok(sameMoment.length > 2 && sameMoment.every(s => s.image === sameMoment[0].image), "Nothing moves between moments");
     } finally { await f.close(); }
+  });
+  await check("The Console embeds the current Rest lattice source", async () => {
+    const [html, source] = await Promise.all(["Autonomic_Telemetry_Console.html", "rest-lattice.js"].map(name => readFile(path.join(root, name), "utf8")));
+    assert.ok(html.includes("<!-- REST_LATTICE_START -->\n<script>\n" + source + "\n</script>\n<!-- REST_LATTICE_END -->"), "Run scripts/embed-rest-lattice.py");
   });
   assert.deepEqual(errors, []); assert.deepEqual(external, []);
   console.log(`\n${passed} visual feedback checks passed.`);

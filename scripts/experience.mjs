@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
+import { readFile } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 import { chromium } from "playwright";
@@ -136,7 +137,7 @@ try {
   );
 
   await check(
-    "Work and Rest change the whole palette and expose optional Rest breathing",
+    "Work and Rest change the whole palette; Rest starts an optional breathing guide",
     async () => {
       const { page, close } = await pageFor();
       const work = await page.evaluate(
@@ -146,8 +147,14 @@ try {
       await page.waitForFunction(
         () => TelemetryLive.getState().mode === "rest",
       );
+      assert.equal(await page.locator("#breath-cue").isVisible(), true, "Rest starts with its breathing guide on");
       await page.locator("#space-button").click();
       assert.equal(await page.locator("#breathing-row").isVisible(), true);
+      assert.equal(await page.locator("#breath-toggle").getAttribute("aria-checked"), "true");
+      await page.locator("#breath-toggle").click();
+      await closeSheet(page, "space-sheet");
+      assert.equal(await page.locator("#breath-cue").isVisible(), false, "The guide can be turned off");
+      await page.locator("#space-button").click();
       await page.locator("#breath-toggle").click();
       await closeSheet(page, "space-sheet");
       assert.equal(await page.locator("#breath-cue").isVisible(), true);
@@ -400,7 +407,7 @@ try {
   );
 
   await check(
-    "All five sheets and both spaces fit 360px portrait and short landscape screens",
+    "Every sheet and both spaces fit 360px portrait and short landscape screens",
     async () => {
       for (const viewport of [
         { width: 360, height: 780 },
@@ -413,12 +420,13 @@ try {
         });
         for (const mode of ["work", "rest"]) {
           await page.locator(`#${mode}-mode`).click();
+          // Rest shows no number, so its details sheet opens from Work.
           for (const name of [
             "connect",
             "timer",
             "space",
             "about",
-            "arousal",
+            ...(mode === "work" ? ["arousal"] : []),
           ]) {
             await page.locator(`#${name}-button`).click();
             const bounds = await page.locator(`#${name}-sheet`).boundingBox();
@@ -443,6 +451,15 @@ try {
             dock.y >= 0 && dock.y + dock.height <= viewport.height,
             "Phone dock stays reachable",
           );
+          if (mode === "rest") {
+            const record = await page.locator("#rest-record").boundingBox(),
+              leave = await page.locator("#rest-leave").boundingBox(),
+              texts = await Promise.all(["#mode-action", "#breath-cue", "#rest-trend", "#scene-caption"].map((s) => page.locator(s).boundingBox()));
+            const overlaps = (a, b) => a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
+            assert.ok(leave.y + leave.height <= viewport.height && record.x + record.width <= leave.x, "Record and Leave fit side by side");
+            assert.ok(![record, leave].some((box) => overlaps(box, dock)), "Record and Leave stay clear of the dock");
+            assert.ok(!texts.some((box) => box && overlaps(box, dock)), "Rest captions stay clear of the dock");
+          }
         }
         await close();
       }
@@ -481,13 +498,11 @@ try {
       assert.equal(await page.locator("#arousal-value").innerText(), "0");
       await page.locator("#rest-mode").click();
       assert.equal((await page.evaluate(() => TelemetryLive.getState())).arousal.value, 0);
-      assert.match(await page.locator("#arousal-trend").innerText(), /starting level/);
-      assert.match(await page.locator("#mode-action").innerText(), /breathing guide/i);
-      await page.locator("#mode-action").click();
-      await page.clock.runFor(50);
+      assert.match(await page.locator("#rest-trend").innerText(), /starting level/);
+      assert.match(await page.locator("#mode-action").innerText(), /breathing guide · on/i);
       await page.locator("#breath-cue").waitFor({ state: "visible" });
       for (let i = 0; i < 20; i++) await frame(80, 25);
-      assert.match(await page.locator("#arousal-trend").innerText(), /higher since entering Rest/);
+      assert.match(await page.locator("#rest-trend").innerText(), /higher since entering Rest/);
       await frame(80, null);
       a = (await page.evaluate(() => TelemetryLive.getState())).arousal;
       assert.equal(a.phase, "held");
@@ -500,7 +515,9 @@ try {
       assert.equal((await page.evaluate(() => TelemetryLive.getState())).restStartValue, null);
       stamp = await page.evaluate(() => Date.now());
       await frame(72, 45);
-      assert.match(await page.locator("#arousal-trend").innerText(), /starting level/, "Resuming after held/stale data starts a new Rest comparison");
+      assert.match(await page.locator("#rest-trend").innerText(), /starting level/, "Resuming after held/stale data starts a new Rest comparison");
+      // Rest shows no number; its details open from Work, and Esc leaves Rest.
+      await page.keyboard.press("Escape");
       await page.locator("#arousal-button").click();
       assert.match(await page.locator("#arousal-components").innerText(), /Fixture cardiac source/);
       await page.locator("#reset-reference").click();
@@ -799,6 +816,65 @@ try {
         "Synthetic relay must never claim live hardware",
       );
       await context.close();
+    },
+  );
+
+  await check(
+    "Rest withdraws to a quiet Record and Leave; Tab brings the controls back and Esc leaves",
+    async () => {
+      const { page, close } = await pageFor(standalone, { clock: true });
+      await page.locator("#demo-button").click();
+      await page.clock.runFor(3000);
+      await page.locator("#rest-mode").click();
+      assert.equal(await page.locator("#rest-edge").isVisible(), true);
+      assert.equal(await page.locator("#arousal-button").isVisible(), false, "Rest shows no big number");
+      assert.equal(await page.locator("#rest-trend").isVisible(), true);
+      await page.clock.runFor(6600);
+      assert.equal(await page.evaluate(() => document.body.dataset.withdrawn), "true");
+      for (const selector of [".header", ".mode-switch", ".dock-wrap", "#scene-caption", "#mode-action"])
+        assert.equal(await page.locator(selector).evaluate((el) => el.inert), true, `${selector} must be inert while withdrawn`);
+      assert.equal(await page.locator("#rest-leave").isVisible(), true);
+      assert.equal(await page.locator("#rest-record").isEnabled(), true);
+      assert.match(await page.locator("#rest-record").innerText(), /Save demo recording/);
+      // Focus never lands on something hidden: every Tab stop is visible and outside withdrawn controls.
+      for (let i = 0; i < 12; i++) {
+        await page.keyboard.press("Tab");
+        const stop = await page.evaluate(() => {
+          const el = document.activeElement;
+          return { id: el.id || el.tagName, inert: Boolean(el.closest("[inert]")),
+            visible: el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) };
+        });
+        assert.equal(stop.inert, false, `${stop.id} is inside withdrawn controls`);
+        assert.equal(stop.visible, true, `${stop.id} is focused while hidden`);
+      }
+      assert.equal(await page.evaluate(() => document.body.dataset.withdrawn), "false");
+      const download = page.waitForEvent("download");
+      await page.locator("#rest-record").click();
+      const saved = JSON.parse(await readFile(await (await download).path(), "utf8"));
+      assert.equal(saved.provenance.kind, "synthetic");
+      assert.ok(saved.frames.length > 0);
+      await page.keyboard.press("Escape");
+      assert.equal((await page.evaluate(() => TelemetryLive.getState())).mode, "work");
+      assert.equal(await page.locator("#rest-edge").isVisible(), false);
+      assert.equal(await page.evaluate(() => Boolean(document.activeElement.closest("[hidden], [inert]"))), false);
+      await close();
+    },
+  );
+
+  await check(
+    "Rest without signals shows an unencoded lattice and nothing to save",
+    async () => {
+      const { page, close } = await pageFor(standalone, { clock: true });
+      await page.locator("#rest-mode").click();
+      await page.clock.runFor(21000);
+      const rest = (await page.evaluate(() => TelemetryLive.getVisualState())).rest;
+      assert.ok(rest.moments >= 2);
+      assert.equal(rest.encoded, 0, "No estimate means no encoded layer");
+      assert.equal(await page.locator("#rest-record").isDisabled(), true);
+      assert.match(await page.locator("#rest-record").innerText(), /Nothing recorded yet/);
+      assert.match(await page.locator("#scene-caption").textContent(), /ambient lattice/i);
+      assert.match(await page.locator("#field").getAttribute("aria-label"), /No current arousal estimate is encoded/);
+      await close();
     },
   );
 

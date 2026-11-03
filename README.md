@@ -6,7 +6,7 @@ An immersive canvas with a personal, experimental **inferred arousal estimate**.
 
 Work supports continuous observation and an optional sustained-elevation cue. Rest adds paced breathing and a personal settling trend. Both use the same estimate; their different palettes and controls do not change the scoring rules. An optional timer stays secondary to the experience.
 
-The estimate controls the galaxy or nebula's extent, brightness, and warmth against a fixed zero-reference orbit. Work uses a slow spiral; Rest uses a diffuse cloud with a separate breathing ring.
+In Work, the estimate controls a slow spiral galaxy's extent, brightness, and warmth against a fixed zero-reference orbit. Rest turns the session into a lattice of light seen through a gravitational lens: each layer is 10 seconds of the session, newest nearest, and a higher estimate makes its layer warmer and denser. Each breath of the guide widens the lens's ring and sends a wave of light through the lattice. After a few seconds the controls withdraw, leaving a quiet Record and Leave; moving the pointer, a tap, or Tab brings them back, and Esc leaves Rest. With reduced motion, Rest is a still, unwarped lattice.
 
 The **[Advanced Signal Lab](Autonomic_Telemetry_Signal_Lab.html)** runs the same integrated model along its recording cursor and exactly replays main-page feature exports. It also retains the earlier three-signal comparison model, recording research lenses, import/export, and Health context. Open **Reference & signals** on the main page for the weighted calculation, prediction surprise, covariance, entropy/autocorrelation, signed lags, PCA, and onset events.
 
