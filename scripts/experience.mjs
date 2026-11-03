@@ -605,6 +605,51 @@ try {
     },
   );
 
+  await check(
+    "Work keeps its caption stack above the dock on phones, and the readout is named by its visible text",
+    async () => {
+      for (const viewport of [
+        { width: 844, height: 390 },
+        { width: 360, height: 780 },
+      ]) {
+        const size = `${viewport.width}x${viewport.height}`;
+        const { page, close } = await pageFor(standalone, {
+          viewport,
+          isMobile: true,
+          hasTouch: true,
+        });
+        for (const demo of [false, true]) {
+          if (demo) {
+            await page.locator("#demo-button").click();
+            await page.waitForFunction(
+              () => document.body.dataset.arousalPhase === "ready",
+            );
+          }
+          const seen = await page.evaluate(() => {
+            const box = (selector) =>
+              document.querySelector(selector).getBoundingClientRect();
+            const words = (text) =>
+              text.toLowerCase().replace(/[^\p{L}\p{N}·]+/gu, " ").trim();
+            const button = document.getElementById("arousal-button");
+            return {
+              gap:
+                box(".dock").top -
+                Math.max(box("#mode-action").bottom, box("#source-badge").bottom),
+              name: words(button.getAttribute("aria-label")),
+              text: words(button.innerText),
+            };
+          });
+          assert.ok(seen.gap >= 4, `${size}: caption stack reaches into the dock by ${-seen.gap}px`);
+          assert.ok(
+            seen.name.startsWith(seen.text) && seen.name.endsWith("inspect reference and signals"),
+            `${size}: "${seen.name}" must begin with the visible "${seen.text}"`,
+          );
+        }
+        await close();
+      }
+    },
+  );
+
   relay = await startRelay();
   await check(
     "Same-origin relay starts without pairing and exposes a synthetic connection honestly",
