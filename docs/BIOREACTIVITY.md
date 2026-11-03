@@ -1,6 +1,6 @@
 # A living view, with a personal estimate
 
-The canvas gives the experimental **inferred arousal estimate** a consistent visual meaning. Work supports continuous observation and an optional sustained-elevation cue; Rest adds paced breathing and a personal settling trend. They share the same estimate, references, and visual scale.
+The canvas gives the experimental **inferred arousal estimate** a consistent visual meaning. Work supports continuous observation and an optional sustained-elevation cue; Rest adds paced breathing and a personal settling trend. They share the same estimate and references; Rest draws it differently, as described below.
 
 ## What the number means
 
@@ -13,9 +13,9 @@ Open **Reference & signals** to see the reference, sources, feature contribution
 ## What shapes the light
 
 - **The available estimate alone** sets the cloud's extent, brightness, warmth, and star-arm spread. Lower values are smaller and cooler aqua; middle values are lavender; higher values are larger, brighter, and warmer coral/peach. A fixed dotted orbit marks the zero-reference origin so the changing extent has a stable comparison.
-- **Work** presents a slowly spiraling galaxy. **Rest** presents a diffuse nebula. The score-to-size and score-to-color meanings stay the same in both modes.
+- **Work** presents a slowly spiraling galaxy with the mapping above. **Rest** draws the session as a lattice of light strands receding in depth, one layer per 10 seconds, newest nearest. Each layer's mean estimate sets its warmth, from cool blue to amber, and how many of its strands are lit. A layer whose samples mostly lacked an estimate stays dim and unencoded, so the ambient lattice carries no score. The lattice is seen through the thin-lens deflection of a point mass, which weakens with angular distance from the mass and forms an Einstein ring, doubled images, and a dark core. The lens is decoration; it encodes no score.
 - **Raw EEG and optical variation** add only minor filament texture. They do not independently enlarge or brighten the score cloud. Raw motion does not move the cloud; its role in feature quality gates is unchanged.
-- **Rest's breathing guide** is a separate outer ring. Its inhale/exhale cycle does not resize the score cloud or manufacture a change in the estimate.
+- **Rest's breathing guide** sets the strength of the lens and a wave of light that travels through the lattice: the Einstein ring widens on each in-breath and relaxes on each out-breath. When the guide is off and a recording supplies a respiratory rate, the same motion follows that rate instead. Breathing never changes the estimate or a layer's encoding. With reduced motion, Rest is a still, unwarped lattice and only the text cue keeps time.
 
 The small visual key in the experience explains this mapping. Color and size encode the displayed estimate; they are not extra evidence, another physiological score, or individual heartbeat timing. A raw trace can remain visible while a derived feature is withheld.
 
@@ -33,7 +33,7 @@ Live raw input and a usable estimate are different states. A connected device ca
 
 ## Work and Rest
 
-Work's optional sustained-elevation cue is off initially; when enabled, it gives a gentle message after an estimate of at least 68 persists for 60 seconds of valid data. It does not identify a cause or predict an outcome. Rest's optional four-second inhale/six-second exhale guide provides timing, not measured respiration. Rest shows change since entering that mode and a 60-second trend within the same track; interruptions or source/reference changes reset the comparison. A lower estimate is an observation, not proof of recovery. Breathing itself can change pulse variability.
+Work's optional sustained-elevation cue is off initially; when enabled, it gives a gentle message after an estimate of at least 68 persists for 60 seconds of valid data. It does not identify a cause or predict an outcome. Rest's four-second inhale/six-second exhale guide starts on and can be turned off; it provides timing, not measured respiration. Rest shows change since entering that mode and a 60-second trend within the same track; interruptions or source/reference changes reset the comparison. A lower estimate is an observation, not proof of recovery. Breathing itself can change pulse variability.
 
 Space provides less copy, gentler movement, a still image, Soft/Vivid color, and full screen where supported. Vivid is the default. Gentler movement and the system's reduced-motion preference freeze decorative drift while allowing static redraws for updated estimates. Still image freezes canvas updates for fresh values. If the estimate becomes stale, held, or unavailable, its score encoding clears once even while Still image remains on. The number and status continue updating. Timer remains optional and does not control feature extraction, reference formation, or the estimate.
 

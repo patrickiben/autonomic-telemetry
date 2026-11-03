@@ -22,6 +22,6 @@ This matrix describes executable behavior after the multivariate restoration, no
 | Apple Watch / Hume daily context | Retained in Signal Lab | Context remains distinct from current live feature frames |
 | Original OSC listener | Not restored | Mac bridge supplies supported BLE routes; Mind Monitor CSV import remains available |
 
-Work and Rest share the multivariate model and differ in interaction: continuous monitoring with an optional sustained cue, versus breathing guidance and a within-session settling trend. No task-management features are introduced.
+Work and Rest share the multivariate model and differ in interaction: continuous monitoring with an optional sustained cue, versus breathing guidance, a within-session settling trend, and a hands-off view of the session as a lensed lattice of 10-second moments, with only Record (save the session file) and Leave at the edge. No task-management features are introduced.
 
 The historical three-signal Lab score and two-feature cardiac engine remain explicitly separate comparison implementations. The new shared multivariate engine drives the main index and visual.
