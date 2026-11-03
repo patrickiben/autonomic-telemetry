@@ -333,6 +333,25 @@
         letter-spacing: 0.6px;
         color: var(--faint);
       }
+      /* the same-tab link among the three pages of the suite */
+      .family {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2px 4px;
+        font-size: 10px;
+        letter-spacing: 0.3px;
+      }
+      .family a {
+        color: var(--muted);
+        text-decoration: none;
+        padding: 7px 8px;
+        border-radius: 12px;
+      }
+      .family a:hover,
+      .family a[aria-current="page"] {
+        color: var(--ink);
+      }
       .timer-chip {
         position: absolute;
         right: 42px;
@@ -707,7 +726,8 @@
         z-index: 2;
       }
       .quiet-mode .intro,
-      .quiet-mode .footer-note {
+      .quiet-mode .footer-note,
+      .quiet-mode .family {
         opacity: 0;
         transition: opacity 0.6s;
       }
@@ -1331,6 +1351,11 @@
           </button>
         </nav>
         <p class="footer-note" id="footer-note">YOUR PACE. YOUR SPACE.</p>
+        <nav class="family" aria-label="Pages in this suite">
+          <a href="Autonomic_Telemetry_Console.html" aria-current="page">Autonomic Telemetry</a>
+          <a href="../generative-av-labs/endless-cockpit.html">Endless Cockpit</a>
+          <a href="../generative-av-labs/biofeedback-path-cockpit.html">Biofeedback Path Cockpit</a>
+        </nav>
       </div>
       <div class="toast" id="toast" role="status" hidden></div>
     </main>
