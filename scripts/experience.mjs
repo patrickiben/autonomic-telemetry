@@ -109,7 +109,7 @@ async function startRelay() {
 let relay;
 try {
   await check(
-    "Untimed Work starts with an unavailable arousal estimate and no automatic device connection",
+    "Untimed Work starts with an unavailable shift reading and no automatic device connection",
     async () => {
       const { page, close } = await pageFor();
       const state = await page.evaluate(() => TelemetryLive.getState());
@@ -628,22 +628,20 @@ try {
           const seen = await page.evaluate(() => {
             const box = (selector) =>
               document.querySelector(selector).getBoundingClientRect();
-            const words = (text) =>
-              text.toLowerCase().replace(/[^\p{L}\p{N}·]+/gu, " ").trim();
             const button = document.getElementById("arousal-button");
             return {
               gap:
                 box(".dock").top -
                 Math.max(box("#mode-action").bottom, box("#source-badge").bottom),
-              name: words(button.getAttribute("aria-label")),
-              text: words(button.innerText),
+              override:
+                button.getAttribute("aria-label") ??
+                button.getAttribute("aria-labelledby"),
+              text: button.innerText.trim(),
             };
           });
           assert.ok(seen.gap >= 4, `${size}: caption stack reaches into the dock by ${-seen.gap}px`);
-          assert.ok(
-            seen.name.startsWith(seen.text) && seen.name.endsWith("inspect reference and signals"),
-            `${size}: "${seen.name}" must begin with the visible "${seen.text}"`,
-          );
+          assert.equal(seen.override, null, `${size}: the readout button must be named by what it shows`);
+          assert.ok(seen.text, `${size}: the readout button shows no text`);
         }
         await close();
       }
@@ -918,7 +916,7 @@ try {
       assert.equal(await page.locator("#rest-record").isDisabled(), true);
       assert.match(await page.locator("#rest-record").innerText(), /Nothing recorded yet/);
       assert.match(await page.locator("#scene-caption").textContent(), /ambient lattice/i);
-      assert.match(await page.locator("#field").getAttribute("aria-label"), /No current arousal estimate is encoded/);
+      assert.match(await page.locator("#field").getAttribute("aria-label"), /No current shift reading is encoded/);
       await close();
     },
   );

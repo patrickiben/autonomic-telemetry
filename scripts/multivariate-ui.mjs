@@ -118,7 +118,8 @@ try {
       assert.equal(state.weights.effective.heart_rate_bpm, 100); assert.equal(state.weights.effective.turbulence, 0);
       assert.equal(component(state, "resp_rate_brpm").value, null); assert.equal(component(state, "resp_rate_brpm").included, false);
       await f.page.locator("#arousal-button").click();
-      assert.match(await f.page.locator("#arousal-coverage").innerText(), /HR-only.*limited/i);
+      assert.match(await f.page.locator("#arousal-coverage").innerText(), /^from heart rate only$/);
+      assert.match(await f.page.locator("#arousal-kicker").innerText(), /^Heart shift/i);
       assert.match(await f.page.locator("#arousal-components").innerText(), /Respiratory rate[\s\S]*Unavailable/);
       await f.frame(CENTER); const late = await f.snapshot();
       assert.deepEqual(late.weights, state.weights); assert.deepEqual(late.reference.profile, ["heart_rate_bpm"]);
@@ -142,7 +143,8 @@ try {
       assert.equal(state.research.lead.available, false);
       assert.equal(state.research.crosslags.find(lag => lag.from === "resp_rate_brpm").available, false);
       await f.page.locator("#arousal-button").click();
-      assert.match(await f.page.locator("#arousal-coverage").innerText(), /4 physiological channels.*85\/100.*limited/i);
+      assert.match(await f.page.locator("#arousal-coverage").innerText(), /^from heart rate, pulse variability and EEG beta\/alpha$/);
+      assert.match(await f.page.locator("#arousal-kicker").innerText(), /Heart and EEG shift/i);
       assert.match(await f.page.locator("#arousal-components").innerText(), /Respiratory rate[\s\S]*Unavailable/);
       await f.frame(CENTER);
       const late = await f.snapshot();
