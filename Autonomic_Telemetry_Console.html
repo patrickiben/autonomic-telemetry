@@ -1413,7 +1413,6 @@
           class="arousal-button"
           id="arousal-button"
           aria-haspopup="dialog"
-          aria-label="Inspect the shift from your first 2 minutes"
         >
           <span class="arousal-kicker" id="arousal-kicker">Shift · from your first 2 minutes</span>
           <span class="arousal-number" id="arousal-value">—</span>
@@ -4186,18 +4185,8 @@ void main(){
               .join(" "),
           );
           $("arousal-history").hidden = hist.length < 2;
-          $("arousal-button").setAttribute(
-            "aria-label",
-            "Shift from your first 2 minutes: " +
-              (ready
-                ? Math.round(a.value) +
-                  " out of 100. " +
-                  a.label +
-                  ". " +
-                  a.coverage
-                : $("arousal-label").textContent) +
-              ". Inspect reference and signals.",
-          );
+          // The button is named by what it shows (heading, number, tier, inputs), so speech and screen agree.
+          $("arousal-button").removeAttribute("aria-label");
         }
         $("arousal-button").onclick = () => {
           openSheet("arousal-sheet");
