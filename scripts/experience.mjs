@@ -109,7 +109,7 @@ async function startRelay() {
 let relay;
 try {
   await check(
-    "Untimed Work starts with an unavailable arousal estimate and no automatic device connection",
+    "Untimed Work starts with an unavailable shift reading and no automatic device connection",
     async () => {
       const { page, close } = await pageFor();
       const state = await page.evaluate(() => TelemetryLive.getState());
@@ -873,7 +873,7 @@ try {
       assert.equal(await page.locator("#rest-record").isDisabled(), true);
       assert.match(await page.locator("#rest-record").innerText(), /Nothing recorded yet/);
       assert.match(await page.locator("#scene-caption").textContent(), /ambient lattice/i);
-      assert.match(await page.locator("#field").getAttribute("aria-label"), /No current arousal estimate is encoded/);
+      assert.match(await page.locator("#field").getAttribute("aria-label"), /No current shift reading is encoded/);
       await close();
     },
   );

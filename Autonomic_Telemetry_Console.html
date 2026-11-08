@@ -1413,9 +1413,9 @@
           class="arousal-button"
           id="arousal-button"
           aria-haspopup="dialog"
-          aria-label="Inspect your experimental personal arousal estimate"
+          aria-label="Inspect the shift from your first 2 minutes"
         >
-          <span class="arousal-kicker">Inferred arousal · personal</span>
+          <span class="arousal-kicker" id="arousal-kicker">Shift · from your first 2 minutes</span>
           <span class="arousal-number" id="arousal-value">—</span>
           <span class="arousal-label" id="arousal-label"
             >Waiting for your rhythm</span
@@ -1725,7 +1725,7 @@
     <dialog class="sheet" id="arousal-sheet" aria-labelledby="arousal-title">
       <div class="sheet-head">
         <h2 id="arousal-title">Your reference, your rhythm.</h2>
-        <button class="close" data-close aria-label="Close arousal details">
+        <button class="close" data-close aria-label="Close shift details">
           <svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></svg>
         </button>
       </div>
@@ -1751,7 +1751,7 @@
         id="arousal-history"
         viewBox="0 0 300 70"
         role="img"
-        aria-label="Recent personal arousal estimates"
+        aria-label="Recent shift readings"
       >
         <path
           d="M0 65H300"
@@ -1809,7 +1809,7 @@
       </p>
       <ul class="about-list">
         <li>
-          <strong>Work</strong> monitors your personal arousal continuously,
+          <strong>Work</strong> watches your shift from your first 2 minutes continuously,
           with an optional sustained-elevation cue. <strong>Rest</strong> adds
           guided breathing and change since you entered. Both use the same
           estimate.
@@ -3996,9 +3996,20 @@ void main(){
           const ready = a.phase === "ready" && finite(a.value);
           if (ready && state.mode === "rest" && state.restStartValue === null)
             state.restStartValue = a.value;
+          // Name only what was measured: the signals in the fixed reference. No "arousal", no channel counts.
+          const prof = (a.reference && a.reference.profile) || [];
+          const heart = prof.some((k) => /heart_rate|rmssd|sdnn/.test(k)), breath = prof.includes("resp_rate_brpm"), eeg = prof.includes("eeg_beta_alpha");
+          const listed = (xs) => xs.length < 2 ? xs.join("") : xs.slice(0, -1).join(", ") + " and " + xs[xs.length - 1];
+          const named = listed([heart && "heart", breath && "breathing", eeg && "EEG"].filter(Boolean));
+          $("arousal-kicker").textContent = (named ? named[0].toUpperCase() + named.slice(1) + " shift" : "Shift") + " · from your first 2 minutes";
+          const hrIn = prof.includes("heart_rate_bpm"), prvIn = prof.some((k) => /rmssd|sdnn/.test(k));
+          const items = [hrIn && "heart rate", prvIn && "pulse variability", breath && "breathing rate", eeg && "EEG beta/alpha"].filter(Boolean);
+          const inputsLine = "from " + (items.length === 1 && hrIn ? "heart rate only" : listed(items)) +
+            (synthetic && breath ? " · the live bridge supplies no breathing" : "");
+          const shiftLabel = (l) => ({ "Low model response": "Near your first 2 minutes", "Mild model response": "Mild shift", "Raised model response": "Raised shift", "Elevated model response": "Large shift" })[l] || l;
           $("arousal-value").textContent = ready ? Math.round(a.value) : "—";
           $("arousal-label").textContent = ready
-            ? a.label
+            ? shiftLabel(a.label)
             : a.phase === "calibrating"
               ? "Learning your reference"
               : a.phase === "stale"
@@ -4015,9 +4026,7 @@ void main(){
               ? Math.round((a.reference?.progress || 0) * 100) +
                 "% of your two-minute reference"
               : ready
-                ? (synthetic ? "Synthetic demo · " : "") +
-                  (a.coverage || "") +
-                  (a.limited ? " · limited" : "")
+                ? (synthetic ? "Synthetic demo · " : "") + inputsLine
                 : a.reason || "Connect a device to build your reference";
           let trend = "";
           if (ready && state.mode === "rest") {
@@ -4057,8 +4066,8 @@ void main(){
                   ? "Ambient sky · waiting for a usable estimate"
                   : "An ambient sky until your estimate is ready.";
           $("field").setAttribute("aria-label", ready
-            ? `${synthetic ? "Synthetic demo" : "Experimental personal"} arousal ${Math.round(a.value)} of 100. ${a.value > 1 ? "Expanded beyond" : "At"} the reference-origin orbit. ${a.coverage || ""}.${state.paused ? " Image paused." : ""}`
-            : "Ambient galaxy. No current arousal estimate is encoded.");
+            ? `${synthetic ? "Synthetic demo" : "Experimental personal"} shift ${Math.round(a.value)} of 100. ${a.value > 1 ? "Expanded beyond" : "At"} the reference-origin orbit. ${a.coverage || ""}.${state.paused ? " Image paused." : ""}`
+            : "Ambient galaxy. No current shift reading is encoded.");
           if (state.mode === "rest") describeRest(a, ready, synthetic);
           $("mode-action").textContent =
             state.mode === "rest"
@@ -4179,7 +4188,7 @@ void main(){
           $("arousal-history").hidden = hist.length < 2;
           $("arousal-button").setAttribute(
             "aria-label",
-            "Experimental personal arousal: " +
+            "Shift from your first 2 minutes: " +
               (ready
                 ? Math.round(a.value) +
                   " out of 100. " +
@@ -5312,7 +5321,7 @@ void main(){
           $("rest-trend").dataset.direction = $("arousal-trend").dataset.direction;
           $("field").setAttribute("aria-label", (ready
             ? `${synthetic ? "Synthetic demo" : "Experimental personal"} arousal ${Math.round(a.value)} of 100, shown as warmth and density.`
-            : "No current arousal estimate is encoded.") +
+            : "No current shift reading is encoded.") +
             ` A lattice of light, one layer for each 10 seconds of this session, newest nearest; ${encoded} of ${tl.list.length} past layers carry an estimate.` + breath);
         }
         function initialTier() {
