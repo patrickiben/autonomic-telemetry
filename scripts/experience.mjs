@@ -605,6 +605,49 @@ try {
     },
   );
 
+  await check(
+    "Work keeps its caption stack above the dock on phones, and the readout is named by its visible text",
+    async () => {
+      for (const viewport of [
+        { width: 844, height: 390 },
+        { width: 360, height: 780 },
+      ]) {
+        const size = `${viewport.width}x${viewport.height}`;
+        const { page, close } = await pageFor(standalone, {
+          viewport,
+          isMobile: true,
+          hasTouch: true,
+        });
+        for (const demo of [false, true]) {
+          if (demo) {
+            await page.locator("#demo-button").click();
+            await page.waitForFunction(
+              () => document.body.dataset.arousalPhase === "ready",
+            );
+          }
+          const seen = await page.evaluate(() => {
+            const box = (selector) =>
+              document.querySelector(selector).getBoundingClientRect();
+            const button = document.getElementById("arousal-button");
+            return {
+              gap:
+                box(".dock").top -
+                Math.max(box("#mode-action").bottom, box("#source-badge").bottom),
+              override:
+                button.getAttribute("aria-label") ??
+                button.getAttribute("aria-labelledby"),
+              text: button.innerText.trim(),
+            };
+          });
+          assert.ok(seen.gap >= 4, `${size}: caption stack reaches into the dock by ${-seen.gap}px`);
+          assert.equal(seen.override, null, `${size}: the readout button must be named by what it shows`);
+          assert.ok(seen.text, `${size}: the readout button shows no text`);
+        }
+        await close();
+      }
+    },
+  );
+
   relay = await startRelay();
   await check(
     "Same-origin relay starts without pairing and exposes a synthetic connection honestly",
