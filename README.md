@@ -1,6 +1,8 @@
 # Autonomic Telemetry
 
-**[Open the experience](https://patrickiben.github.io/autonomic-telemetry/)** · [Field guide](https://patrickiben.github.io/autonomic-telemetry/Autonomic_Telemetry_Field_Guide.html)
+> **Autonomic Telemetry now lives in [Body Signal Labs](https://github.com/patrickiben/body-signal-labs/tree/main/autonomic).** This repository's public site forwards there. The copy here is kept as it was and is no longer updated.
+
+**[Open the experience](https://patrickiben.github.io/body-signal-labs/autonomic/Autonomic_Telemetry_Console.html)** · [Field guide](https://patrickiben.github.io/body-signal-labs/field-guide.html#autonomic)
 
 An immersive canvas with a personal, experimental **shift from your first two minutes**, named by the signals that feed it. Live, those are heart rate from the Hume band (or the Muse's optical pulse), pulse variability (RMSSD, SDNN) from the Muse's optical sensor, and EEG beta/alpha from the Muse; with the Hume band alone it is heart rate only. The bridge supplies no respiration, so breathing counts only in the demo or a recording that includes it. The restored multivariate model combines those channels and regularized covariance distance, with temporal modifiers and causal prediction-error event detection. Available channels form a fixed two-minute personal reference; missing inputs stay explicit. The one-sided 0–100 scale starts at zero at the reference means. It is a custom physiological-pattern model, not a direct measure of sympathetic activity or a mental-state diagnosis.
 
@@ -81,7 +83,7 @@ python3 -m venv .venv-bridge
 
 ## GitHub Pages
 
-The public experience is hosted at [patrickiben.github.io/autonomic-telemetry](https://patrickiben.github.io/autonomic-telemetry/). To publish reviewed changes after pushing, use **Actions → Deploy GitHub Pages (manual) → Run workflow**. For a fork, enable **Settings → Pages → GitHub Actions** first. The Python bridge runs on your Mac, not on Pages.
+The public experience is hosted in Body Signal Labs at [patrickiben.github.io/body-signal-labs/autonomic](https://patrickiben.github.io/body-signal-labs/autonomic/Autonomic_Telemetry_Console.html). This repository's Pages workflow (**Actions → Deploy GitHub Pages (manual)**) publishes only the redirect pages in [redirect/](redirect/), which forward each old address to the same page there. The Python bridge runs on your Mac, not on Pages.
 
 ## Reuse
 
