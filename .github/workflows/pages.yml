@@ -23,16 +23,13 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/configure-pages@v6
-      - name: Stage public static files only
+      # Autonomic Telemetry moved to Body Signal Labs (patrickiben.github.io/body-signal-labs/autonomic/).
+      # This site now publishes only redirect pages: each old page forwards to the same page there,
+      # and 404.html forwards every other old path (docs, pictures, examples) to the same path there.
+      - name: Stage the redirect pages only
         run: |
           mkdir _site
-          cp index.html Autonomic_Telemetry_Console.html Autonomic_Telemetry_Field_Guide.html Autonomic_Telemetry_Signal_Lab.html _site/
-          cp research-math.js _site/
-          cp -R examples _site/examples
-          cp README.md _site/
-          mkdir _site/docs
-          cp docs/*.md _site/docs/
-          cp docs/*.png _site/docs/
+          cp redirect/*.html _site/
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
